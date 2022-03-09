@@ -1,0 +1,14 @@
+.navbarContainer{
+    width: 100vw;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.navbarUserContainer {
+    display: flex;
+    flex-direction: row;
+}
+.navbarUserContainer > * {
+    margin: 1rem;
+}
