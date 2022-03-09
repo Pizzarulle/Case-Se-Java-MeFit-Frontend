@@ -1,0 +1,25 @@
+.exerciseContainer {
+  background-color: #fff;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  margin: 1rem 0;
+}
+.dividerBorder {
+  height: 0.5em;
+  background-color: #00c853;
+}
+.row {
+  display: flex;
+  gap: 3rem;
+  padding: 0 1.5rem;
+  align-items: center;
+}
+.row > * {
+  flex: 1 1 0px;
+  padding: 0.5rem;
+  margin: auto;
+  text-align: left;
+}
+.row > img {
+  max-width: 10rem;
+  min-width: 10rem;
+}
