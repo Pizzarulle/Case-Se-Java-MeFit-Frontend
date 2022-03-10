@@ -3,12 +3,14 @@ import Home from "../../views/Home";
 import Test from "../../views/Test";
 import NoMatch from "../../views/NoMatch";
 import styles from "./ApplicationContent.module.css";
+import Exercises from "../../views/Exercises";
 
 const ApplicationContent = () => {
   return (
     <div className={styles.applicationContentContainer}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/exercises" element={<Exercises/>}/>
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
