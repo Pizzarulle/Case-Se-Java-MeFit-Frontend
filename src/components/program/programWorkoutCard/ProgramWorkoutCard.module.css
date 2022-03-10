@@ -1,0 +1,7 @@
+.workoutTypeSummaryContainer{
+    background-color: #fff;
+    box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+    padding: 0.5rem 1rem;
+    max-width: fit-content;
+    text-align: start;
+}
