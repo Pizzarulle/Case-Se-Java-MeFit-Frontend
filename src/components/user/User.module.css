@@ -1,0 +1,47 @@
+.userContainer {
+    width: 20rem;
+    background-color: #fff;
+    box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+    margin: 1rem auto;
+
+    border-bottom: 0.5rem solid red;
+}
+
+.row {
+    display: flex;
+    gap: 3rem;
+    padding: 0 1.5rem;
+    align-items: center;
+}
+
+.column {
+    flex: 1 1 0;
+    padding: 0.5rem;
+    margin: auto;
+    text-align: left;
+}
+
+.floatRight {
+    /*float: right;*/
+}
+
+.contributor,
+.admin {
+    color: #838383;
+    text-align: right;
+    margin: 0;
+}
+
+.contributor b,
+.admin b {
+    color: #2f2f2f;
+    text-transform: capitalize;
+}
+
+#isAdmin {
+    border-bottom-color: greenyellow !important;
+}
+
+#isContributor {
+    border-bottom-color: yellow !important;
+}
