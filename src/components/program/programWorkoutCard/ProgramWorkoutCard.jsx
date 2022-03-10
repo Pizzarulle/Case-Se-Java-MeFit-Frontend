@@ -4,7 +4,7 @@ const ProgramWorkoutCard = ({ workoutSummaryData }) => {
   const { id, name, type } = workoutSummaryData;
 
   return (
-    <div className={styles.workoutTypeSummaryContainer}>
+    <div className={styles.programWorkoutContainer}>
       <p>
         {name}
         <br />
