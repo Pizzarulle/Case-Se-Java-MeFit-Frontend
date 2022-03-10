@@ -1,0 +1,59 @@
+.workoutContainer {
+    min-width: fit-content;
+    max-width: max(70rem, 70%);
+    background-color: #fff;
+    box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+    margin: 1rem auto;
+
+    border-bottom: 0.5rem solid #0078c8;
+}
+
+.row {
+    display: flex;
+    gap: 3rem;
+    padding: 0 1.5rem;
+    align-items: center;
+}
+
+.column {
+    flex: 1 1 0;
+    padding: 0.5rem;
+    margin: auto;
+    text-align: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+.id,
+.complete {
+    color: #838383;
+    text-align: right;
+    margin: 0;
+}
+
+.complete b {
+    color: #2f2f2f;
+}
+
+.id {
+    color: #2f2f2f;
+    font-weight: bold;
+    margin-block-start: 1rem;
+}
+
+.name {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.type {
+    font-size: 1rem;
+    margin-block: 0 1rem;
+
+}
+
+a.link {
+    text-transform: uppercase;
+}
