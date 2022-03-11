@@ -12,16 +12,27 @@
 .row > div {
   margin-left: 2rem;
   display: flex;
-  flex: 33%;
+  flex: 1;
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
   padding: 0.5rem;
   gap: 3rem;
 }
-.row > div > *{
+.row > div > * {
   flex: 1;
   text-align: start;
+}
+.row > div > *:first-child {
+  flex: 0.5;
+  text-align: start;
+}
+.row > img {
+  margin: 1rem 0;
+  max-width: 8rem;
+  min-width: 8rem;
+  max-height: 8rem;
+  min-height: 8rem;
 }
 .dividerBorder {
   height: 0.5em;

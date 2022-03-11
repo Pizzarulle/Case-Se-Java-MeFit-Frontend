@@ -1,4 +1,3 @@
-import { type } from "@testing-library/user-event/dist/type";
 import { useState } from "react";
 import styles from "./Program.module.css";
 import ProgramWorkoutCard from "./programWorkoutCard/ProgramWorkoutCard";
@@ -13,7 +12,7 @@ const Program = ({ programData }) => {
   const onHandleClick = () => {
     setCollapsed(!isCollapsed);
   };
-  
+
   return (
     <div className={styles.programContainer} onClick={onHandleClick}>
       <div className={styles.row}>
