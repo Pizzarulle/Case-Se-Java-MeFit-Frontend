@@ -10,7 +10,7 @@ const ApplicationContent = () => {
     <div className={styles.applicationContentContainer}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/exercises" element={<Exercises/>}/>
+        <Route path="/exercises" element={<Exercises />} />
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>

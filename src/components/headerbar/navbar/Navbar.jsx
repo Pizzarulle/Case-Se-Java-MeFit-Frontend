@@ -1,7 +1,13 @@
+import { useContext } from "react";
+import { KeyCloakContext } from "../../../context/KeyCloakContext";
+import { initKeycloak,usertest } from "../../KeyCloak/KeyCloak";
 import Navlinks from "../navlinks/Navlinks";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
+
+  const [keyCloak,setKeyCloak] = useContext(KeyCloakContext)
+
   return (
     <nav className={styles.navbarContainer}>
 
@@ -11,7 +17,7 @@ const Navbar = () => {
 
       <div className={styles.navbarUserContainer}>
         <h3>User placeholder</h3>
-        <button>Login</button>
+        <button onClick={() => initKeycloak(keyCloak)}>Login</button>
       </div>
       
     </nav>
