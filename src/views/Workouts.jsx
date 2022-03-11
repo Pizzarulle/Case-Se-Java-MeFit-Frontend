@@ -1,37 +1,36 @@
-import { Component } from "react";
 import Workout from "../components/workout/Workout";
+import { apiFetch } from "../api/api";
+import { useEffect, useState } from "react";
 
-const API_URL = "http://case-se-java-mefit.herokuapp.com/api";
+const Workouts = () => {
+    const [workouts, setWorkouts] = useState(null);
 
-class Workouts extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            workouts: null
+    useEffect(() => {
+        const asyncWrapper = async () => {
+            const [error, data] = await apiFetch("workout");
+
+            if(error) {
+                console.error(error);
+                return;
+            }
+
+            setWorkouts(data)
         }
-    }
 
-    async componentDidMount() {
-        await fetch(`${API_URL}/workout`)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ workouts: data });
-            });
-    }
+        asyncWrapper();
+    }, []);
 
-    render() {
-        return (
-            <div>
-                <h1>Available workouts</h1>
-                { !this.state.workouts
-                    ? <h2>Loading...</h2>
-                    : this.state.workouts.map(workout => (
-                        <Workout key={ workout.id } workoutData={ workout }/>
-                    ))
-                }
-            </div>
-        );
-    };
-}
+    return (
+        <div>
+            <h1>Available workouts</h1>
+            { !workouts
+                ? <h2>Loading...</h2>
+                : workouts.map(workout => (
+                    <Workout key={ workout.id } workoutData={ workout }/>
+                ))
+            }
+        </div>
+    );
+};
 
 export default Workouts;
