@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { initKeycloak, login, usertest } from '../components/KeyCloak/KeyCloak';
+import { initKeycloak, login, usertest } from '../components/security/KeyCloak';
 import { KeyCloakContext } from '../context/KeyCloakContext';
 import logo from '../logo.svg';
 
