@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { KeyCloakContext } from "../../../context/KeyCloakContext";
-import { initKeycloak,usertest } from "../../KeyCloak/KeyCloak";
+import { initKeycloak,usertest } from "../../security/KeyCloak";
 import Navlinks from "../navlinks/Navlinks";
 import styles from "./Navbar.module.css";
 
