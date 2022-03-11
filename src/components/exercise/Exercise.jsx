@@ -2,14 +2,14 @@ import { useState } from "react";
 import styles from "./Exercise.module.css";
 
 const Exercise = ({ exerciseData }) => {
-  const { name, description, target_muscle_group, image, vid_link } =
-    exerciseData;
+  const { name, description, target_muscle_group, image, vid_link } = exerciseData
+  const target_muscles = target_muscle_group.replaceAll(",", ", ");
 
   const [isCollapsed, setCollapsed] = useState(true);
 
-  const onHandleClick = ()=>{
-    setCollapsed(!isCollapsed)
-  }
+  const onHandleClick = () => {
+    setCollapsed(!isCollapsed);
+  };
 
   return (
     <div className={styles.exerciseContainer} onClick={onHandleClick}>
@@ -17,9 +17,9 @@ const Exercise = ({ exerciseData }) => {
         <img src={image} alt={name} />
         <div>
           <h2>{name}</h2>
-          <h4>{target_muscle_group}</h4>
+          <h4>{target_muscles}</h4>
           <h4>
-            <a href={vid_link}>Video link</a>
+            <a href={vid_link} target="_blank" rel="noreferrer">Video link</a>
           </h4>
         </div>
       </div>
