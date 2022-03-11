@@ -4,6 +4,7 @@ import Test from "../../views/Test";
 import NoMatch from "../../views/NoMatch";
 import styles from "./ApplicationContent.module.css";
 import Exercises from "../../views/Exercises";
+import Workouts from "../../views/Workouts";
 import Programs from "../../views/Programs";
 
 const ApplicationContent = () => {
@@ -12,6 +13,7 @@ const ApplicationContent = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/exercises" element={<Exercises/>}/>
+        <Route path="/workouts" element={<Workouts/>}/>
         <Route path="/programs" element={<Programs/>}/>
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NoMatch />} />
