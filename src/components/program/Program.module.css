@@ -1,30 +1,53 @@
-.programContainer{
-    background-color: #fff;
-    box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
-    margin: 1rem 0;
-    min-height: 10rem;
+.programContainer {
+  background-color: #fff;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  margin: 1rem 0;
+  cursor: pointer;
 }
-
 .row {
-    display: flex;
-    gap: 3rem;
-    padding: 0 1.5rem;
-  }
-.dividerBorder {
-    height: 0.5em;
-    background-color: #00c853;
-  }
-.programNameAndCategory{
-    width: 15rem;
-    align-self: center;
-    text-align: start;
-
+  display: flex;
+  gap: 3rem;
+  padding: 0 1.5rem;
+  align-items: center;
+  justify-content: space-between;
 }
-.programWorkouts{
-    display: flex;
-    flex: 1;
-    gap: 0.5rem;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 1rem;
+
+.dividerBorder {
+  height: 0.5em;
+  background-color: #00c853;
+  justify-content: space-around;
+  flex: 0.5;
+}
+
+.collapsedNameAndCategory {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.collapsedNameAndCategory > *{
+  flex: 1;
+  flex-direction: row;
+  text-align: start;
+}
+
+.programNameAndCategory {
+  flex-direction: row;
+  align-self: center;
+  text-align: start;
+  flex: 1;
+}
+.collapsedProgramWorkouts{
+  display: flex;
+  flex: 1;
+}
+
+.programWorkouts {
+  flex: 4;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1rem;
 }
