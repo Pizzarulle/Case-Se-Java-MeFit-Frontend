@@ -7,6 +7,7 @@ const Navlinks = () => {
             <Link to={"/"}>Home</Link>
             <Link to={"/test"}>Test</Link>
             <Link to={"/exercises"}>Exercises</Link> 
+            <Link to={"/workouts"}>Workouts</Link>
         </div>
     );
 }
