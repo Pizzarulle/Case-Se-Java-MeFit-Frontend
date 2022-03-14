@@ -1,0 +1,7 @@
+.personalDetailsContainer {
+    text-align: left;
+    padding: 0 3rem;
+  }
+  .personalDetailsContainer span {
+    font-weight: bold;
+  }

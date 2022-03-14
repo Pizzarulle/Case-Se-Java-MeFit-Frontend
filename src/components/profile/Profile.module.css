@@ -1,0 +1,35 @@
+.profileContainer {
+    box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+    max-width: fit-content;
+    padding: 1.5rem;
+    margin: auto;
+    gap: 3rem;
+    display: flex;
+    border-bottom: 0.5rem solid red;
+}
+img {
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  border: 2px solid grey;
+  border-radius: 50%;
+  max-width: 20rem;
+}
+.row {
+  display: flex;
+}
+
+.editColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.editColumn > * {
+  margin: 0;
+}
+
+#isAdmin {
+    border-bottom-color: greenyellow !important;
+}
+
+#isContributor {
+    border-bottom-color: yellow !important;
+}
