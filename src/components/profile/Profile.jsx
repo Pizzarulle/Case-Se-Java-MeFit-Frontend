@@ -1,14 +1,22 @@
-import User from "../user/User";
 import styles from "./Profile.module.css";
-import ProfileDetails from "./ProfileDetails/ProfileDetails";
+import ProfileDetails from "./profileDetails/ProfileDetails";
 
+//Replace this with information for the logged in user
 const testUser = {
-  firstName: "firstName",
-  lastName: "lastName",
+  firstName: "John",
+  lastName: "Doe",
+//   weight: 70,
+  height: 1.8,
+  medicalConditions: null,
+  disabilities: null,
+  email: "john.doe@gmail.com",
   isContributor: false,
   isAdmin: false,
-};
+}
 
+/**
+ * Component displaying profile information for a user
+ */
 const Profile = () => {
   return (
     <div
@@ -26,7 +34,7 @@ const Profile = () => {
         alt="profile img"
       />
 
-      <ProfileDetails />
+      <ProfileDetails profileDetailsData={testUser} />
 
       <div className={styles.editColumn}>
         <p>

@@ -1,30 +1,44 @@
-import styles from "./ProfileDetails.module.css"
+import styles from "./ProfileDetails.module.css";
 
-const ProfileDetails = () => {
-    return (
-        <div className={styles.personalDetailsContainer}>
-        <h2>First + Last name</h2>
-        <p>
-          <span>Email</span> email@email.email
-        </p>
-     
+const ProfileDetails = ({ profileDetailsData }) => {
+  const {
+    firstName,
+    lastName,
+    weight,
+    height,
+    medicalConditions,
+    disabilities,
+    email,
+  } = profileDetailsData;
 
-        <p>
-          <span>Weight:</span> {(70).toLocaleString} kg
-        </p>
-        <p>
-          <span>Height:</span> 70 cm
-        </p>
-        <p>
-          <span>Medical conditions:</span> None
-        </p>
-        <p>
-          <span>Disabilities:</span> Wheelchair bound
-        </p>
+  return (
+    <div className={styles.personalDetailsContainer}>
+      <h2>
+        {firstName} {lastName}
+      </h2>
 
-        {/* Profile informatio */}
-      </div>
-    );
-}
+      <p>
+        <span>Email:</span> {email}
+      </p>
+
+      <p>
+        <span>Weight:</span> {weight} kg
+      </p>
+
+      <p>
+        <span>Height:</span> {height} m
+      </p>
+
+      <p>
+        <span>Medical conditions:</span>{" "}
+        {medicalConditions ? medicalConditions : "None"}
+      </p>
+
+      <p>
+        <span>Disabilities:</span> {disabilities ? disabilities : "None"}
+      </p>
+    </div>
+  );
+};
 
 export default ProfileDetails;
