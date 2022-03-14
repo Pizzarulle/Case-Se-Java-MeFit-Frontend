@@ -23,8 +23,8 @@ const Exercises = () => {
     <>
       <h1>Available exercises!</h1>
 
-      {exercises &&
-        exercises.map((exercise) => (
+      {!exercises ? <h2>Loading...</h2>
+      : exercises.map((exercise) => (
           <Exercise key={exercise.id} exerciseData={exercise} />
         ))}
     </>
