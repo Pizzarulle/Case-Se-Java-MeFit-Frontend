@@ -1,5 +1,5 @@
 import Keycloak from "keycloak-js";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const KeyCloakContext = createContext()
 /**
@@ -9,7 +9,7 @@ export const KeyCloakContext = createContext()
  */
 const KeyCloakProvider = (props) => {
 
-    const [keyCloak, setKeyCloak] = useState(new Keycloak({
+    const [keyCloak, setKeyCloak] =  useState(new Keycloak({
         url: "https://keycloak-authentication-server.herokuapp.com/auth/",
         realm: "mefitt",
         clientId: "mefitt-app"
@@ -20,7 +20,6 @@ const KeyCloakProvider = (props) => {
             {props.children}
         </KeyCloakContext.Provider>
     )
-
 }
 
 export default KeyCloakProvider

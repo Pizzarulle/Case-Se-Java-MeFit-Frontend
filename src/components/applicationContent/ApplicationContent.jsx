@@ -6,6 +6,7 @@ import styles from "./ApplicationContent.module.css";
 import Exercises from "../../views/Exercises";
 import Workouts from "../../views/Workouts";
 import Programs from "../../views/Programs";
+import Registration from "../registration/Registration";
 
 const ApplicationContent = () => {
   return (
@@ -16,6 +17,11 @@ const ApplicationContent = () => {
         <Route path="/workouts" element={<Workouts/>}/>
         <Route path="/programs" element={<Programs/>}/>
         <Route path="/test" element={<Test />} />
+
+        <Route path="/reg" element={<Registration/>} />
+
+        <Route path= "/silent-check-sso.html"/> 
+
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </div>
