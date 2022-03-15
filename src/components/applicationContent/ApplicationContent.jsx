@@ -7,6 +7,7 @@ import Exercises from "../../views/Exercises";
 import Workouts from "../../views/Workouts";
 import Programs from "../../views/Programs";
 import Registration from "../registration/Registration";
+import AdminPage from "../admin/AdminPage";
 
 const ApplicationContent = () => {
   return (
@@ -19,7 +20,7 @@ const ApplicationContent = () => {
         <Route path="/test" element={<Test />} />
 
         <Route path="/reg" element={<Registration/>} />
-
+        <Route path="/admin" element={<AdminPage/>}/>
         <Route path= "/silent-check-sso.html"/> 
 
         <Route path="*" element={<NoMatch />} />
