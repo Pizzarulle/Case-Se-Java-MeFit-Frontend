@@ -1,5 +1,6 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import styles from "./ContributorsArea.module.css";
+import ManageExercisesList from "./manageExercises/ManageExercisesList";
 /**
  * Component for displaying different componenets through routers and navlinks. Every path that begins with "/contributor/*" will be shown in this component
  */
@@ -43,7 +44,7 @@ const ContributorsArea = () => {
       <div className={styles.manageContainer}>
         <Routes>
           <Route path="/" element={<h1>Manage exercises, workouts and programs!</h1>} />
-          <Route path="/edit/exercise" element={<h1>Manage exercises</h1>} />
+          <Route path="/edit/exercise" element={<ManageExercisesList/>} />
           <Route path="/edit/workout" element={<h1>Manage workouts</h1>} />
           <Route path="/edit/program" element={<h1>Manage programs</h1>} />
         </Routes>
