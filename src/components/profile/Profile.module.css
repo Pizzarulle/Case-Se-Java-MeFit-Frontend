@@ -7,7 +7,7 @@
     display: flex;
     border-bottom: 0.5rem solid red;
 }
-img {
+.profileContainer img {
   box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
   border: 2px solid grey;
   border-radius: 50%;

@@ -5,7 +5,7 @@ import ProfileDetails from "./profileDetails/ProfileDetails";
 const testUser = {
   firstName: "John",
   lastName: "Doe",
-//   weight: 70,
+  weight: 70,
   height: 1.8,
   medicalConditions: null,
   disabilities: null,
