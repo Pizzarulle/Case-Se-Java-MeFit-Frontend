@@ -1,0 +1,27 @@
+.exerciseContainer {
+  background-color: #fff;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  margin: 1rem 0;
+  cursor: pointer;
+}
+.row {
+  display: flex;
+  padding: 0 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+}
+
+
+.column{
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+  flex: 1;
+  justify-content: space-between;
+  height: 200%;
+}
+
+.column > button{
+  margin: 10px;
+}
