@@ -1,17 +1,26 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./EditExercise.module.css";
+import { useNavigate } from "react-router-dom";
 
-const EditExercise = () => {
-  const { register, handleSubmit } = useForm();
+const EditExercise = ({titleText, exercise }) => {
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      name: exercise && exercise.name,
+      description: exercise && exercise.description,
+      targetMuscleGroup: exercise && exercise.targetMuscleGroup,
+      image: exercise && exercise.image,
+      videoLink: exercise && exercise.videoLink,
+    },
+  });
+  const navigate = useNavigate();
 
   //Add functionality for updating
   const onSubmit = (data) => {
     console.log(data);
   };
-  //Add functionality for discarding and returning to previous screen
   const onDiscard = () => {
-    console.log("return to previous screen");
+    navigate(-1);
   };
 
   return (
@@ -19,7 +28,7 @@ const EditExercise = () => {
       onSubmit={handleSubmit(onSubmit)}
       className={styles.editExerciseContainer}
     >
-      <h1>Edit Exercise</h1>
+      <h1>{titleText}</h1>
       <div className={styles.group}>
         <label>Name</label>
         <input type="text" placeholder="Push ups" {...register("name")} />
@@ -27,22 +36,18 @@ const EditExercise = () => {
         <label>Targeted Muscle Group</label>
         <textarea
           placeholder="The abdominal musclee..."
-          {...register("targetMuscleGroup", {})}
+          {...register("targetMuscleGroup")}
         />
         <label>Descripion</label>
         <textarea
           placeholder="Arthritis, High blood pressure"
-          {...register("description", {})}
+          {...register("description")}
         />
 
         <label>Image url</label>
-        <input type="url" placeholder="http://..." {...register("image", {})} />
+        <input type="url" placeholder="http://..." {...register("image")} />
         <label>Video Link</label>
-        <input
-          type="url"
-          placeholder="http://..."
-          {...register("videoLink", {})}
-        />
+        <input type="url" placeholder="http://..." {...register("videoLink")} />
       </div>
 
       <div className={styles.btnContainer}>
