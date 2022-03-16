@@ -6,6 +6,7 @@ import styles from "./ApplicationContent.module.css";
 import Exercises from "../../views/Exercises";
 import Workouts from "../../views/Workouts";
 import Programs from "../../views/Programs";
+import ContributorsArea from "../../views/contributorsArea/ContributorsArea";
 
 const ApplicationContent = () => {
   return (
@@ -15,6 +16,7 @@ const ApplicationContent = () => {
         <Route path="/exercises" element={<Exercises/>}/>
         <Route path="/workouts" element={<Workouts/>}/>
         <Route path="/programs" element={<Programs/>}/>
+        <Route path="/contributor/*" element={<ContributorsArea/>}/>
         <Route path="/test" element={<Test />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
