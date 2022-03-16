@@ -1,6 +1,7 @@
 
 const KeyCloakAdminService = {
     getUsers,
+    getUser,
     getUserRole,
     addUserToRole,
     removeUserFromRole,
@@ -13,6 +14,10 @@ const keyCloakUrl =
 
 async function getUsers(keycloak) {
     return await getRequest(keycloak, "/users")
+}
+
+async function getUser(keycloak,userId){
+    return await getRequest(keycloak,"/users/"+ userId)
 }
 
 async function getUserRole(keycloak, userId) {
@@ -53,7 +58,7 @@ async function updateUserPassword(keycloak, user) {
     const credentialRepresentation = {
         temporary: false,
         type:"password", // TODO can be set to otp to make user have to change it
-        userLabel:"Password set by Admin",
+        userLabel:"Password-set-by-Admin",
         value:user.password
     }
     return putRequest(keycloak, "/users/" + user.id + "/reset-password",JSON.stringify(credentialRepresentation))
