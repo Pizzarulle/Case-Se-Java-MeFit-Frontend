@@ -2,125 +2,107 @@
 const KeyCloakAdminService = {
     getUsers,
     getUserRole,
-
     addUserToRole,
-    removeUserFromRole
-
-
-
+    removeUserFromRole,
+    updateUserPassword
 }
-
-
-
 export default KeyCloakAdminService
 
 const keyCloakUrl =
     "https://keycloak-authentication-server.herokuapp.com/auth/admin/realms/mefitt"
 
 async function getUsers(keycloak) {
-    var myHeaders = new Headers();
-
-    myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
-    myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-    };
-    try {
-        const response = await fetch(keyCloakUrl + "/users", requestOptions)
-        let json = await response.json()
-        return json;
-    } catch (error) {
-    }
+    return await getRequest(keycloak, "/users")
 }
 
-
 async function getUserRole(keycloak, userId) {
-    var myHeaders = new Headers();
-
-    myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
-    myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-    };
-    try {
-        const response = await fetch(
-            keyCloakUrl + "/users/" + userId + "/role-mappings/realm", requestOptions)
-        let json = await response.json()
-        return json;
-    } catch (error) {
-    }
+    return await getRequest(keycloak, "/users/" + userId + "/role-mappings/realm")
 }
 
 async function addUserToRole(keycloak, userId, roleName) {
     const availableRoles = await getAvailableRoles(keycloak, userId)
     const role = availableRoles.find(role => role.name === roleName)
-
-    console.log(JSON.stringify([role]))
-
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
-    myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        redirect: 'follow',
-        body: JSON.stringify([role])
-    };
-    try {
-        const response = await fetch(keyCloakUrl + "/users/" + userId + "/role-mappings/realm", requestOptions)
-        let json = await response.json()
-        return json;
-    } catch (error) {
-    }
-
+    return await postRequest(keycloak, "/users/" + userId + "/role-mappings/realm", JSON.stringify([role]))
 }
 
 async function removeUserFromRole(keycloak, userId, roleName) {
-
     const availableRoles = await getAvailableRoles(keycloak, userId)
     const role = availableRoles.find(role => role.name === roleName)
-
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
-    myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
-        method: 'DELETE',
-        headers: myHeaders,
-        redirect: 'follow',
-        //body: JSON.stringify([role])
-    };
-    try {
-        const response = await fetch(keyCloakUrl + "/users/" + userId + "/role-mappings/realm", requestOptions)
-        let json = await response.json()
-        return json;
-    } catch (error) {
-    }
+    return await deleteRequest(keycloak, "/users/" + userId + "/role-mappings/realm", JSON.stringify([role]))
 
 }
 
+/**
+ * Will get all the roles that belongs to the realm mefitt
+ * @param {*} keycloak 
+ * @param {*} userId 
+ * @returns 
+ */
 async function getAvailableRoles(keycloak, userId) {
+    //const clientId = await getClientId(keycloak,"mefitt-app")
+    return await getRequest(keycloak, "/roles")
+}
+
+
+async function getClientId(keycloak, clientName) {
+    const response = await getRequest(keycloak, "/clients?clientId=" + clientName)
+    return response[0].id
+}
+
+async function updateUserPassword(keycloak, user) {
+    const credentialRepresentation = {
+        temporary: false,
+        type:"password", // TODO can be set to otp to make user have to change it
+        userLabel:"Password set by Admin",
+        value:user.password
+    }
+    return putRequest(keycloak, "/users/" + user.id + "/reset-password",JSON.stringify(credentialRepresentation))
+}
+
+
+async function getRequest(keycloak, url) {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
-
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow'
     };
     try {
-        const response = await fetch(keyCloakUrl + "/users/" + userId + "/role-mappings/realm/available", requestOptions)
+        const response = await fetch(keyCloakUrl + url, requestOptions)
         let json = await response.json()
         return json;
     } catch (error) {
     }
 }
 
-
-async function getClientId(keyCloak, clientName) {
-
-
-
-
+async function postRequest(keycloak, url, body) {
+    return await requestWithBody(keycloak, url, body, "POST")
 }
+
+async function putRequest(keycloak, url, body) {
+    return await requestWithBody(keycloak, url, body, "PUT")
+}
+
+async function deleteRequest(keycloak, url, body) {
+    return await requestWithBody(keycloak, url, body, "DELETE")
+}
+
+async function requestWithBody(keycloak, url, body, method) {
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
+    myHeaders.append("Content-Type", "application/json");
+    var requestOptions = {
+        method: method,
+        headers: myHeaders,
+        redirect: 'follow',
+        body: body
+    };
+    try {
+        const response = await fetch(keyCloakUrl + url, requestOptions)
+        let json = await response.json()
+        return json;
+    } catch (error) {
+    }
+}
+

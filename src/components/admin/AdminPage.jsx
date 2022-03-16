@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import KeyCloakAdminService from "../../api/keyCloak-admin";
 import { KeyCloakContext } from "../../context/KeyCloakContext";
 import User from "../user/User";
@@ -9,7 +9,6 @@ const AdminPage = () => {
 
     const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
     const [openPage, setOpenPage] = useState("")
-
     const [userList, setUserList] = useState([])
 
     const getUsers = async () => {
@@ -36,6 +35,21 @@ const AdminPage = () => {
         return { isAdmin: isAdminValue, isContributor: isContributorValue }
     }
 
+
+    const updatePasswordOfUser = (e,userId) => {
+        let user = userList.find(user => user.id === userId)
+        user.password = e.target.value
+        const list = userList
+        const index =  list.findIndex(user => user.id === userId)
+        list[index] = user
+        setUserList(list)
+    }
+
+
+    useEffect(() => {
+        getUsers()
+    },[])
+
     return (
         <div>
             <button onClick={() => getUsers()}>Get users</button>
@@ -52,25 +66,35 @@ const AdminPage = () => {
                         </div>
                         <div className={styles.column}>
                             {user.roles.isAdmin ?
-                                <button onClick={() => KeyCloakAdminService.removeUserFromRole(keyCloak,user.id,"MeFitt_Admin")} >Remove admin</button>
+                                <button onClick={
+                                    () => KeyCloakAdminService.removeUserFromRole(keyCloak, user.id, "MeFitt_Admin")}
+                                >Remove admin</button>
                                 :
-                                <button onClick={() => KeyCloakAdminService.addUserToRole(keyCloak,user.id,"MeFitt_Admin") }>Make Admin</button>
+                                <button onClick={
+                                    () => KeyCloakAdminService.addUserToRole(keyCloak, user.id, "MeFitt_Admin")}
+                                >Make Admin</button>
                             }
                             {user.roles.isContributor ?
-                                <button onClick={() => KeyCloakAdminService.removeUserFromRole(keyCloak,user.id,"MeFitt_Contributer")}>Remove Con</button>
+                                <button onClick={
+                                    () => KeyCloakAdminService.removeUserFromRole(keyCloak, user.id, "MeFitt_Contributer")}
+                                >Remove Con</button>
                                 :
-                                <button onClick={() => KeyCloakAdminService.addUserToRole(keyCloak,user.id,"MeFitt_Contributer")} >Make Con</button>
+                                <button onClick={
+                                    () => KeyCloakAdminService.addUserToRole(keyCloak, user.id, "MeFitt_Contributer")}
+                                >Make Con</button>
                             }
 
                         </div>
+                        <div>
+                            <label>New password: </label>
+                            <input type="password"  onChange={e => updatePasswordOfUser(e, user.id)} /> <br></br>
+                            <button onClick={() => KeyCloakAdminService.updateUserPassword(keyCloak,user)} >Send password</button>
+                        </div>
                     </div>
                 )
-            }
-            )}
-
+            })}
         </div>
     )
-
 }
 
 export default AdminPage;
