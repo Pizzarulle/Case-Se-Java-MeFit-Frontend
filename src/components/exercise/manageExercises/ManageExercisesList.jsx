@@ -24,6 +24,10 @@ const ManageExercisesList = ({ setSelectedItem }) => {
     setSelectedItem(exercise);
     navigate("edit");
   };
+  const onClickCreate = () =>{
+    setSelectedItem(null);
+    navigate("edit");
+  }
 
   const renderExercises = () =>
     exercises.map((exercise) => (
@@ -41,7 +45,7 @@ const ManageExercisesList = ({ setSelectedItem }) => {
         <h2>Loading...</h2>
       ) : (
         <>
-          <h1>+</h1>
+          <button onClick={onClickCreate}>+</button>
           <div>{renderExercises()}</div>
         </>
       )}

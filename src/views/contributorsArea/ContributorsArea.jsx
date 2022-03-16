@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { NavLink, Route, Routes } from "react-router-dom";
 import styles from "./ContributorsArea.module.css";
-import ManageExercisesList from "../../components/exercise/manageExercises/ManageExercisesList"
-import EditExercise from "../../components/exercise/editExercise/EditExercise"
+import ManageExercisesList from "../../components/exercise/manageExercises/ManageExercisesList";
+import EditExercise from "../../components/exercise/editExercise/EditExercise";
 /**
  * Component for displaying different componenets through routers and navlinks. Every path that begins with "/contributor/*" will be shown in this component
  */
 const ContributorsArea = () => {
-  const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedItem, setSelectedItem] = useState(null);
 
   return (
     <div className={styles.contributorsAreaContainer}>
@@ -50,13 +50,16 @@ const ContributorsArea = () => {
             path="/"
             element={<h1>Manage exercises, workouts and programs!</h1>}
           />
-          <Route path="/exercise" element={<ManageExercisesList setSelectedItem={setSelectedItem}/>} />
+          <Route
+            path="/exercise"
+            element={<ManageExercisesList setSelectedItem={setSelectedItem} />}
+          />
           <Route path="/workout" element={<h1>Manage workouts</h1>} />
           <Route path="/program" element={<h1>Manage programs</h1>} />
 
           <Route
             path="/exercise/edit"
-            element={<EditExercise titleText={"Edit Exercise"} exercise={selectedItem} />}
+            element={<EditExercise titleText={`${selectedItem ? "Edit" : "Create"} Exercise`}exercise={selectedItem}/>}
           />
         </Routes>
       </div>
