@@ -3,6 +3,7 @@ import { NavLink, Route, Routes } from "react-router-dom";
 import styles from "./ContributorsArea.module.css";
 import ManageExercisesList from "../../components/exercise/manageExercises/ManageExercisesList";
 import EditExercise from "../../components/exercise/editExercise/EditExercise";
+
 /**
  * Component for displaying different componenets through routers and navlinks. Every path that begins with "/contributor/*" will be shown in this component
  */
@@ -10,6 +11,8 @@ const ContributorsArea = () => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   return (
+
+    // Displays three navlinks as a menu
     <div className={styles.contributorsAreaContainer}>
       <div className={styles.menuContainer}>
         <div className={styles.menuItemContainer}>
@@ -44,6 +47,7 @@ const ContributorsArea = () => {
         </div>
       </div>
 
+      {/* Components for each navlink in the menu will be displyed here */}
       <div className={styles.manageContainer}>
         <Routes>
           <Route
