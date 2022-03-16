@@ -1,7 +1,7 @@
 import Workout from "../../views/Workouts";
 import Exercises from "../../views/Exercises";
 import Programs from "../../views/Programs";
-import DashboardCalendar from "../calendar/DashboardCalendar";
+import DashboardCalendar from "./calendar/DashboardCalendar";
 
 import styles from "./Dashboard.module.css";
 
