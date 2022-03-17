@@ -1,7 +1,7 @@
 .workoutContainer {
     min-width: fit-content;
-    max-width: max(70rem, 70%);
     background-color: #fff;
+    color: #000;
     box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
     margin: 1rem auto;
 
@@ -10,7 +10,6 @@
 
 .row {
     display: flex;
-    gap: 3rem;
     padding: 0 1.5rem;
     align-items: center;
 }

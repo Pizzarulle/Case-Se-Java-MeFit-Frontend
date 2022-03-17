@@ -5,6 +5,7 @@ const Navlinks = () => {
     return (
         <div className={styles.navlinksContainer}>
             <Link to={"/"}>Home</Link>
+            <Link to={"/dashboard"}>Dashboard</Link>
             <Link to={"/test"}>Test</Link>
             <Link to={"/exercises"}>Exercises</Link> 
             <Link to={"/workouts"}>Workouts</Link>

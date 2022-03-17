@@ -1,6 +1,7 @@
 import Workout from "../components/workout/Workout";
 import { apiFetch } from "../api/api";
 import { useEffect, useState } from "react";
+import Loader from "../components/loader/Loader";
 
 const Workouts = () => {
     const [workouts, setWorkouts] = useState(null);
@@ -9,7 +10,7 @@ const Workouts = () => {
         const asyncWrapper = async () => {
             const [error, data] = await apiFetch("workout");
 
-            if(error) {
+            if (error) {
                 console.error(error);
                 return;
             }
@@ -21,15 +22,16 @@ const Workouts = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Available workouts</h1>
-            { !workouts
-                ? <h2>Loading...</h2>
-                : workouts.map(workout => (
-                    <Workout key={ workout.id } workoutData={ workout }/>
-                ))
+        <>
+            {!workouts ? <Loader /> :
+                <div>
+                    <h3>Available workouts</h3>
+                    {workouts.map(workout => (
+                        <Workout key={workout.id} workoutData={workout} />
+                    ))}
+                </div>
             }
-        </div>
+        </>
     );
 };
 
