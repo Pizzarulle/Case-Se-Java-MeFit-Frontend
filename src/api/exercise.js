@@ -15,26 +15,26 @@ export const fetchExercises = async () => {
 };
 
 export const patchExercise = async (id, updatedExercise) => {
-    try {
-        const response = await fetch(`${API_URL}/exercise/${id}`, {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...updatedExercise,
-          }),
-        });
-    
-        if (!response.ok) {
-          throw new Error("Could not post exercises to db.");
-        }
-        const data = await response.json();
-        return [null, data];
-      } catch (error) {
-        return [error.message, null];
-      }
-}
+  try {
+    const response = await fetch(`${API_URL}/exercise/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...updatedExercise,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Could not post exercises to db.");
+    }
+    const data = await response.json();
+    return [null, data];
+  } catch (error) {
+    return [error.message, null];
+  }
+};
 
 export const createExercise = async (newExercise) => {
   try {
@@ -46,6 +46,22 @@ export const createExercise = async (newExercise) => {
       body: JSON.stringify({
         ...newExercise,
       }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Could not post exercises to db.");
+    }
+    const data = await response.json();
+    return [null, data];
+  } catch (error) {
+    return [error.message, null];
+  }
+};
+
+export const deleteExercise = async (exerciseId) => {
+  try {
+    const response = await fetch(`${API_URL}/exercise/${exerciseId}`, {
+      method: "DELETE",
     });
 
     if (!response.ok) {

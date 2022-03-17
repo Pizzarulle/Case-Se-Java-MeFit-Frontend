@@ -1,7 +1,8 @@
+import { deleteExercise } from "../../../../api/exercise";
 import Exercise from "../../Exercise";
 import styles from "./ManageExerciseListItem.module.css";
 
-const ManageExerciseListItem = ({ exercise, onClickEdit }) => {
+const ManageExerciseListItem = ({ exercise, onClickEdit, onClickDelete }) => {
   return (
     <div className={styles.manageExercisesListItem}>
       <Exercise exerciseData={exercise} />
@@ -12,7 +13,9 @@ const ManageExerciseListItem = ({ exercise, onClickEdit }) => {
         >
           Edit
         </button>
-        <button className={styles.deleteBtn}>Delete</button>
+        <button className={styles.deleteBtn} onClick={() => onClickDelete(exercise.id)}>
+          Delete
+        </button>
       </div>
     </div>
   );
