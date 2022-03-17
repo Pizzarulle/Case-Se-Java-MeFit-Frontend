@@ -2,8 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./EditExercise.module.css";
 import { useNavigate } from "react-router-dom";
+import { createExercise, patchExercise } from "../../../api/exercise";
 
-const EditExercise = ({titleText, exercise }) => {
+const EditExercise = ({ titleText, exercise }) => {
   const { register, handleSubmit } = useForm({
     defaultValues: {
       name: exercise && exercise.name,
@@ -12,16 +13,22 @@ const EditExercise = ({titleText, exercise }) => {
       image: exercise && exercise.image,
       videoLink: exercise && exercise.videoLink,
     },
-  });
+  })
   const navigate = useNavigate();
 
-  //Add functionality for updating
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const onSubmit = async (data) => {
+    const [error] = !exercise
+      ? await createExercise(data)
+      : await patchExercise(exercise.id, data)
+
+    if (error === null) {
+      navigate(-1);
+    }
+  }
+
   const onDiscard = () => {
     navigate(-1);
-  };
+  }
 
   return (
     <form
@@ -57,6 +64,6 @@ const EditExercise = ({titleText, exercise }) => {
         </button>
       </div>
     </form>
-  );
-};
+  )
+}
 export default EditExercise;
