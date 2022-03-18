@@ -69,45 +69,41 @@ const AdminPage = () => {
                                 }} />
                             </div>
                             <div className={styles.column}>
-                            {/* <div className={styles.column}> */}
-                                {/* <div className={styles.row}> */}
-
                                 {user.roles.isAdmin ?
                                     <button onClick={
                                         () => KeyCloakAdminService.removeUserFromRole(keyCloak, user.id, "MeFitt_Admin")
-                                            .then(() => getUpdatedUser(user.id))}
-                                    >Remove admin</button>
+                                            .then(() => getUpdatedUser(user.id))}>Remove admin</button>
                                     :
                                     <button onClick={
                                         () => KeyCloakAdminService.addUserToRole(keyCloak, user.id, "MeFitt_Admin")
-                                            .then(() => getUpdatedUser(user.id))}
-                                    >Make Admin</button>
+                                            .then(() => getUpdatedUser(user.id))}>Make Admin</button>
                                 }
-                                {/* </div> */}
-                                {/* <div className={styles.row}> */}
+
                                 {user.roles.isContributor ?
                                     <button onClick={
                                         () => KeyCloakAdminService.removeUserFromRole(keyCloak, user.id, "MeFitt_Contributer")
-                                            .then(() => getUpdatedUser(user.id))}
-                                    >Remove Con</button>
+                                            .then(() => getUpdatedUser(user.id))}>Remove Con</button>
                                     :
                                     <button onClick={
                                         () => KeyCloakAdminService.addUserToRole(keyCloak, user.id, "MeFitt_Contributer")
-                                            .then(() => getUpdatedUser(user.id))}
-                                    >Make Con</button>
+                                            .then(() => getUpdatedUser(user.id))}>Make Con</button>
                                 }
-                                {/* </div> */}
-                            {/* </div> */}
+
+
+                                <button className={styles.red} onClick={() => KeyCloakAdminService.deleteUser(keyCloak,user.id)} >Delete</button>
+
                             </div>
-                            <div >
+                            <div>
 
                                 {/* <div className={styles.row} > */}
                                 <div className={styles.column}>
                                     <label>New password: </label>
-                                    <input type="password" onChange={e => updatePasswordOfUser(e, user.id)} /> <br></br>
+                                    <input type="password" onChange={e => updatePasswordOfUser(e, user.id)} />
                                     <button onClick={() => KeyCloakAdminService.updateUserPassword(keyCloak, user)} >Send password</button>
                                 </div>
                                 {/* </div> */}
+
+
                             </div>
                         </div>
                     </div>

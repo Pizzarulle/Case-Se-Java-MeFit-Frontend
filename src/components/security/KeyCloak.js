@@ -13,7 +13,7 @@ export default KeyCloakService;
 async function initKeycloak(keyCloak) {
     await keyCloak.init({
         onLoad: 'check-sso',
-        silentCheckSsoRedirectUri: 'http://localhost:3000/silent-check-sso.html'
+        silentCheckSsoRedirectUri: 'http://localhost:3000'
     })
     return keyCloak
 }

@@ -5,35 +5,37 @@ const KeyCloakAdminService = {
     getUserRole,
     addUserToRole,
     removeUserFromRole,
-    updateUserPassword
+    updateUserPassword,
+    deleteUser,
 }
 export default KeyCloakAdminService
 
 const keyCloakUrl =
     "https://keycloak-authentication-server.herokuapp.com/auth/admin/realms/mefitt"
+const meFitUrl = "http://localhost:8080"
 
 async function getUsers(keycloak) {
-    return await getRequest(keycloak, "/users")
+    return await getRequest(keycloak, keyCloakUrl + "/users")
 }
 
-async function getUser(keycloak,userId){
-    return await getRequest(keycloak,"/users/"+ userId)
+async function getUser(keycloak, userId) {
+    return await getRequest(keycloak, keyCloakUrl + "/users/" + userId)
 }
 
 async function getUserRole(keycloak, userId) {
-    return await getRequest(keycloak, "/users/" + userId + "/role-mappings/realm")
+    return await getRequest(keycloak, keyCloakUrl + "/users/" + userId + "/role-mappings/realm")
 }
 
 async function addUserToRole(keycloak, userId, roleName) {
     const availableRoles = await getAvailableRoles(keycloak, userId)
     const role = availableRoles.find(role => role.name === roleName)
-    return await postRequest(keycloak, "/users/" + userId + "/role-mappings/realm", JSON.stringify([role]))
+    return await postRequest(keycloak, keyCloakUrl + "/users/" + userId + "/role-mappings/realm", JSON.stringify([role]))
 }
 
 async function removeUserFromRole(keycloak, userId, roleName) {
     const availableRoles = await getAvailableRoles(keycloak, userId)
     const role = availableRoles.find(role => role.name === roleName)
-    return await deleteRequest(keycloak, "/users/" + userId + "/role-mappings/realm", JSON.stringify([role]))
+    return await deleteRequest(keycloak, keyCloakUrl + "/users/" + userId + "/role-mappings/realm", JSON.stringify([role]))
 
 }
 
@@ -45,23 +47,30 @@ async function removeUserFromRole(keycloak, userId, roleName) {
  */
 async function getAvailableRoles(keycloak, userId) {
     //const clientId = await getClientId(keycloak,"mefitt-app")
-    return await getRequest(keycloak, "/roles")
+    return await getRequest(keycloak, keyCloakUrl + "/roles")
 }
 
 
 async function getClientId(keycloak, clientName) {
-    const response = await getRequest(keycloak, "/clients?clientId=" + clientName)
+    const response = await getRequest(keycloak, keyCloakUrl + "/clients?clientId=" + clientName)
     return response[0].id
 }
 
 async function updateUserPassword(keycloak, user) {
     const credentialRepresentation = {
         temporary: false,
-        type:"password", // TODO can be set to otp to make user have to change it
-        userLabel:"Password-set-by-Admin",
-        value:user.password
+        type: "password", // TODO can be set to otp to make user have to change it
+        userLabel: "Password-set-by-Admin",
+        value: user.password
     }
-    return putRequest(keycloak, "/users/" + user.id + "/reset-password",JSON.stringify(credentialRepresentation))
+    return putRequest(keycloak, keyCloakUrl + "/users/" + user.id + "/reset-password", JSON.stringify(credentialRepresentation))
+}
+
+
+async function deleteUser(keycloak, userId) {
+    const resposneFromMeFit = await deleteRequest(keycloak, meFitUrl + "/security/" + userId, undefined)
+    if (resposneFromMeFit.status === 200)
+        return await deleteRequest(keycloak, keyCloakUrl + "/users/" + userId, undefined)
 }
 
 
@@ -74,7 +83,7 @@ async function getRequest(keycloak, url) {
         redirect: 'follow'
     };
     try {
-        const response = await fetch(keyCloakUrl + url, requestOptions)
+        const response = await fetch(url, requestOptions)
         let json = await response.json()
         return json;
     } catch (error) {
@@ -97,16 +106,18 @@ async function requestWithBody(keycloak, url, body, method) {
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
     myHeaders.append("Content-Type", "application/json");
-    var requestOptions = {
+    let requestOptions = {
         method: method,
         headers: myHeaders,
         redirect: 'follow',
-        body: body
     };
+    if (body !== undefined) {
+        requestOptions.body = body
+    }
     try {
-        const response = await fetch(keyCloakUrl + url, requestOptions)
+        let response = await fetch(url, requestOptions)
         let json = await response.json()
-        return json;
+        return { status: response.status, body: json };
     } catch (error) {
     }
 }
