@@ -1,12 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { KeyCloakContext } from "../../../context/KeyCloakContext";
-import { initKeycloak,usertest } from "../../security/KeyCloak";
+
+import KeyCloakService from "../../security/KeyCloak";
+// import TestService from "../../security/TestFunctions";
+
 import Navlinks from "../navlinks/Navlinks";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
 
-  const [keyCloak,setKeyCloak] = useContext(KeyCloakContext)
+  const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
 
   return (
     <nav className={styles.navbarContainer}>
@@ -16,10 +19,21 @@ const Navbar = () => {
       <Navlinks />
 
       <div className={styles.navbarUserContainer}>
-        <h3>User placeholder</h3>
-        <button onClick={() => initKeycloak(keyCloak)}>Login</button>
+        {/* <button onClick={() => TestService.testuser(keyCloak)} >Test User</button>
+        <button onClick={() => TestService.testadmin(keyCloak)} >Test Admin</button> */}
+        {KeyCloakService.userActive(keyCloak) ?
+          <>
+            <h3>{KeyCloakService.getUserFromJWT(keyCloak)}</h3>
+            <button onClick={() => KeyCloakService.logout(keyCloak)}>Logout</button>
+          </>
+          : <>
+            <button onClick={() => KeyCloakService.login(keyCloak)}>Login</button>
+            <button onClick={() => KeyCloakService.register(keyCloak)}>Register</button>
+          </>
+
+        }
       </div>
-      
+
     </nav>
   );
 };
