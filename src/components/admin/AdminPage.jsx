@@ -90,7 +90,8 @@ const AdminPage = () => {
                                 }
 
 
-                                <button className={styles.red} onClick={() => KeyCloakAdminService.deleteUser(keyCloak,user.id)} >Delete</button>
+                                <button className={styles.red} onClick={() => KeyCloakAdminService.deleteUser(keyCloak, user.id)
+                                    .then(() => getUsers())} >Delete</button>
 
                             </div>
                             <div>
@@ -102,8 +103,6 @@ const AdminPage = () => {
                                     <button onClick={() => KeyCloakAdminService.updateUserPassword(keyCloak, user)} >Send password</button>
                                 </div>
                                 {/* </div> */}
-
-
                             </div>
                         </div>
                     </div>
