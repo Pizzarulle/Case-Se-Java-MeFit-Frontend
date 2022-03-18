@@ -2,7 +2,10 @@
   display: flex;
 }
 .manageContainer {
-  flex: 1;
+    flex: 1;
+    padding: 0 5rem;
+    /* justify-content: center; */
+    /* background-color: aquamarine; */
 }
 .menuContainer {
   max-width: fit-content;
