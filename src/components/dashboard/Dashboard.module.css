@@ -1,0 +1,16 @@
+
+.dashboardContainer {
+    width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.calendarContainer {
+    grid-column: span 1;
+}
+
+.dataContainer {
+    grid-column: span 2;
+}
