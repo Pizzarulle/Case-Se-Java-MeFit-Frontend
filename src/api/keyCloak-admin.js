@@ -68,8 +68,8 @@ async function updateUserPassword(keycloak, user) {
 
 
 async function deleteUser(keycloak, userId) {
-    const resposneFromMeFit = await deleteRequest(keycloak, meFitUrl + "/security/" + userId, undefined)
-    if (resposneFromMeFit.status === 200)
+    const responseFromMeFit = await deleteRequest(keycloak, meFitUrl + "/security/" + userId, undefined)
+    if (responseFromMeFit.status === 200)
         return await deleteRequest(keycloak, keyCloakUrl + "/users/" + userId, undefined)
 }
 
