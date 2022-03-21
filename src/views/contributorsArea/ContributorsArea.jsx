@@ -4,6 +4,7 @@ import styles from "./ContributorsArea.module.css";
 import EditExercise from "../../components/exercise/editExercise/EditExercise";
 import ModelOptionList from "../../components/modelOption/ModelOptionList";
 import { ModelTypes } from "../../constants/enums";
+import EditWorkout from "../../components/workout/editWorkout/EditWorkout";
 
 /**
  * Component for displaying different componenets through routers and navlinks. Every path that begins with "/contributor/*" will be shown in this component
@@ -12,7 +13,6 @@ const ContributorsArea = () => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   return (
-
     // Displays three navlinks as a menu
     <div className={styles.contributorsAreaContainer}>
       <div className={styles.menuContainer}>
@@ -68,10 +68,15 @@ const ContributorsArea = () => {
             path="/program"
             element={<ModelOptionList modelType={ModelTypes.PROGRAM} setSelectedItem={setSelectedItem} />}
           />
+            
 
           <Route
             path="/exercise/edit"
             element={<EditExercise titleText={`${selectedItem ? "Edit" : "Create"} Exercise`} exercise={selectedItem}/>}
+          />
+           <Route
+            path="/workout/edit"
+            element={<EditWorkout titleText={`${selectedItem ? "Edit" : "Create"} Workout`} workout={selectedItem}/>}
           />
         </Routes>
       </div>
