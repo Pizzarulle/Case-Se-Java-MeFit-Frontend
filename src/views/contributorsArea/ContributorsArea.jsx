@@ -5,6 +5,7 @@ import EditExercise from "../../components/exercise/editExercise/EditExercise";
 import ModelOptionList from "../../components/modelOption/ModelOptionList";
 import { ModelTypes } from "../../constants/enums";
 import EditWorkout from "../../components/workout/editWorkout/EditWorkout";
+import EditProgram from "../../components/program/editProgram/EditProgram";
 
 /**
  * Component for displaying different componenets through routers and navlinks. Every path that begins with "/contributor/*" will be shown in this component
@@ -77,6 +78,10 @@ const ContributorsArea = () => {
            <Route
             path="/workout/edit"
             element={<EditWorkout titleText={`${selectedItem ? "Edit" : "Create"} Workout`} workout={selectedItem}/>}
+          />
+            <Route
+            path="/program/edit"
+            element={<EditProgram titleText={`${selectedItem ? "Edit" : "Create"} Program`} program={selectedItem}/>}
           />
         </Routes>
       </div>

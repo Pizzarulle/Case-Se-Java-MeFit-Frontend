@@ -1,0 +1,63 @@
+.editProgramContainer {
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  padding: 1.5rem;
+  margin: auto;
+  border-bottom: 0.5rem solid red;
+}
+.validation {
+  color: red;
+  font-size: small;
+  float: right;
+}
+.group {
+  text-align: start;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  min-width: 600px;
+  max-width: fit-content;
+  margin: auto;
+}
+.workoutsContainer {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 3rem;
+}
+.workoutsContainer > div {
+  flex: 1;
+}
+.greenBtn{
+  background-color: green;
+  border: 3px solid green;
+}
+.greenBtn:hover{
+  background-color: white;
+  color: green;
+}
+
+.fieldArrayBtn {
+  color: white;
+  cursor: pointer;
+  font-size: large;
+  padding: 3px 1.5rem;
+  height: min-content;
+  align-self: center;
+  border-radius: 5px;
+}
+.btnContainer {
+  display: flex;
+  flex: 1;
+  justify-content: end;
+}
+.btnContainer > * {
+  border-radius: 1rem;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  font-size: large;
+  font-weight: bold;
+  margin: 0.5rem 1rem;
+}
+hr{
+  margin-top: 3rem;
+}
