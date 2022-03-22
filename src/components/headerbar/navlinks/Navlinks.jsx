@@ -14,17 +14,16 @@ const Navlinks = (props) => {
 
 
             <Link to={"/reg"}>Reg</Link>
-            {props.keyCloak.tokenParsed !== undefined ?
+            {props.keyCloak.tokenParsed !== undefined &&
                 <>
-                    {props.keyCloak.tokenParsed.roles.includes("MeFitt_Admin") ?
+                    {props.keyCloak.tokenParsed.roles.includes("MeFitt_Admin") &&
                         <Link to={"/admin"}>Admin</Link>
-                        : null}
+                    }
 
-                    {props.keyCloak.tokenParsed.roles.some(role => ["MeFitt_Admin", "MeFitt_Contributer"].includes(role)) ?
+                    {props.keyCloak.tokenParsed.roles.some(role => ["MeFitt_Admin", "MeFitt_Contributer"].includes(role)) &&
                         <Link to={"/contributor"}>Contributor’s Area</Link>
-                        : null}
+                    }
                 </>
-                : null
             }
 
         </div>

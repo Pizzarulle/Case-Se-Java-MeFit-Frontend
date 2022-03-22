@@ -1,65 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./EditProfile.module.css";
 
-const EditProfile = () => {
+const EditProfile = (props) => {
   const {
     register,
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      weight: props.user.weight,
+      height: props.user.height, medicalConditions: props.user.medicalConditions,
+      disabilities: props.user.disabilities
+    }
+  });
+
 
   //Add functionality for updating
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data)
+    if (isNumeric(data.height)) {
+      data = { ...data, height: data.height.replace(",", ".") }
+      props.editSubmitted(data)
+    }
   };
+
+  function isNumeric(num) {
+    console.log(num);
+    num = num.replace(",", ".")
+    if (num.match(/^-?\d+$/)) {
+      return num
+    } else if (num.match(/^\d+\.\d+$/)) {
+      return num
+    } else {
+      return false
+    }
+  }
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={styles.editProfileContainer}
-    >
-      <h1>User details</h1>
-      <div className={styles.group}>
-        <div className={styles.row}>
-          <div>
-            <label>First Name</label>
-            <input type="text" placeholder="John" {...register("firstName")} />
-          </div>
-          <div>
-            <label>Last Name</label>
-            <input type="text" placeholder="Doe" {...register("lastName")} />
-          </div>
-        </div>
-
-        <label>Email</label>
-        <input
-          type="email"
-          placeholder="john.doe@gmail.com"
-          {...register("email")}
-        />
-
-        <label>Avatar</label>
-        <input
-          type="url"
-          placeholder="http://..."
-          {...register("avatar", {})}
-        />
-
-        <label>Password</label>
-        <input type="password" {...register("Password", {})} />
-      </div>
+      className={styles.editProfileContainer}>
 
       <h1>Personal details</h1>
       <div className={styles.group}>
         <div className={styles.row}>
           <div>
             <label>Weight (in kg)</label>
-            <input type="number" placeholder="73" {...register("weight", {})} />
+            <input type="number" placeholder="73"
+              {...register("weight", {})} />
           </div>
           <div>
             <label>Height (in meters)</label>
             <input
-              type="number"
+              type="text"
               placeholder="1.80"
               {...register("height", {})}
             />
@@ -68,13 +61,20 @@ const EditProfile = () => {
         <label>Medical Condition</label>
         <textarea
           placeholder="Arthritis, High blood pressure"
-          {...register("medicalCondition", {})}
+          {...register("medicalConditions", {})}
         />
         <label>Disabilities</label>
-        <textarea placeholder="None" {...register("disabilities", {})} />
+        <textarea placeholder="None"
+          {...register("disabilities", {})} />
       </div>
 
       <input type="submit" />
+      <button className={styles.edit} onClick={() =>
+        window.location.href =
+        "https://keycloak-authentication-server.herokuapp.com/auth/realms/mefitt/" +
+        "account/?error=invalid_request&error_description=Missing+parameter%3A+response_type#/"
+      }>Edit Account</button>
+
     </form>
   );
 };

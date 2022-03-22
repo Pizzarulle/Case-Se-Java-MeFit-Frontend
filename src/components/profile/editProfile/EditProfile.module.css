@@ -45,3 +45,21 @@ form input[type="submit"]:hover {
   background-color: white;
   color: red;
 }
+
+.edit {
+  padding: 1rem;
+  font-size: large;
+  background-color: red;
+  border: 3px solid red;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  border-radius: 1rem;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.edit:hover {
+  background-color: white;
+  color: red;
+}

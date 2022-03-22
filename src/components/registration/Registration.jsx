@@ -16,7 +16,7 @@ const Registration = () => {
                 "lastName": keyCloak.tokenParsed.family_name
             }
 
-            //UserService.regUser(keyCloak,user)
+            UserService.regUser(keyCloak, user)
         }
         registerUser()
     }, [])

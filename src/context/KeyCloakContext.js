@@ -15,31 +15,25 @@ const KeyCloakProvider = (props) => {
         clientId: "mefitt-app"
     }))
 
-    const updateProfile = () => {
-        if (keyCloak.idTokenParsed['name']) {
-            console.log(keyCloak.idTokenParsed['name']);
-        } else {
-        }
-        console.info("????????");
-    }
 
-    keyCloak.onAuthRefreshSuccess = function () {
-        updateProfile();
-    };
+    // keyCloak.onAuthSuccess = function() {  setKeyCloak({...keyCloak}) }
+
+    // keyCloak.onAuthRefreshSuccess = function () {
+    //     setKeyCloak({...keyCloak})
+    // };
 
     useEffect(() => {
         keyCloak.init(new Keycloak({
             // onLoad: 'login-required',
             // redirectUri: 'http://localhost:3000'
             onLoad: 'check-sso',
-            silentCheckSsoRedirectUri: 'http://localhost:3000'
+            silentCheckSsoRedirectUri: 'http://localhost:3000/silent-check-sso.html',
+            silentCheckSsoFallback: false
         }
         )).then(function (authenticated) {
-            console.log(authenticated);
             if (!authenticated) {
                 console.log('Not authenticated');
             } else {
-                updateProfile();
                 setKeyCloak({...keyCloak})
             }
         }).catch(function () {
