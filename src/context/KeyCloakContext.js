@@ -1,6 +1,5 @@
 import Keycloak from "keycloak-js";
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const KeyCloakContext = createContext()
 /**
@@ -23,7 +22,6 @@ const KeyCloakProvider = (props) => {
         }
         console.info("????????");
     }
-
 
     keyCloak.onAuthRefreshSuccess = function () {
         updateProfile();

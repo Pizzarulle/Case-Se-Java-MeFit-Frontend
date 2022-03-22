@@ -14,7 +14,7 @@ const Navbar = () => {
 
       <h1>MeFit</h1>
 
-      <Navlinks />
+      <Navlinks keyCloak={keyCloak}/>
 
       <div className={styles.navbarUserContainer}>
         {/* <button onClick={() => TestService.testuser(keyCloak)} >Test User</button>

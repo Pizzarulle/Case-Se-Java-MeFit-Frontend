@@ -8,19 +8,6 @@ const Home = () => {
   const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
   const [userName, setUserName] = useState("Test");
 
-
-  useEffect(() => {
-    // const getKeyCloak = async () => {
-    //   console.log(keyCloak);
-    //   const newKeyCloak = await KeyCloakService.initKeycloak(keyCloak)
-    //   console.log(newKeyCloak);
-    //   newKeyCloak.loadUserProfile()
-    //   setKeyCloak(newKeyCloak)
-    // }
-    // getKeyCloak()
-    
-  }, [])
-
   return (
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />

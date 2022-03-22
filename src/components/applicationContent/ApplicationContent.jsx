@@ -20,11 +20,11 @@ const ApplicationContent = () => {
         <Route path="/exercises" element={<Exercises/>}/>
         <Route path="/workouts" element={<Workouts/>}/>
         <Route path="/programs" element={<Programs/>}/>
-        <Route path="/contributor/*" element={<ContributorsArea/>}/>
+        <Route path="/contributor/*" element={<ContributorsArea restrict={{role:"MeFitt_Contributer"}}/>}/>
         <Route path="/test" element={<Test />} />
 
         <Route path="/reg" element={<Registration/>} />
-        <Route path="/admin" element={<AdminPage/>}/>
+        <Route path="/admin" element={<AdminPage restrict={{role:"MeFitt_Admin"}}/>}/>
         <Route path= "/silent-check-sso.html"/> 
 
         <Route path="*" element={<NoMatch />} />
