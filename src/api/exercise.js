@@ -5,7 +5,7 @@ export const fetchExercises = async () => {
     const response = await fetch(`${API_URL}/exercise`);
 
     if (!response.ok) {
-      throw new Error("Could not fetch exercises.");
+      throw new Error("Could not FETCH exercises.");
     }
     const data = await response.json();
     return [null, data];
@@ -27,7 +27,7 @@ export const patchExercise = async (id, updatedExercise) => {
     });
 
     if (!response.ok) {
-      throw new Error("Could not post exercises to db.");
+      throw new Error("Could not PATCH exercise.");
     }
     const data = await response.json();
     return [null, data];
@@ -49,7 +49,7 @@ export const createExercise = async (newExercise) => {
     });
 
     if (!response.ok) {
-      throw new Error("Could not post exercises to db.");
+      throw new Error("Could not POST exercise to db.");
     }
     const data = await response.json();
     return [null, data];
@@ -65,7 +65,7 @@ export const deleteExercise = async (exerciseId) => {
     });
 
     if (!response.ok) {
-      throw new Error("Could not post exercises to db.");
+      throw new Error("Could not DELETE exercise.");
     }
     const data = await response.json();
     return [null, data];

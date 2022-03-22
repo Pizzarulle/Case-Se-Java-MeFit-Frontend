@@ -8,6 +8,7 @@ import Loader from "../loader/Loader";
 import ModelOptionListItem from "./modelOptionListItem/ModelOptionListItem";
 import ContributorWorkout from "../workout/contributorWorkout/ContributorWorkout";
 import Program from "../program/Program";
+import { deleteProgram, fetchPrograms } from "../../api/program";
 
 const test = [
   {
@@ -199,9 +200,8 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
           break;
 
         case ModelTypes.PROGRAM:
-          //implement when backend is ready
-          //remove dummy data from the top
-          setItems(test);
+          const [errorProgram, dataProgram] = await fetchPrograms()
+          !errorProgram ? setItems(dataProgram.payload) : console.log(errorProgram);
           break;
         default:
           break;
@@ -234,15 +234,16 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
   const onClickDelete = async (itemId) => {
     switch (modelType) {
       case ModelTypes.EXERCISE:
-        const [error, responseData] = await deleteExercise(itemId);
-        error && setItems(items.filter((item) => item.id !== itemId));
+        const [errorExercise] = await deleteExercise(itemId);
+        errorExercise && setItems(items.filter((item) => item.id !== itemId));
         break;
       case ModelTypes.WORKOUT:
         //implement api call when backend is ready
         break;
       case ModelTypes.PROGRAM:
-        //implement api call when backend is ready
-        break;
+        const [errorProgram ] = await deleteProgram(itemId);
+          errorProgram && setItems(items.filter((item) => item.id !== itemId));      
+            break;
       default:
         break;
     }

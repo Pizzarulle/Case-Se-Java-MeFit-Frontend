@@ -12,7 +12,6 @@ const Program = ({ programData }) => {
   const onHandleClick = () => {
     setCollapsed(!isCollapsed);
   };
-
   return (
     <div className={styles.programContainer} onClick={onHandleClick}>
       <div className={styles.row}>
@@ -32,10 +31,10 @@ const Program = ({ programData }) => {
         ) : (
           workouts && (
             <div className={styles.programWorkouts}>
-              {workouts.map((workout) => (
+              {workouts.map((workout, index) => (
                 <ProgramWorkoutCard
                   size={"small"}
-                  key={workout.id}
+                  key={`${workout.id} : ${index}`}
                   workoutSummaryData={workout}
                 />
               ))}
