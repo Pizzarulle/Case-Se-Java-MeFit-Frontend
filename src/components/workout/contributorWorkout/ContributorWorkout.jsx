@@ -3,14 +3,11 @@ import styles from "./ContributorWorkout.module.css";
 const ContributorWorkout = ({ workoutData }) => {
   const { name, type, sets } = workoutData;
 
-  // const placeholderSets = [sets, sets, sets,sets, sets, sets,];
-  //   const placeholderSets = [];
-
   const renderSets = () => {
     return sets.map((set, index) => {
       return (
         <li key={index + ":" + set.id}>
-          {set.exercise.name}, Reps: {set.exerciseRepetition}
+          {set.exercise[0].name}, Reps: {set.exerciseRepetition}
         </li>
       );
     });

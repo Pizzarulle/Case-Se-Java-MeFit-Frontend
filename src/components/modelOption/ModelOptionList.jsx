@@ -190,12 +190,12 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
       switch (modelType) {
         case ModelTypes.EXERCISE:
           const [errorExercise, dataExercise] = await fetchExercises();
-          !errorExercise ? setItems(dataExercise) : console.log(errorExercise);
+          !errorExercise ? setItems(dataExercise.payload) : console.log(errorExercise);
           break;
 
         case ModelTypes.WORKOUT:
           const [errorWorkouts, dataWorkouts] = await fetchWorkouts();
-          !errorWorkouts ? setItems(dataWorkouts) : console.log(errorWorkouts);
+          !errorWorkouts ? setItems(dataWorkouts.payload) : console.log(errorWorkouts);
           break;
 
         case ModelTypes.PROGRAM:
@@ -235,7 +235,7 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
     switch (modelType) {
       case ModelTypes.EXERCISE:
         const [error, responseData] = await deleteExercise(itemId);
-        responseData && setItems(items.filter((item) => item.id !== itemId));
+        error && setItems(items.filter((item) => item.id !== itemId));
         break;
       case ModelTypes.WORKOUT:
         //implement api call when backend is ready
