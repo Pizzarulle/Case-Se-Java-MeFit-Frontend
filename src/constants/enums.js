@@ -1,5 +1,5 @@
 export const ModelTypes = {
-  EXERCISE: "EXERCISE",
-  WORKOUT: "WORKOUT",
-  PROGRAM: "PROGRAM",
+  EXERCISE: "exercise",
+  WORKOUT: "workout",
+  PROGRAM: "program",
 };

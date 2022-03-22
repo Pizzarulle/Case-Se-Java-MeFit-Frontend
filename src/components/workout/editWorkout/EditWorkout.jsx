@@ -2,13 +2,19 @@ import { useFieldArray, useForm } from "react-hook-form";
 import styles from "./EditWorkout.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchExercises } from "../../../api/exercise";
+import { apiFetch } from "../../../api/api";
+import { ModelTypes } from "../../../constants/enums";
 
 const EditWorkout = ({ titleText, workout }) => {
   const navigate = useNavigate();
   const [exercises, setExercises] = useState(null);
 
-  const {register,control,handleSubmit,formState: { errors }} = useForm({
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: workout && workout.name,
       type: workout && workout.type,
@@ -17,8 +23,8 @@ const EditWorkout = ({ titleText, workout }) => {
           ? workout.sets.map((set) => {
               return {
                 exerciseRepetition: set.exerciseRepetition,
-                exerciseId: set.exercise.id,
-                exerciseName: set.exercise.name,
+                exerciseId: set.exercise[0].id,
+                exerciseName: set.exercise[0].name,
               };
             })
           : [],
@@ -31,11 +37,13 @@ const EditWorkout = ({ titleText, workout }) => {
     name: "sets",
   });
 
-  //Fetches available exercieses 
+  //Fetches available exercieses
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [errorExercise, dataExercise] = await fetchExercises();
-      !errorExercise ? setExercises(dataExercise) : console.log(errorExercise);
+      const [errorExercise, dataExercise] = await apiFetch(ModelTypes.EXERCISE);
+      !errorExercise
+        ? setExercises(dataExercise.payload)
+        : console.log(errorExercise);
     };
     asyncWrapper();
   }, []);
@@ -83,7 +91,7 @@ const EditWorkout = ({ titleText, workout }) => {
         />
       </div>
 
-{/* Displays the current workout exercieses */}
+      {/* Displays the current workout exercieses */}
       <h1>Selected Exercises</h1>
       {fields.map((item, index) => {
         return (
@@ -98,6 +106,8 @@ const EditWorkout = ({ titleText, workout }) => {
                 type={"number"}
                 {...register(`sets.${index}.exerciseRepetition`, {
                   required: true,
+                  valueAsNumber:true
+
                 })}
                 placeholder="Repetitions"
               />
@@ -113,7 +123,7 @@ const EditWorkout = ({ titleText, workout }) => {
         );
       })}
 
-{/* Displays every available exercise */}
+      {/* Displays every available exercise */}
       <h1>Add Exercises</h1>
       <div className={styles.addExerciseContainer}>
         {exercises &&

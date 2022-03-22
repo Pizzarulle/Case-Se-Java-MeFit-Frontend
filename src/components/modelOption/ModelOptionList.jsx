@@ -1,217 +1,30 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteExercise, fetchExercises } from "../../api/exercise";
-import { fetchWorkouts } from "../../api/workouts";
 import { ModelTypes } from "../../constants/enums";
 import Exercise from "../exercise/Exercise";
 import Loader from "../loader/Loader";
 import ModelOptionListItem from "./modelOptionListItem/ModelOptionListItem";
 import ContributorWorkout from "../workout/contributorWorkout/ContributorWorkout";
 import Program from "../program/Program";
-import { deleteProgram, fetchPrograms } from "../../api/program";
-
-const test = [
-  {
-    id: 1,
-    name: "Dumbbell",
-    category: "Muscle building",
-    workouts: [
-      {
-        id: 1,
-        name: "Abdominal",
-        type: "Agility",
-        complete: false,
-        sets:[ {
-          id: 1,
-          exerciseRepetition: 4,
-          exercise: {
-            id: 1,
-            name: "Squats",
-            description:
-              "Squats are a functional exercise that benefit your joint and muscle health, as well as your posture",
-            targetMuscleGroup:
-              "Glutes,Hamstrings,Quadriceps,Adductors,Calves,Core",
-            image:
-              "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rw-april-jess-squat-1589233072.jpg?crop=0.667xw:1.00xh;0.148xw,0&resize=980:*",
-            videoLink: "https://youtu.be/aclHkVaku9U",
-          },
-        },]
-      },
-      {
-        id: 2,
-        name: "Bodybuilding",
-        type: "Strength",
-        complete: true,
-        sets: [{
-          id: 1,
-          exerciseRepetition: 4,
-          exercise: {
-            id: 1,
-            name: "Squats",
-            description:
-              "Squats are a functional exercise that benefit your joint and muscle health, as well as your posture",
-            targetMuscleGroup:
-              "Glutes,Hamstrings,Quadriceps,Adductors,Calves,Core",
-            image:
-              "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rw-april-jess-squat-1589233072.jpg?crop=0.667xw:1.00xh;0.148xw,0&resize=980:*",
-            videoLink: "https://youtu.be/aclHkVaku9U",
-          },
-        },]
-      },
-      {
-        id: 3,
-        name: "Legs",
-        type: "Strength",
-        complete: false,
-        sets: [
-          {
-            id: 1,
-            exerciseRepetition: 4,
-            exercise: {
-              id: 1,
-              name: "Squats",
-              description:
-                "Squats are a functional exercise that benefit your joint and muscle health, as well as your posture",
-              targetMuscleGroup:
-                "Glutes,Hamstrings,Quadriceps,Adductors,Calves,Core",
-              image:
-                "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rw-april-jess-squat-1589233072.jpg?crop=0.667xw:1.00xh;0.148xw,0&resize=980:*",
-              videoLink: "https://youtu.be/aclHkVaku9U",
-            },
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "Dumbbell",
-    category: "Muscle building",
-    workouts: [
-      {
-        id: 1,
-        name: "Abdominal",
-        type: "Agility",
-        complete: false,
-        sets: [
-          {
-            id: 1,
-            exerciseRepetition: 4,
-            exercise: {
-              id: 1,
-              name: "Squats",
-              description:
-                "Squats are a functional exercise that benefit your joint and muscle health, as well as your posture",
-              targetMuscleGroup:
-                "Glutes,Hamstrings,Quadriceps,Adductors,Calves,Core",
-              image:
-                "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rw-april-jess-squat-1589233072.jpg?crop=0.667xw:1.00xh;0.148xw,0&resize=980:*",
-              videoLink: "https://youtu.be/aclHkVaku9U",
-            },
-          },
-          {
-            id: 1,
-            exerciseRepetition: 4,
-            exercise: {
-              id: 1,
-              name: "Squats",
-              description:
-                "Squats are a functional exercise that benefit your joint and muscle health, as well as your posture",
-              targetMuscleGroup:
-                "Glutes,Hamstrings,Quadriceps,Adductors,Calves,Core",
-              image:
-                "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rw-april-jess-squat-1589233072.jpg?crop=0.667xw:1.00xh;0.148xw,0&resize=980:*",
-              videoLink: "https://youtu.be/aclHkVaku9U",
-            },
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Dumbbell",
-    category: "Muscle building",
-    workouts: [
-      {
-        id: 2,
-        name: "Bodybuilding",
-        type: "Strength",
-        complete: true,
-        sets: [{
-          id: 1,
-          exerciseRepetition: 4,
-          exercise: {
-            id: 1,
-            name: "Squats",
-            description:
-              "Squats are a functional exercise that benefit your joint and muscle health, as well as your posture",
-            targetMuscleGroup:
-              "Glutes,Hamstrings,Quadriceps,Adductors,Calves,Core",
-            image:
-              "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rw-april-jess-squat-1589233072.jpg?crop=0.667xw:1.00xh;0.148xw,0&resize=980:*",
-            videoLink: "https://youtu.be/aclHkVaku9U",
-          },
-        },]
-      },
-      {
-        id: 3,
-        name: "Legs",
-        type: "Strength",
-        complete: false,
-        sets: [{
-          id: 1,
-          exerciseRepetition: 4,
-          exercise: {
-            id: 1,
-            name: "Squats",
-            description:
-              "Squats are a functional exercise that benefit your joint and muscle health, as well as your posture",
-            targetMuscleGroup:
-              "Glutes,Hamstrings,Quadriceps,Adductors,Calves,Core",
-            image:
-              "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rw-april-jess-squat-1589233072.jpg?crop=0.667xw:1.00xh;0.148xw,0&resize=980:*",
-            videoLink: "https://youtu.be/aclHkVaku9U",
-          },
-        },]
-      },
-    ],
-  },
-];
+import { apiDelete, apiFetch } from "../../api/api";
 
 const ModelOptionList = ({ modelType, setSelectedItem }) => {
   const [items, setItems] = useState(null);
   const navigate = useNavigate();
 
   /**
-   * Fetches all available exercises or workouts when the page is first rendered.
+   * Fetches all available exercises, workouts or programs  when the page is first rendered.
    */
   useEffect(() => {
     const asyncWrapper = async () => {
-      switch (modelType) {
-        case ModelTypes.EXERCISE:
-          const [errorExercise, dataExercise] = await fetchExercises();
-          !errorExercise ? setItems(dataExercise.payload) : console.log(errorExercise);
-          break;
-
-        case ModelTypes.WORKOUT:
-          const [errorWorkouts, dataWorkouts] = await fetchWorkouts();
-          !errorWorkouts ? setItems(dataWorkouts.payload) : console.log(errorWorkouts);
-          break;
-
-        case ModelTypes.PROGRAM:
-          const [errorProgram, dataProgram] = await fetchPrograms()
-          !errorProgram ? setItems(dataProgram.payload) : console.log(errorProgram);
-          break;
-        default:
-          break;
-      }
+      const [errorExercise, dataExercise] = await apiFetch(modelType);
+      !errorExercise ? setItems(dataExercise.payload) : console.log(errorExercise);
     };
     asyncWrapper();
   }, [modelType]);
 
   /**
-   * Sets selectedItem to the clicked exercise and navigates to "contributor/exercise/edit".
+   * Sets selectedItem to the clicked item and navigates to "contributor/{@link ModelTypes}/edit".
    * @param {*} item
    */
   const onClickEdit = (item) => {
@@ -220,7 +33,7 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
   };
 
   /**
-   * Sets selectedItem to null and navigates to "contributor/exercise/edit". The null value indicates that a new exercise is supposed to be created.
+   * Sets selectedItem to null and navigates to "contributor/{@link ModelTypes}/edit". The null value indicates that a new item is supposed to be created.
    */
   const onClickCreate = () => {
     setSelectedItem(null);
@@ -228,28 +41,15 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
   };
 
   /**
-   * Makes a DELETE request. If the response is true, the exericise is also removed from the state.
+   * Makes a DELETE request. If the response is true, the item is also removed from the state.
    * @param {*} exerciseId
    */
   const onClickDelete = async (itemId) => {
-    switch (modelType) {
-      case ModelTypes.EXERCISE:
-        const [errorExercise] = await deleteExercise(itemId);
-        errorExercise && setItems(items.filter((item) => item.id !== itemId));
-        break;
-      case ModelTypes.WORKOUT:
-        //implement api call when backend is ready
-        break;
-      case ModelTypes.PROGRAM:
-        const [errorProgram ] = await deleteProgram(itemId);
-          errorProgram && setItems(items.filter((item) => item.id !== itemId));      
-            break;
-      default:
-        break;
-    }
+    const [error] = await apiDelete(modelType, itemId)
+    error && setItems(items.filter((item) => item.id !== itemId));
   };
 
-  const renderExercises = () => {
+  const renderItems = () => {
     return items.map((item) => (
       <ModelOptionListItem
         key={item.id}
@@ -264,14 +64,14 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
   };
   return (
     <div>
-      <h1>Manage Exercises</h1>
+      <h1>Manage {modelType}s </h1>
 
       {!items ? (
         <Loader />
       ) : (
         <>
           <button onClick={onClickCreate}>+</button>
-          <div>{renderExercises()}</div>
+          <div>{renderItems()}</div>
         </>
       )}
     </div>

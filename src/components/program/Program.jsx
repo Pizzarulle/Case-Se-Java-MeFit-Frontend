@@ -7,7 +7,7 @@ const Program = ({ programData }) => {
 
   const [isCollapsed, setCollapsed] = useState(true);
 
-  const workoutTypes = workouts.map((workout) => workout.name + ", ");
+  const workoutTypes = workouts && workouts.map((workout) => workout.name + ", ");
 
   const onHandleClick = () => {
     setCollapsed(!isCollapsed);

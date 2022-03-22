@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { createProgram, patchProgram } from "../../../api/program";
-import { fetchWorkouts } from "../../../api/workouts";
+import { apiCreate, apiFetch, apiPatch } from "../../../api/api";
+import { ModelTypes } from "../../../constants/enums";
 import ProgramWorkoutCard from "../programWorkoutCard/ProgramWorkoutCard";
 import styles from "./EditProgram.module.css";
 
@@ -29,18 +29,18 @@ const EditProgram = ({ titleText, program }) => {
 
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [errorExercise, dataExercise] = await fetchWorkouts();
-      !errorExercise
-        ? setWorkouts(dataExercise.payload)
-        : console.log(errorExercise);
+      const [errorWorkouts, dataWorkouts] = await apiFetch(ModelTypes.WORKOUT);
+      !errorWorkouts
+        ? setWorkouts(dataWorkouts.payload)
+        : console.log(errorWorkouts);
     };
     asyncWrapper();
   }, []);
 
   const onSubmit = async (data) => {
     const [error] = !program
-      ? await createProgram({ ...data, id: 0 })
-      : await patchProgram(program.id, data);
+      ? await apiCreate(ModelTypes.PROGRAM, { ...data, id: 0 })
+      : await apiPatch(ModelTypes.PROGRAM, program.id, data);
 
     if (error === null) {
       navigate(-1);
