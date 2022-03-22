@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
-import KeyCloakService from '../components/security/KeyCloak';
+import { useContext} from 'react';
 import { KeyCloakContext } from '../context/KeyCloakContext';
 import logo from '../logo.svg';
 
 const Home = () => {
 
   const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
-  const [userName, setUserName] = useState("Test");
 
   return (
     <header className="App-header">
