@@ -15,8 +15,8 @@ const ApplicationContent = () => {
   return (
     <div className={styles.applicationContentContainer}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<DashboardView/>}/>
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<DashboardView/>}/>
         <Route path="/exercises" element={<Exercises/>}/>
         <Route path="/workouts" element={<Workouts/>}/>
         <Route path="/programs" element={<Programs/>}/>
