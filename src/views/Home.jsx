@@ -8,12 +8,17 @@ const Home = () => {
   const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
   const [userName, setUserName] = useState("Test");
 
+
   useEffect(() => {
-    const getKeyCloak = async () => {
-      const newKeyCloak = await KeyCloakService.initKeycloak(keyCloak)
-      setKeyCloak(newKeyCloak)
-    }
-    getKeyCloak()
+    // const getKeyCloak = async () => {
+    //   console.log(keyCloak);
+    //   const newKeyCloak = await KeyCloakService.initKeycloak(keyCloak)
+    //   console.log(newKeyCloak);
+    //   newKeyCloak.loadUserProfile()
+    //   setKeyCloak(newKeyCloak)
+    // }
+    // getKeyCloak()
+    
   }, [])
 
   return (
@@ -22,9 +27,8 @@ const Home = () => {
       <p>
         Edit <code>src/App.js</code> and save to reload.
       </p>
-
-      {keyCloak.parseToken !== undefined?
-        <h1>{KeyCloakService.getUserFromJWT(keyCloak)}</h1>
+      {keyCloak.authenticated ?
+        <h1>{keyCloak.idTokenParsed['name']}</h1>
         :
         <h1>No user</h1>
       }
