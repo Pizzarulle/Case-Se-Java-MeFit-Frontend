@@ -25,8 +25,6 @@ const Program = (props) => {
           <h4>{category}</h4>
         </div>
 
-
-
         {isCollapsed ? (
           <div className={styles.collapsedProgramWorkouts}>{workoutTypes}</div>
         ) : (

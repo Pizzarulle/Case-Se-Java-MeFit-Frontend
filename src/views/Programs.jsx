@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { apiFetch } from "../api/api";
 import Program from "../components/program/Program";
 import { ModelTypes } from "../constants/enums";
+import { KeyCloakContext } from "../context/KeyCloakContext";
 
 const Programs = (props) => {
+  const [keycloak, setKeycloak] = useContext(KeyCloakContext)
   const [programs, setPrograms] = useState();
 
 
@@ -53,10 +55,13 @@ const Programs = (props) => {
 
       {programs &&
         programs.map((program) => (
-          props.userProgram ?
-            <Program key={program.id} programData={program} removeProgramFromProfile={removeProgramFromProfile} />
+          keycloak.authenticated ?
+            props.userProgram ?
+              <Program key={program.id} programData={program} removeProgramFromProfile={removeProgramFromProfile} />
+              :
+              <Program key={program.id} programData={program} addProgramToProfile={addProgramToProfile} />
             :
-            <Program key={program.id} programData={program} addProgramToProfile={addProgramToProfile} />
+            <Program key={program.id} programData={program} />
 
         )
         )}

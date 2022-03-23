@@ -12,7 +12,7 @@ const Workout = (props) => {
                             <p className={styles.id}>#{id}</p>
                             <p className={styles.complete}>Completed: <b>{complete.toString()}</b></p>
 
-                            {props.removeWorkoutFromProfile !== undefined ?
+                            {props.removeWorkoutFromProfile !== undefined &&
                                 <p className={styles.complete} >
                                     {complete ?
                                         <button>In Complete</button>
@@ -21,7 +21,8 @@ const Workout = (props) => {
                                     }
                                     <button>Remove</button>
                                 </p>
-                                :
+                            }{
+                                props.addWorkoutToProfile !== undefined &&
                                 <p className={styles.complete} > <button>Add</button></p>
                             }
 

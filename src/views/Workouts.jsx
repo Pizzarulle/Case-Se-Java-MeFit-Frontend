@@ -1,11 +1,12 @@
 import Workout from "../components/workout/Workout";
 import { apiFetch } from "../api/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../components/loader/Loader";
+import { KeyCloakContext } from "../context/KeyCloakContext";
 
 const Workouts = (props) => {
     const [workouts, setWorkouts] = useState(null);
-
+    const [keycloak, setKeycloak] = useContext(KeyCloakContext)
 
     const addWorkoutToProfile = () => {
 
@@ -40,13 +41,16 @@ const Workouts = (props) => {
                         <h3>Available workouts</h3>
                     }
                     {workouts.map(workout => (
-                        props.userWorkout ?
-                            <Workout key={workout.id} workoutData={workout}
-                                removeWorkoutFromProfile={removeWorkoutFromProfile} />
+                        keycloak.authenticated ?
+                            props.userWorkout ?
+                                <Workout key={workout.id} workoutData={workout}
+                                    removeWorkoutFromProfile={removeWorkoutFromProfile} />
+                                :
+                                <Workout key={workout.id} workoutData={workout}
+                                    addWorkoutToProfile={addWorkoutToProfile} />
                             :
                             <Workout key={workout.id} workoutData={workout}
-                                addWorkoutToProfile={addWorkoutToProfile} />
-
+                            />
                     ))}
                 </div>
             }
