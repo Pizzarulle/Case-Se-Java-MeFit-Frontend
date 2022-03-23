@@ -1,0 +1,42 @@
+.contributorsAreaContainer {
+    display: flex;
+  }
+  .manageContainer {
+      flex: 1;
+      padding: 0 5rem;
+      /* justify-content: center; */
+      /* background-color: aquamarine; */
+  }
+  .menuContainer {
+    max-width: fit-content;
+    border-right: 2px solid rgb(195, 193, 193);
+    text-align: left;
+    padding: 1rem 0;
+  }
+  .menuItemContainer > * {
+    text-decoration: none;
+    color: black;
+    font-size: xx-large;
+    padding: 0 3rem;
+    margin: 0.3rem;
+    display: flex;
+  }
+  .menuItemContainer > *:hover {
+    text-decoration: underline;
+    text-decoration-color: red;
+  }
+  
+  .active {
+    text-decoration: underline;
+    text-decoration-color: red;
+  }
+  .inactive {
+    text-decoration: none;
+  }
+  .menuContainer h2{
+      margin-bottom: 0;
+  }
+  .menuContainer h2:first-child{
+      margin-top: 0;
+  }
+  

@@ -2,6 +2,7 @@ import Workout from "../components/workout/Workout";
 import { apiFetch } from "../api/api";
 import { useEffect, useState } from "react";
 import Loader from "../components/loader/Loader";
+import ContributorWorkout from "../components/workout/contributorWorkout/ContributorWorkout";
 
 const Workouts = () => {
     const [workouts, setWorkouts] = useState(null);
@@ -27,7 +28,7 @@ const Workouts = () => {
                 <div>
                     <h3>Available workouts</h3>
                     {workouts.map(workout => (
-                        <Workout key={workout.id} workoutData={workout} />
+                        <ContributorWorkout key={workout.id} workoutData={workout} />
                     ))}
                 </div>
             }

@@ -5,12 +5,10 @@ const Navlinks = (props) => {
 
     return (
         <div className={styles.navlinksContainer}>
-            {/* <Link to={"/"}>Home</Link> */}
-            {/* <Link to={"/dashboard"}>Dashboard</Link> */}
-            <Link to={"/test"}>Test</Link>
-            <Link to={"/exercises"}>Exercises</Link>
-            <Link to={"/workouts"}>Workouts</Link>
-            <Link to={"/programs"}>Programs</Link>
+            <Link to={"/dashboard/index"}>Dashboard</Link>
+            <Link to={"/dashboard/exercise"}>Exercises</Link>
+            <Link to={"/dashboard/workout"}>Workouts</Link>
+            <Link to={"/dashboard/program"}>Programs</Link>
 
 
             <Link to={"/reg"}>Reg</Link>
@@ -21,7 +19,7 @@ const Navlinks = (props) => {
                     }
 
                     {props.keyCloak.tokenParsed.roles.some(role => ["MeFitt_Admin", "MeFitt_Contributer"].includes(role)) &&
-                        <Link to={"/contributor"}>Contributor’s Area</Link>
+                        <Link to={"/contributor/exercise"}>Contributor’s Area</Link>
                     }
                 </>
             }

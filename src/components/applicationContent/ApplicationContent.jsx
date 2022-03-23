@@ -1,28 +1,20 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "../../views/Home";
-import Test from "../../views/Test";
 import NoMatch from "../../views/NoMatch";
 import styles from "./ApplicationContent.module.css";
-import Exercises from "../../views/Exercises";
-import Workouts from "../../views/Workouts";
-import Programs from "../../views/Programs";
 import Registration from "../registration/Registration";
 import AdminPage from "../admin/AdminPage";
 import ContributorsArea from "../../views/contributorsArea/ContributorsArea";
 import DashboardView from "../../views/DashboardView";
 import Profile from "../profile/Profile";
+import DasboardArea from "../../views/dashboardArea/DashboardArea"
 
 const ApplicationContent = () => {
   return (
     <div className={styles.applicationContentContainer}>
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
         <Route path="/" element={<DashboardView/>}/>
-        <Route path="/exercises" element={<Exercises/>}/>
-        <Route path="/workouts" element={<Workouts/>}/>
-        <Route path="/programs" element={<Programs/>}/>
+        <Route path="/dashboard/*" element={<DasboardArea/>}/>
         <Route path="/contributor/*" element={<ContributorsArea restrict={{role:"MeFitt_Contributer"}}/>}/>
-        <Route path="/test" element={<Test />} />
 
         <Route path="/profile" element={<Profile/>} />
 
