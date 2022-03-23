@@ -66,7 +66,7 @@ const Profile = () => {
 
           <div className={styles.editColumn}>
             <p>
-              <span>Status:</span> user
+              <span>Status:</span> {user.isAdmin? <>Admin</>: user.isContributor? <>Contributor</>: <>User</>}
             </p>
 
             <button onClick={() => setEditPage(true)}>Edit profile</button>
