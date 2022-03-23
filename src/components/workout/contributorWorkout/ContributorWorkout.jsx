@@ -7,7 +7,7 @@ const ContributorWorkout = ({ workoutData }) => {
     return sets.map((set, index) => {
       return (
         <li key={index + ":" + set.id}>
-          {set.exercise[0].name}, Reps: {set.exerciseRepetition}
+          {set.exercise.name}, Reps: {set.exerciseRepetition}
         </li>
       );
     });
