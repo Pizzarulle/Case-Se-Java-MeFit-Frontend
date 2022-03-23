@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className={styles.navbarContainer}>
 
-      <h1 onClick={() => navigate("/")} >MeFit</h1>
+      <h1 className={styles.bigText} onClick={() => navigate("/dashboard/index")} >MeFit</h1>
 
       <Navlinks keyCloak={keyCloak} />
 
