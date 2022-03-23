@@ -8,7 +8,7 @@ import EditWorkout from "../../components/workout/editWorkout/EditWorkout";
 import EditProgram from "../../components/program/editProgram/EditProgram";
 
 /**
- * Component for displaying different componenets through routers and navlinks. Every path that begins with "/contributor/*" will be shown in this component
+ * Displaying different componenets through routers and navlinks. Every path that begins with "/contributor/*" will be shown in this component
  */
 const ContributorsArea = () => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -17,6 +17,7 @@ const ContributorsArea = () => {
     // Displays three navlinks as a menu
     <div className={styles.contributorsAreaContainer}>
       <div className={styles.menuContainer}>
+      <h2>Manage available:</h2>
         <div className={styles.menuItemContainer}>
           <NavLink
             to={"exercise"}
@@ -26,8 +27,6 @@ const ContributorsArea = () => {
           >
             Exercises
           </NavLink>
-        </div>
-        <div className={styles.menuItemContainer}>
           <NavLink
             to={"workout"}
             className={({ isActive }) =>
@@ -36,8 +35,6 @@ const ContributorsArea = () => {
           >
             Workouts
           </NavLink>
-        </div>
-        <div className={styles.menuItemContainer}>
           <NavLink
             to={"program"}
             className={({ isActive }) =>
@@ -52,11 +49,6 @@ const ContributorsArea = () => {
       {/* Components for each navlink in the menu will be displyed here */}
       <div className={styles.manageContainer}>
         <Routes>
-          <Route
-            path="/"
-            element={<h1>Manage exercises, workouts and programs!</h1>}
-          />
-
           <Route    
             path="/exercise"
             element={<ModelOptionList modelType={ModelTypes.EXERCISE} setSelectedItem={setSelectedItem} />}

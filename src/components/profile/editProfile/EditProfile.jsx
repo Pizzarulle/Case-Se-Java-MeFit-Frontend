@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./EditProfile.module.css";
 
@@ -14,7 +14,6 @@ const EditProfile = (props) => {
     }
   });
 
-  //Add functionality for updating
   const onSubmit = (data) => {
     if (isNumeric(data.height)) {
       data = { ...data, height: isNumeric(data.height) }

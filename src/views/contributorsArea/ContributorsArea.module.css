@@ -4,8 +4,6 @@
 .manageContainer {
     flex: 1;
     padding: 0 5rem;
-    /* justify-content: center; */
-    /* background-color: aquamarine; */
 }
 .menuContainer {
   max-width: fit-content;
@@ -33,3 +31,8 @@
 .inactive {
   text-decoration: none;
 }
+.menuContainer h2{
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
