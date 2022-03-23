@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import KeyCloakAdminService from "../../api/keyCloak-admin";
 import { KeyCloakContext } from "../../context/KeyCloakContext";
+import withAuth from "../security/withAuth";
 import User from "../user/User";
 
 import styles from "./AdminPage.module.css";
@@ -112,5 +113,5 @@ const AdminPage = () => {
     )
 }
 
-export default AdminPage;
+export default withAuth(AdminPage);
 

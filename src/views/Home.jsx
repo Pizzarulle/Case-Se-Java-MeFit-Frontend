@@ -1,20 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
-import KeyCloakService from '../components/security/KeyCloak';
+import { useContext} from 'react';
 import { KeyCloakContext } from '../context/KeyCloakContext';
 import logo from '../logo.svg';
 
 const Home = () => {
 
   const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
-  const [userName, setUserName] = useState("Test");
-
-  useEffect(() => {
-    const getKeyCloak = async () => {
-      const newKeyCloak = await KeyCloakService.initKeycloak(keyCloak)
-      setKeyCloak(newKeyCloak)
-    }
-    getKeyCloak()
-  }, [])
 
   return (
     <header className="App-header">
@@ -22,9 +12,8 @@ const Home = () => {
       <p>
         Edit <code>src/App.js</code> and save to reload.
       </p>
-
-      {keyCloak.parseToken !== undefined?
-        <h1>{KeyCloakService.getUserFromJWT(keyCloak)}</h1>
+      {keyCloak.authenticated ?
+        <h1>{keyCloak.idTokenParsed['name']}</h1>
         :
         <h1>No user</h1>
       }

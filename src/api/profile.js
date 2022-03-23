@@ -1,9 +1,10 @@
 
-const UserService = {
-    regUser
+const ProfileService = {
+    regUser,
+    updateProfile,
 }
 
-export default UserService
+export default ProfileService
 
 async function regUser(keycloak, user) {
     var myHeaders = new Headers();
@@ -11,8 +12,6 @@ async function regUser(keycloak, user) {
     const jsonBody = await JSON.stringify(user)
     myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('Access-Control-Allow-Origin', 'http://localhost:3000');
-    myHeaders.append('Access-Control-Allow-Credentials', 'true');
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -26,3 +25,11 @@ async function regUser(keycloak, user) {
     } catch (error) {
     }
 }
+
+async function updateProfile(keyCloak,profile){
+
+    console.log(profile);
+}
+
+
+

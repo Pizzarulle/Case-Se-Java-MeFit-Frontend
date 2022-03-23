@@ -1,3 +1,4 @@
+import Keycloak from "keycloak-js";
 import { useContext } from "react";
 import { Navigate } from 'react-router-dom'
 import { KeyCloakContext } from "../../context/KeyCloakContext";
@@ -13,8 +14,7 @@ const withAuth = Component => props => {
     const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
 
     const hasValidSession = () => {
-        //returns true if there is a valid session or false if there isn't.
-        if (keyCloak.token !== undefined && keyCloak.token !== '') {
+        if (keyCloak.authenticated) {
             return true;
         }
         return false
@@ -22,8 +22,18 @@ const withAuth = Component => props => {
 
     const isAuthenticated = hasValidSession()
 
-    if (isAuthenticated) {
-        return <Component {...props} />
+    if (isAuthenticated && keyCloak.tokenParsed.roles.includes("MeFitt_User")) {
+        if (props.restrict !== undefined) {
+            if (props.restrict.role === "MeFitt_Admin" && keyCloak.tokenParsed.roles.includes("MeFitt_Admin"))
+                return <Component {...props} />
+            else if (props.restrict.roles === "MeFitt_Contributer" &&
+                keyCloak.tokenParsed.roles.some(role => ["MeFitt_Admin", "MeFitt_Contributer"].includes(role)))
+                return <Component {...props} />
+            else
+                return <Navigate replace to="/" />
+        }
+        else
+            return <Component {...props} />
     } else {
         return <Navigate replace to="/" />
     }
