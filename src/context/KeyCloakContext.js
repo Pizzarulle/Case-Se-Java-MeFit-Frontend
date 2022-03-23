@@ -9,11 +9,37 @@ export const KeyCloakContext = createContext()
  */
 const KeyCloakProvider = (props) => {
 
-    const [keyCloak, setKeyCloak] =  useState(new Keycloak({
+    const [keyCloak, setKeyCloak] = useState(new Keycloak({
         url: "https://keycloak-authentication-server.herokuapp.com/auth/",
         realm: "mefitt",
         clientId: "mefitt-app"
     }))
+
+
+    // keyCloak.onAuthSuccess = function() {  setKeyCloak({...keyCloak}) }
+
+    // keyCloak.onAuthRefreshSuccess = function () {
+    //     setKeyCloak({...keyCloak})
+    // };
+
+    useEffect(() => {
+        keyCloak.init(new Keycloak({
+            // onLoad: 'login-required',
+            // redirectUri: 'http://localhost:3000'
+            onLoad: 'check-sso',
+            silentCheckSsoRedirectUri: 'http://localhost:3000/silent-check-sso.html',
+            silentCheckSsoFallback: false
+        }
+        )).then(function (authenticated) {
+            if (!authenticated) {
+                console.log('Not authenticated');
+            } else {
+                setKeyCloak({...keyCloak})
+            }
+        }).catch(function () {
+            console.log('Init Error');
+        });
+    },[])
 
     return (
         <KeyCloakContext.Provider value={[keyCloak, setKeyCloak]}>

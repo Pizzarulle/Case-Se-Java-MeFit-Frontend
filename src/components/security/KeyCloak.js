@@ -8,7 +8,7 @@ const KeyCloakService = {
     userActive
 }
 
-export default KeyCloakService;
+// export default KeyCloakService;
 
 async function initKeycloak(keyCloak) {
     await keyCloak.init({
