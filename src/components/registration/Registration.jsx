@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useContext } from "react"
 import { KeyCloakContext } from "../../context/KeyCloakContext"
 
-import UserService from "../../api/user"
+import UserService from "../../api/profile"
 
 const Registration = () => {
 

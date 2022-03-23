@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import UserService from "../../api/user";
+import { useContext, useEffect, useState } from "react";
+import UserService from "../../api/profile";
 import EditProfile from "./editProfile/EditProfile";
 import styles from "./Profile.module.css";
 import ProfileDetails from "./profileDetails/ProfileDetails";
@@ -32,8 +32,14 @@ const Profile = () => {
   const handleEditSubmit = (e) => {
     setEditPage(false)
     setUser(e)
+    UserService.updateProfile(keycloak, e)
   }
 
+
+  //TODO get info from profile 
+  useEffect(() => {
+
+  }, [])
 
 
   return (
@@ -48,7 +54,7 @@ const Profile = () => {
               ? styles.isAdmin
               : user.isContributor
                 ? styles.isContributor
-                :""
+                : ""
           }
         >
           <img

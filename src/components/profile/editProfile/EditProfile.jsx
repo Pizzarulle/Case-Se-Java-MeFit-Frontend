@@ -14,18 +14,15 @@ const EditProfile = (props) => {
     }
   });
 
-
   //Add functionality for updating
   const onSubmit = (data) => {
-    console.log(data)
     if (isNumeric(data.height)) {
-      data = { ...data, height: data.height.replace(",", ".") }
+      data = { ...data, height: isNumeric(data.height) }
       props.editSubmitted(data)
     }
   };
 
   function isNumeric(num) {
-    console.log(num);
     num = num.replace(",", ".")
     if (num.match(/^-?\d+$/)) {
       return num
