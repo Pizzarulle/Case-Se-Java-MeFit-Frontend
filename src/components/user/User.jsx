@@ -1,7 +1,7 @@
 import styles from "./User.module.css";
 
 const User = ({ userData }) => {
-    const { firstName, lastName, isContributor, isAdmin } = userData;
+    const { firstName, lastName, roles:{isContributor, isAdmin} } = userData;
 
     return (
         <div>

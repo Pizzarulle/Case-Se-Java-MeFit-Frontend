@@ -10,6 +10,7 @@ const Navlinks = () => {
             <Link to={"/exercises"}>Exercises</Link> 
             <Link to={"/workouts"}>Workouts</Link>
             <Link to={"/programs"}>Programs</Link>
+            <Link to={"/admin"}>Admin</Link>
             <Link to={"/contributor"}>Contributor’s Area</Link>
         </div>
     );

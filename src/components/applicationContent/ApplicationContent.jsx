@@ -6,6 +6,8 @@ import styles from "./ApplicationContent.module.css";
 import Exercises from "../../views/Exercises";
 import Workouts from "../../views/Workouts";
 import Programs from "../../views/Programs";
+import Registration from "../registration/Registration";
+import AdminPage from "../admin/AdminPage";
 import ContributorsArea from "../../views/contributorsArea/ContributorsArea";
 import DashboardView from "../../views/DashboardView";
 
@@ -20,6 +22,11 @@ const ApplicationContent = () => {
         <Route path="/programs" element={<Programs/>}/>
         <Route path="/contributor/*" element={<ContributorsArea/>}/>
         <Route path="/test" element={<Test />} />
+
+        <Route path="/reg" element={<Registration/>} />
+        <Route path="/admin" element={<AdminPage/>}/>
+        <Route path= "/silent-check-sso.html"/> 
+
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </div>
