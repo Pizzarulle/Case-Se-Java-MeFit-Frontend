@@ -9,6 +9,7 @@ import Program from "../program/Program";
 import { apiDelete, apiFetch } from "../../api/api";
 
 const ModelOptionList = ({ modelType, setSelectedItem }) => {
+  const [show, setShow] = useState(false);
   const [items, setItems] = useState(null);
   const navigate = useNavigate();
 
@@ -18,9 +19,19 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
   useEffect(() => {
     const asyncWrapper = async () => {
       const [errorExercise, dataExercise] = await apiFetch(modelType);
-      !errorExercise ? setItems(dataExercise.payload) : console.log(errorExercise);
+      !errorExercise
+        ? setItems(dataExercise.payload)
+        : console.log(errorExercise);
+      setShow(true);
     };
-    asyncWrapper();
+    !show && asyncWrapper();
+  }, [modelType, show]);
+
+  useEffect(() => {
+    return () => {
+      setItems(null);
+      setShow(false);
+    };
   }, [modelType]);
 
   /**
@@ -45,7 +56,7 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
    * @param {*} exerciseId
    */
   const onClickDelete = async (itemId) => {
-    const [error] = await apiDelete(modelType, itemId)
+    const [error] = await apiDelete(modelType, itemId);
     error && setItems(items.filter((item) => item.id !== itemId));
   };
 
@@ -57,24 +68,25 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
         onClickDelete={() => onClickDelete(item.id)}
       >
         {modelType === ModelTypes.EXERCISE && <Exercise exerciseData={item} />}
-        {modelType === ModelTypes.WORKOUT && <ContributorWorkout workoutData={item} />}
-        {modelType === ModelTypes.PROGRAM && <Program programData={item}  />}
+        {modelType === ModelTypes.WORKOUT && (
+          <ContributorWorkout workoutData={item} />
+        )}
+        {modelType === ModelTypes.PROGRAM && <Program programData={item} />}
       </ModelOptionListItem>
     ));
   };
   return (
-    <div>
-      <h1>Manage {modelType}s </h1>
-
-      {!items ? (
+    <>
+      {!show ? (
         <Loader />
       ) : (
-        <>
+        <div>
+          <h1>Manage {modelType}s </h1>
           <button onClick={onClickCreate}>+</button>
           <div>{renderItems()}</div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
