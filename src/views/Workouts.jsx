@@ -8,14 +8,14 @@ const Workouts = () => {
 
     useEffect(() => {
         const asyncWrapper = async () => {
-            const [error, data] = await apiFetch("workout");
+            const [error, {payload}] = await apiFetch("workout");
 
             if (error) {
                 console.error(error);
                 return;
             }
 
-            setWorkouts(data)
+            setWorkouts(payload)
         }
 
         asyncWrapper();

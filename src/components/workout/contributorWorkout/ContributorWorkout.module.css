@@ -1,0 +1,31 @@
+.contributorWorkoutContainer {
+  min-width: fit-content;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  margin: 1rem auto;
+  border-bottom: 0.5rem solid #0078c8;
+}
+.contributorWorkoutContainer ul {
+  padding: 1rem 3rem;
+  max-height: 6rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+}
+.contributorWorkoutContainer li {
+  margin-right: 3rem;
+}
+.row {
+  display: flex;
+  padding: 0 1.5rem;
+}
+.row > div {
+  text-align: start;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.row > div:first-child {
+  flex: 0.3;
+}

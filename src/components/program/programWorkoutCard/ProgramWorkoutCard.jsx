@@ -1,19 +1,27 @@
 import styles from "./ProgramWorkoutCard.module.css";
 
-const ProgramWorkoutCard = ({ workoutSummaryData }) => {
-  const { id, name, type } = workoutSummaryData;
-
+const ProgramWorkoutCard = ({ workoutSummaryData, size }) => {
+  const { name, type, sets } = workoutSummaryData;
   return (
-    <div className={styles.programWorkoutContainer}>
-      <p>
-        {name}
+    <div
+      className={
+        size === "small"
+          ? styles.programWorkoutContainerSmall
+          : styles.programWorkoutContainer
+      }
+    >
+      <div>
+        <span>{name}</span>
         <br />
         {type}
-      </p>
-      {/* replace wiht a map to render the name and maybe link to the exercises */}
+      </div>
       <ul>
-        <li>Extercise 1</li>
-        <li>Extercise 2</li>
+        {sets &&
+          sets.map((set, index) => (
+            <li key={index}>
+              {set.exerciseRepetition} {set.exercise[0].name}
+            </li>
+          ))}
       </ul>
     </div>
   );
