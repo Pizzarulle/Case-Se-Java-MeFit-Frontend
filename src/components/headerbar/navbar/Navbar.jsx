@@ -23,11 +23,11 @@ const Navbar = () => {
           <>
             <h3 onClick={() => navigate("/profile")}
             >{keyCloak.idTokenParsed['name']}</h3>
-            <button onClick={() => keyCloak.logout({ redirectUri: 'http://localhost:3000' })}>Logout</button>
+            <button onClick={() => keyCloak.logout({ redirectUri: 'http://localhost:3000/dashboard/index' })}>Logout</button>
           </>
           : <>
             <button onClick={() =>
-              keyCloak.login({ redirectUri: 'http://localhost:3000' })
+              keyCloak.login({ redirectUri: 'http://localhost:3000/dashboard/index' })
             }
             >Login</button>
             <button onClick={() => keyCloak.register()}>Register</button>

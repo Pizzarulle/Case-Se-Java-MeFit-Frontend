@@ -2,6 +2,7 @@ const RestService = {
     getRequest,
     postRequest,
     putRequest,
+    patchRequest,
     deleteRequest,
 }
 
@@ -30,6 +31,10 @@ async function postRequest(keycloak, url, body) {
 
 async function putRequest(keycloak, url, body) {
     return await requestWithBody(keycloak, url, body, "PUT")
+}
+
+async function patchRequest(keycloak, url, body) {
+    return await requestWithBody(keycloak, url, body, "PATCH")
 }
 
 async function deleteRequest(keycloak, url, body) {

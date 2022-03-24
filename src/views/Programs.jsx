@@ -10,11 +10,17 @@ const Programs = (props) => {
 
 
   const addProgramToProfile = (e) => {
-    console.log(e);
+    if(!programs.some(program => program.id === e.id)){
+      const temp = programs
+      temp.push(e)
+      setPrograms(temp)
+      props.editPrograms()
+    }
   }
 
   const removeProgramFromProfile = (e) => {
     console.log(e);
+    console.log(programs);
 
   }
 
@@ -28,17 +34,8 @@ const Programs = (props) => {
       }
     };
 
-    const asyncUserPrograms = async () => {
-      const [error, { payload }] = await apiFetch(ModelTypes.PROGRAM);
-      if (error !== null) {
-        console.log(error);
-      } else {
-        setPrograms(payload);
-      }
-    }
-
     if (props.userProgram)
-      asyncUserPrograms()
+      setPrograms(props.programs)
     else
       asyncWrapper();
   }, []);
