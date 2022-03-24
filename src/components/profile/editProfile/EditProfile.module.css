@@ -23,15 +23,15 @@
   flex-direction: column;
   max-width: fit-content;
 }
-form input {
+.editProfileContainer form input {
   padding: 1rem;
   font-size: large;
 }
-form textarea {
+.editProfileContainer form textarea {
   padding: 1rem;
   font-size: large;
 }
-form input[type="submit"] {
+.editProfileContainer form input[type="submit"] {
   background-color: red;
   border: 3px solid red;
   font-size: large;
@@ -41,7 +41,7 @@ form input[type="submit"] {
   align-self: flex-end;
   cursor: pointer;
 }
-form input[type="submit"]:hover {
+.editProfileContainer form input[type="submit"]:hover {
   background-color: white;
   color: red;
 }

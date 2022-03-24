@@ -23,8 +23,8 @@ const EditWorkout = ({ titleText, workout }) => {
           ? workout.sets.map((set) => {
               return {
                 exerciseRepetition: set.exerciseRepetition,
-                exerciseId: set.exercise[0].id,
-                exerciseName: set.exercise[0].name,
+                exerciseId: set.exercise.id,
+                exerciseName: set.exercise.name,
               };
             })
           : [],

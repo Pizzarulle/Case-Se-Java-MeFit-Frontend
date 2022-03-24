@@ -19,7 +19,7 @@ const ProgramWorkoutCard = ({ workoutSummaryData, size }) => {
         {sets &&
           sets.map((set, index) => (
             <li key={index}>
-              {set.exerciseRepetition} {set.exercise[0].name}
+              {set.exerciseRepetition} {set.exercise.name}
             </li>
           ))}
       </ul>
