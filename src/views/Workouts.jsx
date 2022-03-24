@@ -1,35 +1,59 @@
 import Workout from "../components/workout/Workout";
 import { apiFetch } from "../api/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../components/loader/Loader";
+import { KeyCloakContext } from "../context/KeyCloakContext";
 import ContributorWorkout from "../components/workout/contributorWorkout/ContributorWorkout";
 
-const Workouts = () => {
-    const [workouts, setWorkouts] = useState(null);
+const Workouts = (props) => {
+    const [workouts, setWorkouts] = useState(props.workouts);
+    const [keycloak, setKeycloak] = useContext(KeyCloakContext)
+
+
+    const asyncWrapper = async () => {
+        const [error, { payload }] = await apiFetch("workout");
+        if (error) {
+            console.error(error);
+            return;
+        }
+        setWorkouts(payload)
+    }
+
 
     useEffect(() => {
-        const asyncWrapper = async () => {
-            const [error, {payload}] = await apiFetch("workout");
+        // if (props.workouts === undefined) {
+        //     console.log("getting");
+        //     asyncWrapper();
+        // }
 
-            if (error) {
-                console.error(error);
-                return;
-            }
-
-            setWorkouts(payload)
-        }
-
-        asyncWrapper();
     }, []);
 
     return (
         <>
-            {!workouts ? <Loader /> :
+            {workouts === undefined /* || workouts.length === 0 */ ? <Loader /> :
                 <div>
-                    <h3>Available workouts</h3>
-                    {workouts.map(workout => (
-                        <ContributorWorkout key={workout.id} workoutData={workout} />
+                    {props.userWorkout ?
+                        <h3>Your workouts</h3>
+                        :
+                        <h3>Available workouts</h3>
+                    }
+
+                    {workouts.map(workout => (<div key={workout.id}>
+                        {
+                            props.userWorkout && <Workout key={workout.id} workoutData={workout} removeWorkoutFromProfile={() => props.removeWorkout(workout)} />}
+                        {
+                            props.availableWorkout && <Workout key={workout.id} workoutData={workout} addWorkoutToProfile={() => props.addWorkout(workout)} />
+                        }
+                        {
+                            props.workouts === undefined && <ContributorWorkout key={workout.id} workoutData={workout} />
+                        }
+                    </div>
+                        // <ContributorWorkout key={workout.id} workoutData={workout} />
                     ))}
+
+                    {/* {workouts.map(workout => { <Workout key={workout.id} workoutData={workout} />
+                    })} */}
+
                 </div>
             }
         </>

@@ -2,26 +2,26 @@ import { useState } from "react";
 import styles from "./Program.module.css";
 import ProgramWorkoutCard from "./programWorkoutCard/ProgramWorkoutCard";
 
-const Program = ({ programData }) => {
-  const { name, category, workouts } = programData;
+const Program = (props) => {
+  const { name, category, workouts } = props.programData;
 
   const [isCollapsed, setCollapsed] = useState(true);
 
   const workoutTypes = workouts && workouts.map((workout) => workout.name + ", ");
 
-  const onHandleClick = () => {
-    setCollapsed(!isCollapsed);
+  const onHandleClick = (e) => {
+    if (e.target.name === "div")
+      setCollapsed(!isCollapsed);
   };
   return (
-    <div className={styles.programContainer} onClick={onHandleClick}>
+    <div className={styles.programContainer} name="div" onClick={onHandleClick}>
       <div className={styles.row}>
         <div
           className={
             isCollapsed
               ? styles.collapsedNameAndCategory
               : styles.programNameAndCategory
-          }
-        >
+          }>
           <h2>{name}</h2>
           <h4>{category}</h4>
         </div>
@@ -41,6 +41,14 @@ const Program = ({ programData }) => {
             </div>
           )
         )}
+
+        {props.removeProgramFromProfile !== undefined &&
+          <button onClick={() => props.removeProgramFromProfile(props.programData)} >Remove</button>
+        }{
+          props.addProgramToProfile !== undefined &&
+          <button onClick={() => props.addProgramToProfile(props.programData)} >Add</button>
+        }
+
       </div>
       <div className={styles.dividerBorder}></div>
     </div>
