@@ -10,11 +10,10 @@ const Program = (props) => {
   const workoutTypes = workouts && workouts.map((workout) => workout.name + ", ");
 
   const onHandleClick = (e) => {
-    if (e.target.name === "div")
       setCollapsed(!isCollapsed);
   };
   return (
-    <div className={styles.programContainer} name="div" onClick={onHandleClick}>
+    <div className={styles.programContainer} onClick={onHandleClick}>
       <div className={styles.row}>
         <div
           className={
