@@ -1,4 +1,4 @@
-import Workout from "../../views/Workouts";
+import Workouts from "../../views/Workouts";
 import Exercises from "../../views/Exercises";
 import Programs from "../../views/Programs";
 import DashboardCalendar from "./calendar/DashboardCalendar";
@@ -14,30 +14,53 @@ const Dashboard = () => {
     const [keycloak, setKeycloak] = useContext(KeyCloakContext)
     const [profile, setProfile] = useState(null)
     const [workouts, setWorkouts] = useState([])
-    const [progras, setPrograms] = useState([])
+    const [programs, setPrograms] = useState([])
 
-    const editPrograms = (e) => {
-        const temp = profile;
-        temp.programs = e
-        setProfile(temp)
+    const removeProgram = (e) => {
+        let index = profile.programs.findIndex(program => program.id === e.id)
+        let temp = profile
+        temp.programs.splice(index, 1)
+        setProfile({ ...temp })
+        console.log("Remove")
+        ProfileService.pathProfileProgram(keycloak, profile)
     }
 
+    const addProgram = (e) => {
+        if (!profile.programs.some(program => program.id === e.id)) {
+            let temp = profile
+            temp.programs.push(e)
+            console.log(temp);
+            setProfile({ ...temp })
+
+            // let tempArray = [...workouts]
+
+            
+            console.log("ADD");
+            ProfileService.pathProfileProgram(keycloak, profile)
+        }
+    }
 
     const removeWorkout = (e) => {
         let index = profile.workouts.findIndex(work => work.id === e.id)
         let temp = profile
+        console.log(temp);
         temp.workouts.splice(index, 1)
+        console.log(temp);
         setProfile( {...temp} )
 
-        ProfileService.patchProfileWorkout(keycloak,profile)
+        setWorkouts([...workouts,e])
+        //ProfileService.patchProfileWorkout(keycloak,profile)
     }
     const addWorkout = (e) => {
         if (!profile.workouts.some(work => work.id === e.id)) {
             let temp = profile
             temp.workouts.push(e)
-            setProfile({...temp})
+            setProfile({ ...temp })
+            const array = workouts.filter(Workout => Workout.id !== e.id)
+            console.log(array);
+            setWorkouts([...array])
 
-            ProfileService.patchProfileWorkout(keycloak,profile)
+            // ProfileService.patchProfileWorkout(keycloak, profile)
         }
     }
 
@@ -51,8 +74,8 @@ const Dashboard = () => {
             }
         }
         setProfile(profileFetch[1].payload[1])
-        setWorkouts(temp)
-        // console.log(workouts);
+        setWorkouts([ ...temp ])
+         console.log(profile);
     }
 
     const asyncWrapper = async () => {
@@ -71,8 +94,9 @@ const Dashboard = () => {
     useEffect(() => {
         // if (keycloak.authenticated)
         getProfile()
+        console.log("UseEffect");
         // else
-        setWorkoutAsync()
+        // setWorkoutAsync()
     }, [])
 
     return (
@@ -81,20 +105,21 @@ const Dashboard = () => {
 
                 {keycloak.authenticated && profile !== null ?
                     <>
-                        {/* <Programs editPrograms={editPrograms} programs={profile.programs} userProgram={true} /> */}
-                        <Workout removeWorkout={removeWorkout} workouts={profile.workouts} userWorkout={true} />
-
-                        {/* <Programs editPrograms={editPrograms} availableProgram={true} /> */}
-                        <Workout addWorkout={addWorkout} workouts={workouts} availableWorkout={true} />
+                        <Programs removeProgram={removeProgram} programs={profile.programs} userProgram={true} />
+                        <Workouts removeWorkout={removeWorkout} workouts={profile.workouts} userWorkout={true} />
+                        
+                        
+                        <Programs addProgram={addProgram} availableProgram={true} />
+                        <Workouts addWorkout={addWorkout} workouts={workouts} availableWorkout={true} />
                     </>
                     : <>
-                        <Programs /* availableProgram={true} */ />
-                        {<Workout />}
+                        {/* <Programs />
+                        {<Workout />} */}
                     </>
                 }
 
 
-                <Exercises />
+                {/* <Exercises /> */}
             </div>
             <div className={styles.calendarContainer}>
                 <DashboardCalendar />

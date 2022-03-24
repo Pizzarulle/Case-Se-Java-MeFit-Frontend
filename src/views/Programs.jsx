@@ -1,28 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { apiFetch } from "../api/api";
+import Loader from "../components/loader/Loader";
 import Program from "../components/program/Program";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
 
 const Programs = (props) => {
   const [keycloak, setKeycloak] = useContext(KeyCloakContext)
-  const [programs, setPrograms] = useState();
+  const [programs, setPrograms] = useState(props.programs);
 
-
-  const addProgramToProfile = (e) => {
-    if(!programs.some(program => program.id === e.id)){
-      const temp = programs
-      temp.push(e)
-      setPrograms(temp)
-      props.editPrograms()
-    }
-  }
-
-  const removeProgramFromProfile = (e) => {
-    console.log(e);
-    console.log(programs);
-
-  }
 
   useEffect(() => {
     const asyncWrapper = async () => {
@@ -33,35 +19,51 @@ const Programs = (props) => {
         setPrograms(payload);
       }
     };
-
-    if (props.userProgram)
-      setPrograms(props.programs)
-    else
+    console.log(props.programs);
+    if (props.programs === undefined) {
+      console.log("Getting programs");
       asyncWrapper();
+    }
   }, []);
-
 
 
   return (
     <>
-      {props.userProgram ?
-        <h1>Your programs!</h1>
-        :
-        <h1>Available programs!</h1>
-      }
-
-      {programs &&
-        programs.map((program) => (
-          keycloak.authenticated ?
-            props.userProgram ?
-              <Program key={program.id} programData={program} removeProgramFromProfile={removeProgramFromProfile} />
-              :
-              <Program key={program.id} programData={program} addProgramToProfile={addProgramToProfile} />
+      {programs === undefined /* ||  programs.length === 0 */ ? <Loader /> :
+        <div>
+          {props.userProgram ?
+            <h1>Your programs!</h1>
             :
-            <Program key={program.id} programData={program} />
+            <h1>Available programs!</h1>
+          }
+          {programs.map(program => (<div key={program.id}>
+            {
+              props.userProgram && <Program programData={program} removeProgramFromProfile={() => props.removeProgram(program)} />}
+            {
+              props.availableProgram && <Program programData={program} addProgramToProfile={() => props.addProgram(program)} />
+            }
+            {/* {
+          props.workouts === undefined && <ContributorProgram  programData={program} />
+        } */}
+
+
+          </div>
+          ))}
+
+
+          {/* {programs &&
+        programs.map((program) => (
+        
+            props.userProgram ?
+              <Program key={program.id} programData={program} removeProgramFromProfile={() => props.editPrograms(program)} />
+              :
+              <Program key={program.id} programData={program} addProgramToProfile={() => props.editPrograms(program)} />
+            // :
+            // <Program key={program.id} programData={program} />
 
         )
-        )}
+        )} */}
+        </div>}
     </>
   );
 };

@@ -43,7 +43,7 @@ async function deleteRequest(keycloak, url, body) {
 
 async function requestWithBody(keycloak, url, body, method) {
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
+    // myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
     myHeaders.append("Content-Type", "application/json");
     let requestOptions = {
         method: method,

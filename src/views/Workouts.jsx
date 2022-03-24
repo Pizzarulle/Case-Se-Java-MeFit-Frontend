@@ -21,18 +21,16 @@ const Workouts = (props) => {
 
 
     useEffect(() => {
-
-
-        if (props.workouts === undefined) {
-            console.log("getting");
-            asyncWrapper();
-        }
+        // if (props.workouts === undefined) {
+        //     console.log("getting");
+        //     asyncWrapper();
+        // }
 
     }, []);
 
     return (
         <>
-            {workouts === undefined || workouts.length === 0 ? <Loader /> :
+            {workouts === undefined /* || workouts.length === 0 */ ? <Loader /> :
                 <div>
                     {props.userWorkout ?
                         <h3>Your workouts</h3>
