@@ -6,11 +6,11 @@ import { KeyCloakContext } from "../context/KeyCloakContext";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState(null);
-  const [ke] = useContext(KeyCloakContext)
+  const [keyCloak] = useContext(KeyCloakContext)
 
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [error, { payload }] = await apiFetch(ModelTypes.EXERCISE,ke);
+      const [error, { payload }] = await apiFetch(ModelTypes.EXERCISE,keyCloak);
 
       if (error !== null) {
         console.log(error);
