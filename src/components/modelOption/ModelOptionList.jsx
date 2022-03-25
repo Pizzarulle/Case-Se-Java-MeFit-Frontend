@@ -21,14 +21,14 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
    */
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [errorExercise, dataExercise] = await apiFetch(modelType);
+      const [errorExercise, dataExercise] = await apiFetch(modelType,keyCloack);
       !errorExercise
         ? setItems(dataExercise.payload)
         : console.log(errorExercise);
       setShow(true);
     };
     !show && asyncWrapper();
-  }, [modelType, show]);
+  }, [modelType, show, keyCloack]);
 
   useEffect(() => {
     return () => {

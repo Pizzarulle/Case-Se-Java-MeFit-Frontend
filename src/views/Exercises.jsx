@@ -19,7 +19,7 @@ const Exercises = () => {
       }
     };
     asyncWrapper();
-  }, []);
+  }, [keyCloak]);
 
   return (
     <>
