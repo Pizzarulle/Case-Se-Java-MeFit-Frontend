@@ -1,14 +1,18 @@
 import { apiFetch } from "../api/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../components/loader/Loader";
 import ContributorWorkout from "../components/workout/contributorWorkout/ContributorWorkout";
+import { ModelTypes } from "../constants/enums";
+import { KeyCloakContext } from "../context/KeyCloakContext";
 
 const Workouts = () => {
     const [workouts, setWorkouts] = useState(null);
+      const [keyCloak] = useContext(KeyCloakContext)
+
 
     useEffect(() => {
         const asyncWrapper = async () => {
-            const [error, {payload}] = await apiFetch("workout");
+      const [error, { payload }] = await apiFetch(ModelTypes.EXERCISE,keyCloak);
 
             if (error) {
                 console.error(error);
