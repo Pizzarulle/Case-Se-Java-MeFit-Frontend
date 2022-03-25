@@ -2,8 +2,29 @@ import { useFieldArray, useForm } from "react-hook-form";
 import styles from "./EditWorkout.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { apiFetch } from "../../../api/api";
+import { apiCreate, apiFetch, apiPatch } from "../../../api/api";
 import { ModelTypes } from "../../../constants/enums";
+
+/**
+ * Reformat the form data so its accapatable for the api ednpoint
+ * @param {*} data 
+ * @returns 
+ */
+const formatSubmitData = (data) => {
+  data = { ...data, complete: false };
+
+  const sets = data.sets.map((set) => {
+    return {
+      id: set.id ? set.id : 0,
+      exerciseRepetition: set.exerciseRepetition,
+      exercise: {
+        id: set.exerciseId,
+      },
+    };
+  });
+  data = { ...data, sets };
+  return data;
+};
 
 const EditWorkout = ({ titleText, workout }) => {
   const navigate = useNavigate();
@@ -22,6 +43,7 @@ const EditWorkout = ({ titleText, workout }) => {
         workout && workout.sets
           ? workout.sets.map((set) => {
               return {
+                id: set.id,
                 exerciseRepetition: set.exerciseRepetition,
                 exerciseId: set.exercise.id,
                 exerciseName: set.exercise.name,
@@ -49,14 +71,21 @@ const EditWorkout = ({ titleText, workout }) => {
   }, []);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    data = formatSubmitData(data);
+      const [error] = !workout
+      ? await apiCreate(ModelTypes.WORKOUT, {...data, id:0})
+      : await apiPatch(ModelTypes.WORKOUT, workout.id, data)
+
+      if (error === null) {
+        navigate(-1);
+      }
   };
 
   const onDiscard = () => navigate(-1);
 
   return (
     <form
-      onSubmit={handleSubmit((data) => console.log(data))}
+      onSubmit={handleSubmit(onSubmit)}
       className={styles.editExerciseContainer}
     >
       <h1>{titleText}</h1>
@@ -106,8 +135,7 @@ const EditWorkout = ({ titleText, workout }) => {
                 type={"number"}
                 {...register(`sets.${index}.exerciseRepetition`, {
                   required: true,
-                  valueAsNumber:true
-
+                  valueAsNumber: true,
                 })}
                 placeholder="Repetitions"
               />
