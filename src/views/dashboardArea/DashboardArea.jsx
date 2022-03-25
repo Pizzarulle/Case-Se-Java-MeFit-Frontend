@@ -13,7 +13,7 @@ const ContributorsArea = () => {
         <h2>Dashboard:</h2>
         <div className={styles.menuItemContainer}>
           <NavLink
-            to={"index"}
+            to={""}
             className={({ isActive }) =>
               isActive ? styles.active : styles.inactive
             }
@@ -53,7 +53,7 @@ const ContributorsArea = () => {
       {/* Components for each navlink in the menu will be displyed here */}
       <div className={styles.manageContainer}>
         <Routes>
-          <Route path="/index" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
           <Route path="/exercise" element={<Exercises />} />
           <Route path="/workout" element={<Workouts />} />
           <Route path="/program" element={<Programs />} />

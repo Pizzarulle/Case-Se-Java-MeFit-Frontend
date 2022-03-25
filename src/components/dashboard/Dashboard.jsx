@@ -7,6 +7,10 @@ import { apiFetch } from "../../api/api";
 import DashboardWorkouts from "./dashboardLists/DashboardWorkouts";
 import DashboardPrograms from "./dashboardLists/DashboardPrograms";
 import { ModelTypes } from "../../constants/enums";
+import Exercises from "../../views/Exercises";
+import Workouts from "../../views/Workouts";
+import Programs from "../../views/Programs";
+import Loader from "../loader/Loader";
 
 const Dashboard = () => {
   const [keycloak, setKeycloak] = useContext(KeyCloakContext);
@@ -98,7 +102,7 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.dataContainer}>
-        {keycloak.authenticated && profile !== null && (
+        {(keycloak.authenticated && profile) ? (
           <>
             <DashboardPrograms
               removeProgram={removeProgram}
@@ -122,7 +126,10 @@ const Dashboard = () => {
               availableWorkout={true}
             />
           </>
-        )}
+        ):
+         <>
+         <Loader/>
+         </>}
       </div>
       <div className={styles.calendarContainer}>
         <DashboardCalendar />

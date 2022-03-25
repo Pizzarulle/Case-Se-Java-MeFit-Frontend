@@ -1,11 +1,12 @@
 import { API_URL } from "../constants/api";
 
 
-const createMethodHeaderBody = (methodType, body)=>{
+const createMethodHeaderBody = (keyCloak, methodType, body)=>{
     return {
         method: methodType,
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${keyCloak.token}`
         },
         body: JSON.stringify({
           ...body,
@@ -27,9 +28,9 @@ export const apiFetch = async (url) => {
   }
 };
 
-export const apiCreate = async (url, newObject) => {
+export const apiCreate = async (keyCloak, url, newObject) => {
     try {
-        const response = await fetch(`${API_URL}/${url}`, createMethodHeaderBody("POST", newObject));
+        const response = await fetch(`${API_URL}/${url}`, createMethodHeaderBody(keyCloak, "POST", newObject));
     
         if (!response.ok) {
           throw new Error("Could not POST to db.");
@@ -41,9 +42,9 @@ export const apiCreate = async (url, newObject) => {
       }
 };
 
-export const apiPatch = async (url, id, updatedObject) => {
+export const apiPatch = async (keyCloak, url, id, updatedObject) => {
     try {
-        const response = await fetch(`${API_URL}/${url}/${id}`, createMethodHeaderBody("PATCH", updatedObject));
+        const response = await fetch(`${API_URL}/${url}/${id}`, createMethodHeaderBody(keyCloak, "PATCH", updatedObject));
     
         if (!response.ok) {
           throw new Error("Could not PATCH to db.");
@@ -54,10 +55,13 @@ export const apiPatch = async (url, id, updatedObject) => {
         return [error.message, null];
       }
 };
-export const apiDelete = async (url, id) => {
+export const apiDelete = async (keyCloak, url, id) => {
     try {
       const response = await fetch(`${API_URL}/${url}/${id}`, {
         method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${keyCloak.token}`
+        },
       });
   
       if (!response.ok) {

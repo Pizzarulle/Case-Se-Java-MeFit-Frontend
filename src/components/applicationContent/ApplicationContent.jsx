@@ -4,7 +4,6 @@ import styles from "./ApplicationContent.module.css";
 import Registration from "../registration/Registration";
 import AdminPage from "../admin/AdminPage";
 import ContributorsArea from "../../views/contributorsArea/ContributorsArea";
-import DashboardView from "../../views/DashboardView";
 import Profile from "../profile/Profile";
 import DasboardArea from "../../views/dashboardArea/DashboardArea"
 
@@ -12,8 +11,7 @@ const ApplicationContent = () => {
   return (
     <div className={styles.applicationContentContainer}>
       <Routes>
-        <Route path="/" element={<DashboardView/>}/>
-        <Route path="/dashboard/*" element={<DasboardArea/>}/>
+        <Route path="/*" element={<DasboardArea/>}/>
         <Route path="/contributor/*" element={<ContributorsArea restrict={{role:"MeFitt_Contributer"}}/>}/>
 
         <Route path="/profile" element={<Profile/>} />

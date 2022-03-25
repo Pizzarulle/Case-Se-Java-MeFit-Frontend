@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { apiCreate, apiFetch, apiPatch } from "../../../api/api";
 import { ModelTypes } from "../../../constants/enums";
+import { KeyCloakContext } from "../../../context/KeyCloakContext";
 import ProgramWorkoutCard from "../programWorkoutCard/ProgramWorkoutCard";
 import styles from "./EditProgram.module.css";
 
 const EditProgram = ({ titleText, program }) => {
   const navigate = useNavigate();
   const [workouts, setWorkouts] = useState(null);
+  const [keyCloack] = useContext(KeyCloakContext)
+
   const {
     register,
     handleSubmit,
@@ -39,8 +42,8 @@ const EditProgram = ({ titleText, program }) => {
 
   const onSubmit = async (data) => {
     const [error] = !program
-      ? await apiCreate(ModelTypes.PROGRAM, { ...data, id: 0 })
-      : await apiPatch(ModelTypes.PROGRAM, program.id, data);
+      ? await apiCreate(keyCloack,ModelTypes.PROGRAM, { ...data, id: 0 })
+      : await apiPatch(keyCloack, ModelTypes.PROGRAM, program.id, data);
 
     if (error === null) {
       navigate(-1);

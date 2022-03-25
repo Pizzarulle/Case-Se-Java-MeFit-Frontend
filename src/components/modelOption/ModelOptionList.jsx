@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModelTypes } from "../../constants/enums";
 import Exercise from "../exercise/Exercise";
@@ -7,10 +7,13 @@ import ModelOptionListItem from "./modelOptionListItem/ModelOptionListItem";
 import ContributorWorkout from "../workout/contributorWorkout/ContributorWorkout";
 import Program from "../program/Program";
 import { apiDelete, apiFetch } from "../../api/api";
+import { KeyCloakContext } from "../../context/KeyCloakContext";
 
 const ModelOptionList = ({ modelType, setSelectedItem }) => {
   const [show, setShow] = useState(false);
   const [items, setItems] = useState(null);
+  const [keyCloack] = useContext(KeyCloakContext)
+
   const navigate = useNavigate();
 
   /**
@@ -56,7 +59,7 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
    * @param {*} exerciseId
    */
   const onClickDelete = async (itemId) => {
-    const [error] = await apiDelete(modelType, itemId);
+    const [error] = await apiDelete(keyCloack, modelType, itemId);
     error && setItems(items.filter((item) => item.id !== itemId));
   };
 
