@@ -1,0 +1,65 @@
+.editProfileContainer {
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  padding: 1.5rem;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.5rem solid red;
+}
+.row {
+  display: flex;
+  gap: 3rem;
+}
+.row > div {
+  display: flex;
+  flex-direction: column;
+}
+.group {
+  text-align: start;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  max-width: fit-content;
+}
+.editProfileContainer form input {
+  padding: 1rem;
+  font-size: large;
+}
+.editProfileContainer form textarea {
+  padding: 1rem;
+  font-size: large;
+}
+.editProfileContainer form input[type="submit"] {
+  background-color: red;
+  border: 3px solid red;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  border-radius: 1rem;
+  align-self: flex-end;
+  cursor: pointer;
+}
+.editProfileContainer form input[type="submit"]:hover {
+  background-color: white;
+  color: red;
+}
+
+.edit {
+  padding: 1rem;
+  font-size: large;
+  background-color: red;
+  border: 3px solid red;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  border-radius: 1rem;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.edit:hover {
+  background-color: white;
+  color: red;
+}

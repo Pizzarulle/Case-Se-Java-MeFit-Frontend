@@ -14,7 +14,7 @@
 
 .dividerBorder {
   height: 0.5em;
-  background-color: #00c853;
+  background-color: #0078c8;
   justify-content: space-around;
   flex: 0.5;
 }
@@ -26,7 +26,7 @@
   flex: 1;
   flex-wrap: wrap;
 }
-.collapsedNameAndCategory > *{
+.collapsedNameAndCategory > * {
   flex: 1;
   flex-direction: row;
   text-align: start;
@@ -38,7 +38,7 @@
   text-align: start;
   flex: 1;
 }
-.collapsedProgramWorkouts{
+.collapsedProgramWorkouts {
   display: flex;
   flex: 1;
 }

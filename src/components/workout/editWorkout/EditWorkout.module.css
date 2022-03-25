@@ -1,0 +1,96 @@
+.editExerciseContainer {
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  padding: 1.5rem;
+  margin: auto;
+  border-bottom: 0.5rem solid red;
+}
+.row {
+  display: flex;
+  gap: 3rem;
+}
+.row > div {
+  display: flex;
+  flex-direction: column;
+}
+.group {
+  text-align: start;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  min-width: 600px;
+  max-width: fit-content;
+  margin: auto;
+}
+form input {
+  padding: 1rem;
+  font-size: large;
+}
+form textarea {
+  padding: 1rem;
+  font-size: large;
+  min-height: 5rem;
+}
+
+.btnContainer {
+  display: flex;
+  flex: 1;
+  justify-content: end;
+}
+.btnContainer > * {
+  border-radius: 1rem;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  font-size: large;
+  font-weight: bold;
+  margin: 0.5rem 1rem;
+}
+.validation {
+  color: red;
+  font-size: small;
+  float: right;
+}
+.addExercise {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+.addExercise > label{
+  font-size: large;
+}
+.addExerciseContainer {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.addExerciseContainer button {
+  background-color: green;
+  border: 3px solid green;
+}
+.addExerciseContainer button:hover {
+  background-color: white;
+  color: green;
+}
+.fieldArrayBtn {
+  color: white;
+  cursor: pointer;
+  font-size: large;
+  margin-left: 3rem;
+  padding: 3px 1.5rem;
+  height: min-content;
+  align-self: center;
+  border-radius: 5px;
+}
+.selectedExercise {
+  display: flex;
+  text-align: start;
+  margin: 5px;
+  justify-content: center;
+}
+.selectedExercise > div {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  max-width: fit-content;
+}

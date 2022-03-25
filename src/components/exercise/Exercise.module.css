@@ -8,6 +8,8 @@
   display: flex;
   padding: 0 1.5rem;
   align-items: center;
+  justify-content: space-between;
+
 }
 .row > div {
   margin-left: 2rem;
@@ -16,6 +18,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
+  flex-wrap: wrap;
   padding: 0.5rem;
   gap: 3rem;
 }
@@ -36,7 +39,7 @@
 }
 .dividerBorder {
   height: 0.5em;
-  background-color: #00c853;
+  background-color: #0078c8;
 }
 .description {
   text-align: left;

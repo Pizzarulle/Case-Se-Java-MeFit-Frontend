@@ -1,7 +1,32 @@
-.programWorkoutContainer{
-    background-color: #fff;
-    box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
-    padding: 0.5rem 1rem;
-    max-width: fit-content;
-    text-align: start;
+.programWorkoutContainerSmall {
+  background-color: #fff;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  padding: 0.5rem 1rem;
+  max-width: fit-content;
+  text-align: start;
+}
+
+.programWorkoutContainer {
+  background-color: #fff;
+  box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
+  padding: 0.5rem 1rem;
+  text-align: start;
+  display: flex;
+  align-items: baseline;
+}
+.programWorkoutContainer > div:first-child {
+  flex: 0.3;
+}
+.programWorkoutContainer ul {
+  max-height: 4rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.programWorkoutContainer span {
+  font-size: large;
+  font-weight: bold;
+  text-decoration: underline;
 }
