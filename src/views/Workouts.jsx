@@ -1,4 +1,3 @@
-import Workout from "../components/workout/Workout";
 import { apiFetch } from "../api/api";
 import { useEffect, useState } from "react";
 import Loader from "../components/loader/Loader";
