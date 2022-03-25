@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { apiFetch } from "../api/api";
 import Exercise from "../components/exercise/Exercise";
 import { ModelTypes } from "../constants/enums";
+import { KeyCloakContext } from "../context/KeyCloakContext";
 
 const Exercises = () => {
   const [exercises, setExercises] = useState(null);
+  const [ke] = useContext(KeyCloakContext)
 
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [error, { payload }] = await apiFetch(ModelTypes.EXERCISE);
+      const [error, { payload }] = await apiFetch(ModelTypes.EXERCISE,ke);
 
       if (error !== null) {
         console.log(error);

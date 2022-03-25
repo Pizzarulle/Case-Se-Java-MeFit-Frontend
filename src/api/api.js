@@ -14,9 +14,12 @@ const createMethodHeaderBody = (keyCloak, methodType, body)=>{
     }
 }
 
-export const apiFetch = async (url) => {
+export const apiFetch = async (url,keyCloak) => {
   try {
-    const response = await fetch(`${API_URL}/${url}`);
+    const response = await fetch(`${API_URL}/${url}`,{        method: "GET",   headers: {
+      "Authorization": `Bearer ${keyCloak.token}`
+    },
+    });
     if (!response.ok) {
       return new Error(`Could not fetch ${url}.`);
     }
@@ -29,6 +32,7 @@ export const apiFetch = async (url) => {
 };
 
 export const apiCreate = async (keyCloak, url, newObject) => {
+  console.log(keyCloak.token);
     try {
         const response = await fetch(`${API_URL}/${url}`, createMethodHeaderBody(keyCloak, "POST", newObject));
     

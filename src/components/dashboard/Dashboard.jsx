@@ -7,50 +7,52 @@ import { apiFetch } from "../../api/api";
 import DashboardWorkouts from "./dashboardLists/DashboardWorkouts";
 import DashboardPrograms from "./dashboardLists/DashboardPrograms";
 import { ModelTypes } from "../../constants/enums";
-import Exercises from "../../views/Exercises";
-import Workouts from "../../views/Workouts";
-import Programs from "../../views/Programs";
 import Loader from "../loader/Loader";
 
 const Dashboard = () => {
-  const [keycloak, setKeycloak] = useContext(KeyCloakContext);
+  const [keycloak] = useContext(KeyCloakContext);
   const [profile, setProfile] = useState(null);
   const [workouts, setWorkouts] = useState([]);
   const [programs, setPrograms] = useState([]);
 
-  const removeItem = (e, listName, state, setFunction) => {
+  const removeItem = (e, listName, state, setFunction, modelType) => {
     let index = profile[listName].findIndex((item) => item.id === e.id);
     let temp = profile;
     temp[listName].splice(index, 1);
     setProfile({ ...temp });
     setFunction([...state, e]);
+    
+    ProfileService.patchProfileLists(keycloak, { ...temp },modelType);
+    
   };
 
-  const addItem = (e, listName, state, setFunction) => {
+  const addItem = (e, listName, state, setFunction, modelType) => {
     if (!profile[listName].some((item) => item.id === e.id)) {
       let temp = profile;
       temp[listName].push(e);
       setProfile({ ...temp });
       setFunction([...state.filter((item) => item.id !== e.id)]);
+    
+      ProfileService.patchProfileLists(keycloak, { ...temp },modelType);
     }
   };
 
   const removeProgram = (e) => {
-    removeItem(e, "programs", programs, setPrograms);
+    removeItem(e, "programs", programs, setPrograms, ModelTypes.PROGRAM);
     // ProfileService.patchProfileWorkout(keycloak, profile);
   };
 
   const addProgram = (e) => {
-    addItem(e, "programs", programs, setPrograms);
+    addItem(e, "programs", programs, setPrograms, ModelTypes.PROGRAM);
   };
 
   const removeWorkout = (e) => {
-    removeItem(e, "workouts", workouts, setWorkouts);
+    removeItem(e, "workouts", workouts, setWorkouts, ModelTypes.WORKOUT);
     // ProfileService.patchProfileWorkout(keycloak, profile);
   };
 
   const addWorkout = (e) => {
-    addItem(e, "workouts", workouts, setWorkouts);
+    addItem(e, "workouts", workouts, setWorkouts, ModelTypes.WORKOUT);
   };
 
   const getProfile = async () => {
