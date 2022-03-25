@@ -23,5 +23,5 @@ jobs:
         with:
           args: deploy --dir=build --prod
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: 'java-se-mefit-frontend-test'
+          heroku_app_name: 'java-se-mefit-frontend-develop'
           heroku_email: 'andreas.hellstrom@se.experis.com'
