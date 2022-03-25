@@ -23,11 +23,11 @@ const Navbar = () => {
           <>
             <h3 onClick={() => navigate("/profile")}
             >{keyCloak.idTokenParsed['name']}</h3>
-            <button onClick={() => keyCloak.logout({ redirectUri: 'https://java-se-mefit-frontend-develop.herokuapp.com/' })}>Logout</button>
+            <button onClick={() => keyCloak.logout({ redirectUri: 'https://java-se-mefit-frontend-test.herokuapp.com' })}>Logout</button>
           </>
           : <>
             <button onClick={() =>
-              keyCloak.login({ redirectUri: 'https://java-se-mefit-frontend-develop.herokuapp.com/' })
+              keyCloak.login({ redirectUri: 'https://java-se-mefit-frontend-test.herokuapp.com' })
             }
             >Login</button>
             <button onClick={() => keyCloak.register()}>Register</button>
