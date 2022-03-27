@@ -14,7 +14,7 @@ const Workouts = () => {
 
     const asyncWrapper = async () => {
       const [error, { payload }] = await apiFetch(
-        ModelTypes.EXERCISE,
+        ModelTypes.WORKOUT,
         keyCloak
       );
 
