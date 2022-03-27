@@ -4,10 +4,11 @@ import Loader from "../components/loader/Loader";
 import ContributorWorkout from "../components/workout/contributorWorkout/ContributorWorkout";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
+import { useKC } from "../context/useKeyCloak";
 
 const Workouts = () => {
   const [workouts, setWorkouts] = useState(null);
-  const [keyCloak] = useContext(KeyCloakContext);
+  const [keyCloak] = useKC;
 
   useEffect(() => {
     const asyncWrapper = async () => {
