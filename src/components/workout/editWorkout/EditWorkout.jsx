@@ -64,13 +64,13 @@ const EditWorkout = ({ titleText, workout }) => {
   //Fetches available exercieses
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [errorExercise, dataExercise] = await apiFetch(ModelTypes.EXERCISE);
+      const [errorExercise, dataExercise] = await apiFetch(ModelTypes.EXERCISE,keyCloack );
       !errorExercise
         ? setExercises(dataExercise.payload)
         : console.log(errorExercise);
     };
     asyncWrapper();
-  }, []);
+  }, [keyCloack]);
 
   const onSubmit = async (data) => {
     data = formatSubmitData(data);

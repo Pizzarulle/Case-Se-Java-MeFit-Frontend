@@ -14,6 +14,7 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
   const [items, setItems] = useState(null);
   const [keyCloack] = useContext(KeyCloakContext)
 
+
   const navigate = useNavigate();
 
   /**
@@ -21,7 +22,7 @@ const ModelOptionList = ({ modelType, setSelectedItem }) => {
    */
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [errorExercise, dataExercise] = await apiFetch(modelType,keyCloack);
+      const [errorExercise, dataExercise] = await apiFetch(modelType, keyCloack);
       !errorExercise
         ? setItems(dataExercise.payload)
         : console.log(errorExercise);
