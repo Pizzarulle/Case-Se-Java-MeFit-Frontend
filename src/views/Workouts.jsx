@@ -10,8 +10,6 @@ const Workouts = () => {
   const [keyCloak] = useContext(KeyCloakContext);
 
   useEffect(() => {
-    console.log("Workouts");
-
     const asyncWrapper = async () => {
       const [error, { payload }] = await apiFetch(
         ModelTypes.WORKOUT,
