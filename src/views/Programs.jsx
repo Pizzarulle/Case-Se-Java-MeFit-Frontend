@@ -13,7 +13,7 @@ const Programs = () => {
 
     const asyncWrapper = async () => {
       const [error, { payload }] = await apiFetch(
-        ModelTypes.EXERCISE,
+        ModelTypes.PROGRAM,
         keyCloak
       );
 
