@@ -32,13 +32,13 @@ const EditProgram = ({ titleText, program }) => {
 
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [errorWorkouts, dataWorkouts] = await apiFetch(ModelTypes.WORKOUT);
+      const [errorWorkouts, dataWorkouts] = await apiFetch(ModelTypes.WORKOUT, keyCloack);
       !errorWorkouts
         ? setWorkouts(dataWorkouts.payload)
         : console.log(errorWorkouts);
     };
     asyncWrapper();
-  }, []);
+  }, [keyCloack]);
 
   const onSubmit = async (data) => {
     const [error] = !program

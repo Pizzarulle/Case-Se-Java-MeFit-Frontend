@@ -19,7 +19,7 @@ const Programs = () => {
       }
     };
     asyncWrapper();
-  }, []);
+  }, [keyCloak]);
   return (
     <>
       <h1>Available programs!</h1>
