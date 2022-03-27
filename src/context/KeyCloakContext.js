@@ -9,11 +9,15 @@ export const KeyCloakContext = createContext()
  */
 const KeyCloakProvider = (props) => {
 
-    const [keyCloak, setKeyCloak] = useState(new Keycloak({
-        url: "https://keycloak-authentication-server.herokuapp.com/auth/",
-        realm: "mefitt",
-        clientId: "mefitt-app"
-    }))
+    const [keyCloak, setKeyCloak] = useState(
+        JSON.parse(sessionStorage.getItem("mefit-kc"))
+    //     new Keycloak({
+    //     url: "https://keycloak-authentication-server.herokuapp.com/auth/",
+    //     realm: "mefitt",
+    //     clientId: "mefitt-app"
+    // })
+    
+    )
 
 
     // keyCloak.onAuthSuccess = function() {  setKeyCloak({...keyCloak}) }
@@ -35,6 +39,7 @@ const KeyCloakProvider = (props) => {
                 console.log('Not authenticated');
             } else {
                 setKeyCloak({...keyCloak})
+                sessionStorage.setItem("mefit-kc", JSON.stringify({...keyCloak}))
             }
         }).catch(function () {
             console.log('Init Error');

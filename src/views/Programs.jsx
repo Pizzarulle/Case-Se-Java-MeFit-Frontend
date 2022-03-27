@@ -4,11 +4,10 @@ import Loader from "../components/loader/Loader";
 import Program from "../components/program/Program";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
-import { useKC } from "../context/useKeyCloak";
 
 const Programs = () => {
   const [programs, setPrograms] = useState();
-  const [keyCloak] = useKC;
+  const [keyCloak] = useContext(KeyCloakContext);
 
   useEffect(() => {
     const asyncWrapper = async () => {
