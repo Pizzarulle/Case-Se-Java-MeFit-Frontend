@@ -5,16 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import KeyCloakProvider from "./context/KeyCloakContext";
-import KCProvider from './context/useKeyCloak';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <KCProvider>
+    <KeyCloakProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </KCProvider>
+    </KeyCloakProvider>
 
   </React.StrictMode>,
   document.getElementById('root')
