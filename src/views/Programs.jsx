@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { apiFetch } from "../api/api";
+import Loader from "../components/loader/Loader";
 import Program from "../components/program/Program";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
@@ -12,10 +13,7 @@ const Programs = () => {
     console.log("Programs");
 
     const asyncWrapper = async () => {
-      const [error, { payload }] = await apiFetch(
-        ModelTypes.PROGRAM,
-        keyCloak
-      );
+      const [error, { payload }] = await apiFetch(ModelTypes.PROGRAM, keyCloak);
 
       if (error !== null) {
         console.log(error);
@@ -27,12 +25,16 @@ const Programs = () => {
   }, [keyCloak]);
   return (
     <>
-      <h1>Available programs!</h1>
-
-      {programs &&
-        programs.map((program) => (
-          <Program key={program.id} programData={program} />
-        ))}
+      {!programs ? (
+        <Loader />
+      ) : (
+        <>
+          <h1>Available programs!</h1>
+          {programs.map((program) => (
+            <Program key={program.id} programData={program} />
+          ))}
+        </>
+      )}
     </>
   );
 };

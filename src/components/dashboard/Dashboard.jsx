@@ -39,7 +39,6 @@ const Dashboard = () => {
 
   const removeProgram = (e) => {
     removeItem(e, "programs", programs, setPrograms, ModelTypes.PROGRAM);
-    // ProfileService.patchProfileWorkout(keycloak, profile);
   };
 
   const addProgram = (e) => {
@@ -48,7 +47,6 @@ const Dashboard = () => {
 
   const removeWorkout = (e) => {
     removeItem(e, "workouts", workouts, setWorkouts, ModelTypes.WORKOUT);
-    // ProfileService.patchProfileWorkout(keycloak, profile);
   };
 
   const addWorkout = (e) => {
@@ -56,7 +54,7 @@ const Dashboard = () => {
   };
 
   const getProfile = async () => {
-    const profileFetch = await apiFetch("profile");
+    const profileFetch = await apiFetch("profile", keycloak);
 
     const allWokrouts = await asyncWrapper(ModelTypes.WORKOUT);
     const temp = [];
@@ -82,17 +80,17 @@ const Dashboard = () => {
   };
 
   const asyncWrapper = async (modelType) => {
-    const [error, { payload }] = await apiFetch(modelType);
+    const [error, { payload }] = await apiFetch(modelType,keycloak);
     if (error) {
       console.error(error);
       return;
     }
     return payload;
   };
-  const setWorkoutAsync = async () => {
-    const temp = await asyncWrapper();
-    setWorkouts(temp);
-  };
+  // const setWorkoutAsync = async () => {
+  //   const temp = await asyncWrapper();
+  //   setWorkouts(temp);
+  // };
 
   useEffect(() => {
     // if (keycloak.authenticated)

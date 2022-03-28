@@ -33,12 +33,12 @@ const Workouts = () => {
       {!workouts ? (
         <Loader />
       ) : (
-        <div>
-          <h3>Available workouts</h3>
+        <>
+          <h1>Available workouts</h1>
           {workouts.map((workout) => (
             <ContributorWorkout key={workout.id} workoutData={workout} />
           ))}
-        </div>
+        </>
       )}
     </>
   );

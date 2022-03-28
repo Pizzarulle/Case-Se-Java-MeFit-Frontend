@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { apiFetch } from "../api/api";
 import Exercise from "../components/exercise/Exercise";
+import Loader from "../components/loader/Loader";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
 
@@ -27,14 +28,15 @@ const Exercises = () => {
 
   return (
     <>
-      <h1>Available exercises!</h1>
-
       {!exercises ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : (
-        exercises.map((exercise) => (
+        <>
+          <h1>Available exercises!</h1>
+         { exercises.map((exercise) => (
           <Exercise key={exercise.id} exerciseData={exercise} />
-        ))
+          ))}
+        </>
       )}
     </>
   );
