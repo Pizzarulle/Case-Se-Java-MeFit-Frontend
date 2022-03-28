@@ -10,7 +10,6 @@ const Exercises = () => {
   const [keyCloak] = useContext(KeyCloakContext);
 
   useEffect(() => {
-    console.log("Exercise");
     const asyncWrapper = async () => {
       const [error, { payload }] = await apiFetch(
         ModelTypes.EXERCISE,
@@ -33,8 +32,9 @@ const Exercises = () => {
       ) : (
         <>
           <h1>Available exercises!</h1>
-         { exercises.map((exercise) => (
+         {exercises.map((exercise) => (
           <Exercise key={exercise.id} exerciseData={exercise} />
+
           ))}
         </>
       )}
