@@ -7,14 +7,14 @@ import styles from "./Navbar.module.css";
 
 const Navbar = () => {
 
-  const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
+  const [keyCloak] = useContext(KeyCloakContext)
 
   const navigate = useNavigate()
 
   return (
     <nav className={styles.navbarContainer}>
 
-      <h1 className={styles.bigText} onClick={() => navigate("/dashboard/index")} >MeFit</h1>
+      <h1 className={styles.bigText} onClick={() => navigate("/")} >MeFit</h1>
 
       <Navlinks keyCloak={keyCloak} />
 
@@ -23,11 +23,11 @@ const Navbar = () => {
           <>
             <h3 onClick={() => navigate("/profile")}
             >{keyCloak.idTokenParsed['name']}</h3>
-            <button onClick={() => keyCloak.logout({ redirectUri: 'http://localhost:3000/dashboard/index' })}>Logout</button>
+            <button onClick={() => keyCloak.logout({ redirectUri: 'https://java-se-mefit-frontend-develop.herokuapp.com' })}>Logout</button>
           </>
           : <>
             <button onClick={() =>
-              keyCloak.login({ redirectUri: 'http://localhost:3000/dashboard/index' })
+              keyCloak.login({ redirectUri: 'https://java-se-mefit-frontend-develop.herokuapp.com' })
             }
             >Login</button>
             <button onClick={() => keyCloak.register()}>Register</button>

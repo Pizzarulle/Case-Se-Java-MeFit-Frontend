@@ -1,9 +1,10 @@
 import { useFieldArray, useForm } from "react-hook-form";
 import styles from "./EditWorkout.module.css";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { apiCreate, apiFetch, apiPatch } from "../../../api/api";
 import { ModelTypes } from "../../../constants/enums";
+import { KeyCloakContext } from "../../../context/KeyCloakContext";
 
 /**
  * Reformat the form data so its accapatable for the api ednpoint
@@ -29,6 +30,7 @@ const formatSubmitData = (data) => {
 const EditWorkout = ({ titleText, workout }) => {
   const navigate = useNavigate();
   const [exercises, setExercises] = useState(null);
+  const [keyCloack] = useContext(KeyCloakContext)
 
   const {
     register,
@@ -62,19 +64,19 @@ const EditWorkout = ({ titleText, workout }) => {
   //Fetches available exercieses
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [errorExercise, dataExercise] = await apiFetch(ModelTypes.EXERCISE);
+      const [errorExercise, dataExercise] = await apiFetch(ModelTypes.EXERCISE,keyCloack );
       !errorExercise
         ? setExercises(dataExercise.payload)
         : console.log(errorExercise);
     };
     asyncWrapper();
-  }, []);
+  }, [keyCloack]);
 
   const onSubmit = async (data) => {
     data = formatSubmitData(data);
       const [error] = !workout
-      ? await apiCreate(ModelTypes.WORKOUT, {...data, id:0})
-      : await apiPatch(ModelTypes.WORKOUT, workout.id, data)
+      ? await apiCreate(keyCloack, ModelTypes.WORKOUT, {...data, id:0})
+      : await apiPatch(keyCloack, ModelTypes.WORKOUT, workout.id, data)
 
       if (error === null) {
         navigate(-1);

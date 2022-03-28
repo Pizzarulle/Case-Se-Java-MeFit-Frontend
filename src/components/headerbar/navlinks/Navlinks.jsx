@@ -5,10 +5,10 @@ const Navlinks = (props) => {
 
     return (
         <div className={styles.navlinksContainer}>
-            <Link to={"/dashboard/index"}>Dashboard</Link>
-            <Link to={"/dashboard/exercise"}>Exercises</Link>
-            <Link to={"/dashboard/workout"}>Workouts</Link>
-            <Link to={"/dashboard/program"}>Programs</Link>
+            <Link to={"/"}>Dashboard</Link>
+            <Link to={"/exercise"}>Exercises</Link>
+            <Link to={"/workout"}>Workouts</Link>
+            <Link to={"/program"}>Programs</Link>
 
 
             <Link to={"/reg"}>Reg</Link>

@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./EditExercise.module.css";
 import { useNavigate } from "react-router-dom";
 import { apiCreate, apiPatch } from "../../../api/api";
 import { ModelTypes } from "../../../constants/enums";
+import { KeyCloakContext } from "../../../context/KeyCloakContext";
 
 const EditExercise = ({ titleText, exercise }) => {
   const navigate = useNavigate();
+  const [keyCloack] = useContext(KeyCloakContext)
+
   const { register, handleSubmit, formState: { errors }} = useForm({
     defaultValues: {
       name: exercise && exercise.name,
@@ -19,8 +22,8 @@ const EditExercise = ({ titleText, exercise }) => {
 
   const onSubmit = async (data) => {
     const [error] = !exercise
-      ? await apiCreate(ModelTypes.EXERCISE, data)
-      : await apiPatch(ModelTypes.EXERCISE, exercise.id, data);
+      ? await apiCreate(keyCloack, ModelTypes.EXERCISE, data)
+      : await apiPatch(keyCloack, ModelTypes.EXERCISE, exercise.id, data);
 
     if (error === null) {
       navigate(-1);

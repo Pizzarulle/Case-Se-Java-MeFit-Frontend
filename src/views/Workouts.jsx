@@ -1,38 +1,47 @@
 import { apiFetch } from "../api/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "../components/loader/Loader";
 import ContributorWorkout from "../components/workout/contributorWorkout/ContributorWorkout";
+import { ModelTypes } from "../constants/enums";
+import { KeyCloakContext } from "../context/KeyCloakContext";
+import withAuth from "../components/security/withAuth";
 
 const Workouts = () => {
-    const [workouts, setWorkouts] = useState(null);
+  const [workouts, setWorkouts] = useState(null);
+  const [keyCloak] = useContext(KeyCloakContext);
 
-    useEffect(() => {
-        const asyncWrapper = async () => {
-            const [error, {payload}] = await apiFetch("workout");
+  useEffect(() => {
 
-            if (error) {
-                console.error(error);
-                return;
-            }
+    const asyncWrapper = async () => {
+      const [error, { payload }] = await apiFetch(
+        ModelTypes.WORKOUT,
+        keyCloak
+      );
 
-            setWorkouts(payload)
-        }
+      if (error) {
+        console.error(error);
+        return;
+      }
 
-        asyncWrapper();
-    }, []);
+      setWorkouts(payload);
+    };
+    asyncWrapper();
+  }, [keyCloak]);
 
-    return (
+  return (
+    <>
+      {!workouts ? (
+        <Loader />
+      ) : (
         <>
-            {!workouts ? <Loader /> :
-                <div>
-                    <h3>Available workouts</h3>
-                    {workouts.map(workout => (
-                        <ContributorWorkout key={workout.id} workoutData={workout} />
-                    ))}
-                </div>
-            }
+          <h1>Available workouts</h1>
+          {workouts.map((workout) => (
+            <ContributorWorkout key={workout.id} workoutData={workout} />
+          ))}
         </>
-    );
+      )}
+    </>
+  );
 };
 
-export default Workouts;
+export default withAuth(Workouts);

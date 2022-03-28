@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { apiFetch } from "../api/api";
+import Loader from "../components/loader/Loader";
 import Program from "../components/program/Program";
+import withAuth from "../components/security/withAuth";
 import { ModelTypes } from "../constants/enums";
+import { KeyCloakContext } from "../context/KeyCloakContext";
 
 const Programs = () => {
   const [programs, setPrograms] = useState();
+  const [keyCloak] = useContext(KeyCloakContext);
 
   useEffect(() => {
     const asyncWrapper = async () => {
-      const [error, { payload }] = await apiFetch(ModelTypes.PROGRAM);
+      const [error, { payload }] = await apiFetch(ModelTypes.PROGRAM, keyCloak);
 
       if (error !== null) {
         console.log(error);
@@ -17,17 +21,21 @@ const Programs = () => {
       }
     };
     asyncWrapper();
-  }, []);
+  }, [keyCloak]);
   return (
     <>
-      <h1>Available programs!</h1>
-
-      {programs &&
-        programs.map((program) => (
-          <Program key={program.id} programData={program} />
-        ))}
+      {!programs ? (
+        <Loader />
+      ) : (
+        <>
+          <h1>Available programs!</h1>
+          {programs.map((program) => (
+            <Program key={program.id} programData={program} />
+          ))}
+        </>
+      )}
     </>
   );
 };
 
-export default Programs;
+export default withAuth(Programs);
