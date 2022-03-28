@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { apiFetch } from "../api/api";
 import Exercise from "../components/exercise/Exercise";
 import Loader from "../components/loader/Loader";
+import withAuth from "../components/security/withAuth";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
 
@@ -10,7 +11,6 @@ const Exercises = () => {
   const [keyCloak] = useContext(KeyCloakContext);
 
   useEffect(() => {
-    console.log("Exercise");
     const asyncWrapper = async () => {
       const [error, { payload }] = await apiFetch(
         ModelTypes.EXERCISE,
@@ -42,4 +42,4 @@ const Exercises = () => {
   );
 };
 
-export default Exercises;
+export default withAuth(Exercises);

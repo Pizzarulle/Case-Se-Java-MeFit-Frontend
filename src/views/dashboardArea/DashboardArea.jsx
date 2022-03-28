@@ -1,11 +1,12 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import Dashboard from "../../components/dashboard/Dashboard";
+import withAuth from "../../components/security/withAuth";
 import Exercises from "../Exercises";
 import Programs from "../Programs";
 import Workouts from "../Workouts";
 import styles from "./DashboardArea.module.css";
 
-const ContributorsArea = () => {
+const DasboardArea = () => {
   return (
     // Displays four navlinks as a menu
     <div className={styles.contributorsAreaContainer}>
@@ -63,4 +64,4 @@ const ContributorsArea = () => {
   );
 };
 
-export default ContributorsArea;
+export default DasboardArea;

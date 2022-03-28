@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { apiFetch } from "../api/api";
 import Loader from "../components/loader/Loader";
 import Program from "../components/program/Program";
+import withAuth from "../components/security/withAuth";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
 
@@ -10,8 +11,6 @@ const Programs = () => {
   const [keyCloak] = useContext(KeyCloakContext);
 
   useEffect(() => {
-    console.log("Programs");
-
     const asyncWrapper = async () => {
       const [error, { payload }] = await apiFetch(ModelTypes.PROGRAM, keyCloak);
 
@@ -39,4 +38,4 @@ const Programs = () => {
   );
 };
 
-export default Programs;
+export default withAuth(Programs);

@@ -6,6 +6,7 @@ import ModelOptionList from "../../components/modelOption/ModelOptionList";
 import { ModelTypes } from "../../constants/enums";
 import EditWorkout from "../../components/workout/editWorkout/EditWorkout";
 import EditProgram from "../../components/program/editProgram/EditProgram";
+import withAuth from "../../components/security/withAuth";
 
 /**
  * Displaying different componenets through routers and navlinks. Every path that begins with "/contributor/*" will be shown in this component
@@ -81,4 +82,4 @@ const ContributorsArea = () => {
   );
 };
 
-export default ContributorsArea;
+export default withAuth(ContributorsArea);

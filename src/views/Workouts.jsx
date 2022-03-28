@@ -4,13 +4,13 @@ import Loader from "../components/loader/Loader";
 import ContributorWorkout from "../components/workout/contributorWorkout/ContributorWorkout";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
+import withAuth from "../components/security/withAuth";
 
 const Workouts = () => {
   const [workouts, setWorkouts] = useState(null);
   const [keyCloak] = useContext(KeyCloakContext);
 
   useEffect(() => {
-    console.log("Workouts");
 
     const asyncWrapper = async () => {
       const [error, { payload }] = await apiFetch(
@@ -44,4 +44,4 @@ const Workouts = () => {
   );
 };
 
-export default Workouts;
+export default withAuth(Workouts);

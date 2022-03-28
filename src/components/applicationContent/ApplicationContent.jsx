@@ -6,6 +6,8 @@ import AdminPage from "../admin/AdminPage";
 import ContributorsArea from "../../views/contributorsArea/ContributorsArea";
 import Profile from "../profile/Profile";
 import DasboardArea from "../../views/dashboardArea/DashboardArea"
+import Login from "../../views/Login";
+import withAuth from "../security/withAuth";
 
 const ApplicationContent = () => {
   return (
@@ -19,6 +21,7 @@ const ApplicationContent = () => {
         <Route path="/reg" element={<Registration/>} />
         <Route path="/admin" element={<AdminPage restrict={{role:"MeFitt_Admin"}}/>}/>
         <Route path= "/silent-check-sso.html"/> 
+        <Route path="/login" element={<Login/>} />
 
         <Route path="*" element={<NoMatch />} />
       </Routes>

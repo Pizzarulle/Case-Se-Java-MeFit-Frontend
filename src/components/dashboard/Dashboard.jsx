@@ -8,6 +8,8 @@ import DashboardWorkouts from "./dashboardLists/DashboardWorkouts";
 import DashboardPrograms from "./dashboardLists/DashboardPrograms";
 import { ModelTypes } from "../../constants/enums";
 import Loader from "../loader/Loader";
+import withAuth from "../security/withAuth";
+import Login from "../../views/Login";
 
 const Dashboard = () => {
   const [keycloak] = useContext(KeyCloakContext);
@@ -76,7 +78,9 @@ const Dashboard = () => {
     }
     setPrograms([...tempPrograms]);
 
+
     setProfile(profileFetch[1].payload[1]);
+    console.log(profile );
   };
 
   const asyncWrapper = async (modelType) => {
@@ -93,16 +97,17 @@ const Dashboard = () => {
   // };
 
   useEffect(() => {
-    // if (keycloak.authenticated)
+    if (keycloak.authenticated)
     getProfile();
     // else
     // setWorkoutAsync()
-  }, []);
+  }, [keycloak]);
 
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.dataContainer}>
-        {(keycloak.authenticated && profile) ? (
+
+        {(profile) ? (
           <>
             <DashboardPrograms
               removeProgram={removeProgram}
@@ -128,7 +133,8 @@ const Dashboard = () => {
           </>
         ):
          <>
-         <Loader/>
+         {!keycloak.authenticated? <Login/>:         <Loader/>
+}
          </>}
       </div>
       <div className={styles.calendarContainer}>
