@@ -43,7 +43,7 @@ const Profile = () => {
       }
     };
     asyncWrapper();
-  }, [keycloak]);
+  }, [keycloak, profile]);
 
   return (
     <>

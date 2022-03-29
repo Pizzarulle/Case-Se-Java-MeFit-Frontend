@@ -26,6 +26,7 @@ const Navbar = () => {
         {keyCloak.authenticated ?
           <>
             <h3 onClick={() => navigate("/profile")}
+            className={styles.pointer}
             >{keyCloak.idTokenParsed['name']}</h3>
             <button onClick={() => keyCloak.logout({ redirectUri: 'https://java-se-mefit-frontend-develop.herokuapp.com' })}>Logout</button>
           </>
@@ -34,7 +35,7 @@ const Navbar = () => {
               keyCloak.login({ redirectUri: 'https://java-se-mefit-frontend-develop.herokuapp.com' })
             }
             >Login</button>
-            <button onClick={() => keyCloak.register()}>Register</button>
+            <button onClick={() => keyCloak.register({ redirectUri: 'https://java-se-mefit-frontend-develop.herokuapp.com/reg' })}>Register</button>
           </>
         }
       </div>
