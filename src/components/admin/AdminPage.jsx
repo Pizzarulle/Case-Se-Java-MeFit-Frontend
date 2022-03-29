@@ -11,6 +11,9 @@ const AdminPage = () => {
     const [keyCloak] = useContext(KeyCloakContext)
     const [userList, setUserList] = useState([])
 
+    /**
+     * Method to get all the user from keycloak and put them in state
+     */
     const getUsers = async () => {
         const userList = await KeyCloakAdminService.getUsers(keyCloak)
         for (const user of userList) {
@@ -19,12 +22,21 @@ const AdminPage = () => {
         setUserList(userList)
     }
 
+    /**
+     * Method get specivied user back from keycloak (used to get updates)
+     * @param {*} userId of user to fetch
+     */
     const getUpdatedUser = async (userId) => {
         const updatedUser = await KeyCloakAdminService.getUser(keyCloak, userId)
         updatedUser.roles = await getUserRoles(updatedUser)
         updateUserInList(updatedUser)
     }
 
+    /**
+     * Method to get all the roles of a user and make them displayable
+     * @param {*} user object to go through 
+     * @returns new render object
+     */
     const getUserRoles = async (user) => {
         let isAdminValue = false
         let isContributorValue = false
@@ -38,12 +50,21 @@ const AdminPage = () => {
         return { isAdmin: isAdminValue, isContributor: isContributorValue }
     }
 
+    /**
+     * Method to set the users password in object and send it to the database
+     * @param {*} e event with the new password inside
+     * @param {*} userId of the user to update 
+     */
     const updatePasswordOfUser = (e, userId) => {
         let user = userList.find(user => user.id === userId)
         user.password = e.target.value
         updateUserInList(user)
     }
 
+    /**
+     * Help method to update the state of objects in the user list 
+     * @param {*} updatedUser 
+     */
     const updateUserInList = (updatedUser) => {
         const list = [...userList]
         const index = list.findIndex(user => user.id === updatedUser.id)
@@ -89,11 +110,8 @@ const AdminPage = () => {
                                         () => KeyCloakAdminService.addUserToRole(keyCloak, user.id, "MeFitt_Contributer")
                                             .then(() => getUpdatedUser(user.id))}>Make Con</button>
                                 }
-
-
                                 <button className={styles.red} onClick={() => KeyCloakAdminService.deleteUser(keyCloak, user.id)
                                     .then(() => getUsers())} >Delete</button>
-
                             </div>
                             <div>
 

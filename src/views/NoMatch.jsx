@@ -1,3 +1,7 @@
+/**
+ * Will be shown to the user then entering a url path thats not implemented
+ * @returns 
+ */
 const NoMatch = () => {
     return (
         <div>

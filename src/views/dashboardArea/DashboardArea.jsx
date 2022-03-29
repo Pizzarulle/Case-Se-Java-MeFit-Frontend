@@ -6,6 +6,10 @@ import Programs from "../Programs";
 import Workouts from "../Workouts";
 import styles from "./DashboardArea.module.css";
 
+/**
+ * Components that will display a links for the user to use and navigate Dashboard area
+ * @returns 
+ */
 const DasboardArea = () => {
   return (
     // Displays four navlinks as a menu

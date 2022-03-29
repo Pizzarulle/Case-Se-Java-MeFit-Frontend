@@ -6,10 +6,17 @@ import withAuth from "../components/security/withAuth";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
 
+/**
+ * component that will render all the avaible programs, will fetch them from the database.
+ * @returns 
+ */
 const Programs = () => {
   const [programs, setPrograms] = useState();
   const [keyCloak] = useContext(KeyCloakContext);
 
+  /**
+   * Method that will be run when component first mounts and when keycloak  updates, will fetch all programs from database
+   */
   useEffect(() => {
     const asyncWrapper = async () => {
       const [error, { payload }] = await apiFetch(ModelTypes.PROGRAM, keyCloak);

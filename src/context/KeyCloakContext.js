@@ -22,6 +22,10 @@ const KeyCloakProvider = (props) => {
     //     setKeyCloak({...keyCloak})
     // };
 
+    /**
+     * Method that will be run every time the app gets opens
+     * Will handle the redirects when comming back from keycloak
+     */
     useEffect(() => {
         keyCloak.init(new Keycloak({
             // onLoad: 'login-required',

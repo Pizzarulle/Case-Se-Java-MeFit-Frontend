@@ -1,5 +1,10 @@
 import Workout from "../../workout/Workout";
 
+/**
+ * Component to rendr the workouts lists when user is autenticated and profile fetched
+ * @param {*} props contains the list of workouts and callback function to add or remove
+ * @returns 
+ */
 const DashboardWorkouts = (props) => {
   return (
     <>

@@ -1,8 +1,12 @@
 import Loader from "../../loader/Loader";
 import Program from "../../program/Program";
 
+/**
+ * Component to render list of programs when user is authenticated and profile fetched.
+ * @param {*} props contains the list of programs to render and the call back function to add or remove
+ * @returns 
+ */
 const DashboardPrograms = (props) => {
-
 
   return (
     <>

@@ -7,7 +7,7 @@ import { ModelTypes } from "../../../constants/enums";
 import { KeyCloakContext } from "../../../context/KeyCloakContext";
 
 /**
- * Reformat the form data so its accapatable for the api ednpoint
+ * Method the formats the edit data from user to match what API requirer
  * @param {*} data 
  * @returns 
  */
@@ -27,6 +27,11 @@ const formatSubmitData = (data) => {
   return data;
 };
 
+/**
+ * Component to render the page where contributers can edit or create workouts
+ * @param {*} param0 contains titletext and information about the existing workout if present
+ * @returns 
+ */
 const EditWorkout = ({ titleText, workout }) => {
   const navigate = useNavigate();
   const [exercises, setExercises] = useState(null);
@@ -72,6 +77,10 @@ const EditWorkout = ({ titleText, workout }) => {
     asyncWrapper();
   }, [keyCloack]);
 
+  /**
+   * Submit handler to create of patch the edited workout
+   * @param {*} data 
+   */
   const onSubmit = async (data) => {
     data = formatSubmitData(data);
       const [error] = !workout
@@ -83,6 +92,10 @@ const EditWorkout = ({ titleText, workout }) => {
       }
   };
 
+  /**
+   * If users dicards will be redirected to upper url page
+   * @returns 
+   */
   const onDiscard = () => navigate(-1);
 
   return (
