@@ -103,10 +103,19 @@ npm install
 ```
 This might take a while ☕  
 ...  
+
+Before running the application change these url:s to **your** specific urls.
+```bash
+API_URL in src/constants/api.js
+redirectUri in src/components/headerbar/navbar/Navbar.jsx
+keyCloakUrl in src/api/keyCloak-admin.js
+```
 Once the installation is complete you can simply run your final command:
+
 ```bash
 npm run start
 ```
+
 to start the application front-end! The React start command will automatically open the website at [localhost:3000](http://localhost:3000/) when it is done compiling.
 
 
