@@ -8,7 +8,6 @@ import DashboardWorkouts from "./dashboardLists/DashboardWorkouts";
 import DashboardPrograms from "./dashboardLists/DashboardPrograms";
 import { ModelTypes } from "../../constants/enums";
 import Loader from "../loader/Loader";
-import withAuth from "../security/withAuth";
 import Login from "../../views/Login";
 
 const Dashboard = () => {
@@ -23,19 +22,17 @@ const Dashboard = () => {
     temp[listName].splice(index, 1);
     setProfile({ ...temp });
     setFunction([...state, e]);
-    
-    ProfileService.patchProfileLists(keycloak, { ...temp },modelType);
-    
+     ProfileService.removed(keycloak, profile.id, e.id, modelType);
   };
 
-  const addItem = (e, listName, state, setFunction, modelType) => {
+  const  addItem = (e, listName, state, setFunction, modelType) => {
     if (!profile[listName].some((item) => item.id === e.id)) {
       let temp = profile;
       temp[listName].push(e);
       setProfile({ ...temp });
       setFunction([...state.filter((item) => item.id !== e.id)]);
-    
-      ProfileService.patchProfileLists(keycloak, { ...temp },modelType);
+
+     ProfileService.add(keycloak, profile.id, e, modelType);
     }
   };
 
@@ -56,12 +53,14 @@ const Dashboard = () => {
   };
 
   const getProfile = async () => {
-    const profileFetch = await apiFetch("profile", keycloak);
+    const { payload } = await ProfileService.getProfileByUserId(keycloak);
 
+    console.log(payload);
     const allWokrouts = await asyncWrapper(ModelTypes.WORKOUT);
     const temp = [];
+
     for (const work of allWokrouts) {
-      if (!profileFetch[1].payload[1].workouts.some((w) => w.id === work.id)) {
+      if (!payload.profile.workouts.some((w) => w.id === work.id)) {
         temp.push(work);
       }
     }
@@ -70,44 +69,34 @@ const Dashboard = () => {
     const allPrograms = await asyncWrapper(ModelTypes.PROGRAM);
     const tempPrograms = [];
     for (const program of allPrograms) {
-      if (
-        !profileFetch[1].payload[1].programs.some((w) => w.id === program.id)
-      ) {
+      if (!payload.profile.programs.some((w) => w.id === program.id)) {
         tempPrograms.push(program);
       }
     }
+
+    
     setPrograms([...tempPrograms]);
 
-
-    setProfile(profileFetch[1].payload[1]);
-    console.log(profile );
+    setProfile(payload.profile);
   };
 
   const asyncWrapper = async (modelType) => {
-    const [error, { payload }] = await apiFetch(modelType,keycloak);
+    const [error, { payload }] = await apiFetch(modelType, keycloak);
     if (error) {
       console.error(error);
       return;
     }
     return payload;
   };
-  // const setWorkoutAsync = async () => {
-  //   const temp = await asyncWrapper();
-  //   setWorkouts(temp);
-  // };
 
   useEffect(() => {
-    if (keycloak.authenticated)
-    getProfile();
-    // else
-    // setWorkoutAsync()
+    if (keycloak.authenticated) getProfile();
   }, [keycloak]);
 
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.dataContainer}>
-
-        {(profile) ? (
+        {profile ? (
           <>
             <DashboardPrograms
               removeProgram={removeProgram}
@@ -131,11 +120,9 @@ const Dashboard = () => {
               availableWorkout={true}
             />
           </>
-        ):
-         <>
-         {!keycloak.authenticated? <Login/>:         <Loader/>
-}
-         </>}
+        ) : (
+          <>{!keycloak.authenticated ? <Login /> : <Loader />}</>
+        )}
       </div>
       <div className={styles.calendarContainer}>
         <DashboardCalendar />
