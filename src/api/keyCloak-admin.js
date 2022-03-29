@@ -1,4 +1,5 @@
 
+import { API_URL } from "../constants/api"
 import RestService from "./rest-service"
 
 const KeyCloakAdminService = {
@@ -70,57 +71,7 @@ async function updateUserPassword(keycloak, user) {
 
 
 async function deleteUser(keycloak, userId) {
-    const responseFromMeFit = await RestService.deleteRequest(keycloak, meFitUrl + "/api/user/" + userId, undefined)
-    if (responseFromMeFit.status === 200)
+    // const responseFromMeFit = await RestService.deleteRequest(keycloak,  "https://case-se-java-mefit.herokuapp.com/api/user/6a7e2cbb-dc6e-4c1a-81b1-bb298661f1a4", undefined)
+    // if (responseFromMeFit.status === 200)
         return await RestService.deleteRequest(keycloak, keyCloakUrl + "/users/" + userId, undefined)
 }
-
-
-// async function getRequest(keycloak, url) {
-//     var myHeaders = new Headers();
-//     myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
-//     var requestOptions = {
-//         method: 'GET',
-//         headers: myHeaders,
-//         redirect: 'follow'
-//     };
-//     try {
-//         const response = await fetch(url, requestOptions)
-//         let json = await response.json()
-//         return json;
-//     } catch (error) {
-//     }
-// }
-
-// async function postRequest(keycloak, url, body) {
-//     return await requestWithBody(keycloak, url, body, "POST")
-// }
-
-// async function putRequest(keycloak, url, body) {
-//     return await requestWithBody(keycloak, url, body, "PUT")
-// }
-
-// async function deleteRequest(keycloak, url, body) {
-//     return await requestWithBody(keycloak, url, body, "DELETE")
-// }
-
-// async function requestWithBody(keycloak, url, body, method) {
-//     var myHeaders = new Headers();
-//     myHeaders.append("Authorization", `Bearer ${keycloak.token}`)
-//     myHeaders.append("Content-Type", "application/json");
-//     let requestOptions = {
-//         method: method,
-//         headers: myHeaders,
-//         redirect: 'follow',
-//     };
-//     if (body !== undefined) {
-//         requestOptions.body = body
-//     }
-//     try {
-//         let response = await fetch(url, requestOptions)
-//         let json = await response.json()
-//         return { status: response.status, body: json };
-//     } catch (error) {
-//     }
-// }
-

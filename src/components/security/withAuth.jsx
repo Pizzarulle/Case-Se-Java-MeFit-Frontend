@@ -22,7 +22,6 @@ const withAuth = (Component) => (props) => {
 
   const isAuthenticated = hasValidSession();
 
-  console.log("isAuthenticated: ", isAuthenticated);
   if (!isAuthenticated) {
     return <Navigate replace to="/login" />;
   }
