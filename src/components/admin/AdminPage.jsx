@@ -8,7 +8,7 @@ import styles from "./AdminPage.module.css";
 
 const AdminPage = () => {
 
-    const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
+    const [keyCloak] = useContext(KeyCloakContext)
     const [userList, setUserList] = useState([])
 
     const getUsers = async () => {
@@ -97,13 +97,11 @@ const AdminPage = () => {
                             </div>
                             <div>
 
-                                {/* <div className={styles.row} > */}
                                 <div className={styles.column}>
                                     <label>New password: </label>
                                     <input type="password" onChange={e => updatePasswordOfUser(e, user.id)} />
                                     <button onClick={() => KeyCloakAdminService.updateUserPassword(keyCloak, user)} >Send password</button>
                                 </div>
-                                {/* </div> */}
                             </div>
                         </div>
                     </div>

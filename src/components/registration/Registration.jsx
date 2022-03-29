@@ -6,24 +6,26 @@ import UserService from "../../api/profile"
 
 const Registration = () => {
 
-    const [keyCloak, setKeyCloak] = useContext(KeyCloakContext)
+    const [keyCloak,] = useContext(KeyCloakContext)
 
     useEffect(() => {
         const registerUser = async () => {
             const user = {
-                "id": keyCloak.tokenParsed.sid,
-                "firstName": keyCloak.tokenParsed.given_name,
-                "lastName": keyCloak.tokenParsed.family_name
+                firstName: keyCloak.tokenParsed.given_name,
+                lastName: keyCloak.tokenParsed.family_name,
+                admin:false,
+                contributor: false,
+                password: ""
             }
 
             UserService.regUser(keyCloak, user)
         }
         registerUser()
-    }, [])
+    }, [keyCloak])
 
     return (
         <>
-            <h2>Welcome </h2> <h1>{keyCloak.tokenParsed.name}</h1>  <h2> to MeFit</h2>
+            <h2>Welcome </h2> <h1>{keyCloak?.tokenParsed && keyCloak.tokenParsed.name}</h1>  <h2> to MeFit</h2>
             <p>
                 This is a welcome message
             </p>

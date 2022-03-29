@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import ProfileService from "../../../api/profile";
+import  { KeyCloakContext } from "../../../context/KeyCloakContext";
 import styles from "./EditProfile.module.css";
 
 const EditProfile = (props) => {
+
+  const [keycloak] = useContext(KeyCloakContext)
   const {
     register,
     handleSubmit,
@@ -14,23 +18,11 @@ const EditProfile = (props) => {
     }
   });
 
-  const onSubmit = (data) => {
-    if (isNumeric(data.height)) {
-      data = { ...data, height: isNumeric(data.height) }
-      props.editSubmitted(data)
-    }
+  const onSubmit = async (data) => {
+      data = {...data, id: props.user.id}
+      const res = await ProfileService.updateProfile(keycloak, data)
+      props.editSubmitted(res)
   };
-
-  function isNumeric(num) {
-    num = num.replace(",", ".")
-    if (num.match(/^-?\d+$/)) {
-      return num
-    } else if (num.match(/^\d+\.\d+$/)) {
-      return num
-    } else {
-      return false
-    }
-  }
 
   return (
     <form
@@ -41,16 +33,16 @@ const EditProfile = (props) => {
       <div className={styles.group}>
         <div className={styles.row}>
           <div>
-            <label>Weight (in kg)</label>
+            <label>Weight (in kg, rounded)</label>
             <input type="number" placeholder="73"
-              {...register("weight", {})} />
+              {...register("weight" , {required:true})} />
           </div>
           <div>
-            <label>Height (in meters)</label>
+            <label>Height (in centimeters, rounded)</label>
             <input
-              type="text"
+              type="number"
               placeholder="1.80"
-              {...register("height", {})}
+              {...register("height", {required:true})}
             />
           </div>
         </div>

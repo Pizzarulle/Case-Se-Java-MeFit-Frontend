@@ -10,8 +10,6 @@ const Navlinks = (props) => {
             <Link to={"/workout"}>Workouts</Link>
             <Link to={"/program"}>Programs</Link>
 
-
-            <Link to={"/reg"}>Reg</Link>
             {props.keyCloak.tokenParsed !== undefined &&
                 <>
                     {props.keyCloak.tokenParsed.roles.includes("MeFitt_Admin") &&

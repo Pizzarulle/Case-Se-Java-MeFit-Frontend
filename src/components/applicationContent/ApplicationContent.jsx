@@ -7,7 +7,6 @@ import ContributorsArea from "../../views/contributorsArea/ContributorsArea";
 import Profile from "../profile/Profile";
 import DasboardArea from "../../views/dashboardArea/DashboardArea"
 import Login from "../../views/Login";
-import withAuth from "../security/withAuth";
 
 const ApplicationContent = () => {
   return (
