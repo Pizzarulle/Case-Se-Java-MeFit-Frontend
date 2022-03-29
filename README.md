@@ -114,7 +114,7 @@ Congratulations 🎉 you're all set! 🎈
 
 <!-- USAGE -->
 # 💻 Usage
-Once you have completed the whole back to front-end set up you're free to use the application to your hearts content. But let us show you one way of using it! 😉
+Once you have completed the whole front-end set up you're free to use the application to your hearts content. But let us show you one way of using it! 😉
 
 Have a look at our [User Manual](https://github.com/Cusatelli/Case-Se-Java-MeFit/wiki/User-Manual) for a detailed use guide on how to do just about anything you want. With the `as-is` application.  
 
