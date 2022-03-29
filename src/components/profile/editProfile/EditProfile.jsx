@@ -4,6 +4,11 @@ import ProfileService from "../../../api/profile";
 import  { KeyCloakContext } from "../../../context/KeyCloakContext";
 import styles from "./EditProfile.module.css";
 
+/**
+ * Component to render the page to edit a users profile details
+ * @param {*} props 
+ * @returns 
+ */
 const EditProfile = (props) => {
 
   const [keycloak] = useContext(KeyCloakContext)
@@ -18,6 +23,10 @@ const EditProfile = (props) => {
     }
   });
 
+   /**
+   * On form submit handler
+   * @param {*} data 
+   */
   const onSubmit = async (data) => {
       data = {...data, id: props.user.id}
       const res = await ProfileService.updateProfile(keycloak, data)

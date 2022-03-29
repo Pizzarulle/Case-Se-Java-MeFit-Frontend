@@ -1,5 +1,10 @@
 import styles from "./Workout.module.css";
 
+/**
+ * Compontent to render information about a Workout
+ * @param {*} props contains ifnormation about the workout and that call back function for add or remove
+ * @returns 
+ */
 const Workout = (props) => {
     const { id, name, type, complete, setLink } = props.workoutData;
 

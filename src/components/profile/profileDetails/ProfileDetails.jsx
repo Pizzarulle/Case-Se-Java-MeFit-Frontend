@@ -1,5 +1,10 @@
 import styles from "./ProfileDetails.module.css";
 
+/**
+ * Component to render info about the user to show 
+ * @param {*} param0 contains user and profile data to show
+ * @returns 
+ */
 const ProfileDetails = ({ userDetails, profileDetails }) => {
   const { firstName, lastName, email } = userDetails;
 

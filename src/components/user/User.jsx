@@ -1,5 +1,10 @@
 import styles from "./User.module.css";
 
+/**
+ * Component to render basic info about a user
+ * @param {*} param0 
+ * @returns 
+ */
 const User = ({ userData }) => {
     const { firstName, lastName, roles:{isContributor, isAdmin} } = userData;
 

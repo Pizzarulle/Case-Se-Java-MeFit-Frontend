@@ -8,6 +8,10 @@ import Profile from "../profile/Profile";
 import DasboardArea from "../../views/dashboardArea/DashboardArea"
 import Login from "../../views/Login";
 
+/**
+ * In this component defines what is going to be shown on all the different url paths 
+ * @returns 
+ */
 const ApplicationContent = () => {
   return (
     <div className={styles.applicationContentContainer}>

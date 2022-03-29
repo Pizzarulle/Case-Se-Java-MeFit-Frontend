@@ -5,6 +5,10 @@ import { KeyCloakContext } from "../../../context/KeyCloakContext";
 import Navlinks from "../navlinks/Navlinks";
 import styles from "./Navbar.module.css";
 
+/**
+ * Component to render the navbar shown on top of site, with links to different path and session handle
+ * @returns 
+ */
 const Navbar = () => {
 
   const [keyCloak] = useContext(KeyCloakContext)

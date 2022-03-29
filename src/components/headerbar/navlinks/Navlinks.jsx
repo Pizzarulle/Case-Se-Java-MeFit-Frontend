@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "./Navlinks.module.css"
 
+/**
+ * Component to render all the links in the navbar
+ * @param {*} props to get keycloak to the navlinks and decide if Admin and Contributor link will show
+ * @returns 
+ */
 const Navlinks = (props) => {
 
     return (

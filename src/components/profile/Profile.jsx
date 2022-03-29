@@ -23,7 +23,9 @@ const Profile = () => {
     setProfile(e);
   };
 
-  //TODO get info from profile
+  /**
+   * Method that will run when keycloak updates and the component renders for the first time
+   */
   useEffect(() => {
     const asyncWrapper = async () => {
       const { payload, success } = await ProfileService.getProfileByUserId(

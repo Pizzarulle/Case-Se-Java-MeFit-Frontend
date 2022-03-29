@@ -3,6 +3,10 @@ import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import styles from "./DashboardCalendar.module.css";
 
+/**
+ * Component to render the initiate the calender
+ * @returns 
+ */
 const DashboardCalendar = () => {
 	const [dateState, setDateState] = useState(new Date())
 	const changeDate = (e) => {
