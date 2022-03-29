@@ -52,7 +52,6 @@ export const apiFetch = async (url,keyCloak) => {
  * @returns body or error
  */
 export const apiCreate = async (keyCloak, url, newObject) => {
-  console.log(keyCloak.token);
     try {
         const response = await fetch(`${API_URL}/${url}`, createMethodHeaderBody(keyCloak, "POST", newObject));
     
