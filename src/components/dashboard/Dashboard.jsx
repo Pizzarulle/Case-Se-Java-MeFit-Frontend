@@ -54,8 +54,6 @@ const Dashboard = () => {
 
   const getProfile = async () => {
     const { payload } = await ProfileService.getProfileByUserId(keycloak);
-
-    console.log(payload);
     const allWokrouts = await asyncWrapper(ModelTypes.WORKOUT);
     const temp = [];
 
