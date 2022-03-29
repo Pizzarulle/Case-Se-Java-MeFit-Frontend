@@ -2,6 +2,11 @@ import { useState } from "react";
 import styles from "./Program.module.css";
 import ProgramWorkoutCard from "./programWorkoutCard/ProgramWorkoutCard";
 
+/**
+ * component to render a program
+ * @param {*} props 
+ * @returns 
+ */
 const Program = (props) => {
   const { name, category, workouts } = props.programData;
 
@@ -9,6 +14,10 @@ const Program = (props) => {
 
   const workoutTypes = workouts && workouts.map((workout) => workout.name + ", ");
 
+  /**
+   * Handler for user clicking on a program to expand / collapse
+   * @param {*} e 
+   */
   const onHandleClick = (e) => {
       setCollapsed(!isCollapsed);
   };

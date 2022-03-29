@@ -6,10 +6,18 @@ import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
 import withAuth from "../components/security/withAuth";
 
+/**
+ * Component that will render all the Available workouts in the database.
+ * @returns 
+ */
 const Workouts = () => {
   const [workouts, setWorkouts] = useState(null);
   const [keyCloak] = useContext(KeyCloakContext);
 
+  /**
+   * Method that will run when component first mounts and when keycloak updates
+   * Fill fetch all the Available workouts
+   */
   useEffect(() => {
 
     const asyncWrapper = async () => {

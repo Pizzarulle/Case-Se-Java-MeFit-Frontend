@@ -1,5 +1,10 @@
 import styles from "./ContributorWorkout.module.css";
 
+/**
+ * Component to render the page for contributor's to show Workouts 
+ * @param {*} param0 
+ * @returns 
+ */
 const ContributorWorkout = ({ workoutData }) => {
   const { name, type, sets } = workoutData;
 

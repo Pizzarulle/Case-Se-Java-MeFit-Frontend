@@ -7,6 +7,11 @@ import { KeyCloakContext } from "../../../context/KeyCloakContext";
 import ProgramWorkoutCard from "../programWorkoutCard/ProgramWorkoutCard";
 import styles from "./EditProgram.module.css";
 
+/**
+ * Component that renders the edit program page
+ * @param {*} param0  
+ * @returns 
+ */
 const EditProgram = ({ titleText, program }) => {
   const navigate = useNavigate();
   const [workouts, setWorkouts] = useState(null);
@@ -30,6 +35,9 @@ const EditProgram = ({ titleText, program }) => {
     name: "workouts",
   });
 
+  /**
+   * Method that will run when keycloak updates and the component renders for the first time
+   */
   useEffect(() => {
     const asyncWrapper = async () => {
       const [errorWorkouts, dataWorkouts] = await apiFetch(ModelTypes.WORKOUT, keyCloack);
@@ -40,6 +48,10 @@ const EditProgram = ({ titleText, program }) => {
     asyncWrapper();
   }, [keyCloack]);
 
+  /**
+   * Sumbit handler that will update of create the edited program
+   * @param {*} data 
+   */
   const onSubmit = async (data) => {
     const [error] = !program
       ? await apiCreate(keyCloack,ModelTypes.PROGRAM, { ...data, id: 0 })
@@ -49,6 +61,10 @@ const EditProgram = ({ titleText, program }) => {
       navigate(-1);
     }
   };
+  /**
+   * When users hit discard will be redirected to the upper url page
+   * @returns 
+   */
   const onDiscard = () => navigate(-1);
 
   return (

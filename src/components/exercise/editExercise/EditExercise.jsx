@@ -6,6 +6,11 @@ import { apiCreate, apiPatch } from "../../../api/api";
 import { ModelTypes } from "../../../constants/enums";
 import { KeyCloakContext } from "../../../context/KeyCloakContext";
 
+/**
+ * Component to render edit page of a exercise where a contributor / admin can edit exercise
+ * @param {*} param0 
+ * @returns 
+ */
 const EditExercise = ({ titleText, exercise }) => {
   const navigate = useNavigate();
   const [keyCloack] = useContext(KeyCloakContext);
@@ -24,6 +29,10 @@ const EditExercise = ({ titleText, exercise }) => {
     },
   });
 
+  /**
+   * Method to handle the submission of a edit of a exercise 
+   * @param {*} data 
+   */
   const onSubmit = async (data) => {
     const [error] = !exercise
       ? await apiCreate(keyCloack, ModelTypes.EXERCISE, data)
@@ -34,6 +43,10 @@ const EditExercise = ({ titleText, exercise }) => {
     }
   };
 
+  /**
+   * If user hits discard button will be redirected a url up
+   * @returns 
+   */
   const onDiscard = () => navigate(-1);
 
   return (

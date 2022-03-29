@@ -6,6 +6,10 @@ import withAuth from "../components/security/withAuth";
 import { ModelTypes } from "../constants/enums";
 import { KeyCloakContext } from "../context/KeyCloakContext";
 
+/**
+ * Component that will render and fetch all the Exercises to display
+ * * @returns 
+ */
 const Exercises = () => {
   const [exercises, setExercises] = useState(null);
   const [keyCloak] = useContext(KeyCloakContext);

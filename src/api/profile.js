@@ -12,6 +12,12 @@ const ProfileService = {
 
 export default ProfileService;
 
+/**
+ * Method to rend a user to the backend to be registreted / posted. 
+ * @param {*} keycloak instance of keycloak that has a token
+ * @param {*} user the now user object made from Keycloak token
+ * @returns newly created user object with belonging profile
+ */
 async function regUser(keycloak, user) {
   return await RestService.postRequest(
     keycloak,
@@ -20,6 +26,11 @@ async function regUser(keycloak, user) {
   );
 }
 
+/**
+ * Method to get all the profiles in the batabase
+ * @param {*} keyCloak instance of keycloak that has a token
+ * @returns list of all the profiles in the database
+ */
 async function getProfile(keyCloak) {
   return await RestService.getRequest(keyCloak, `${API_URL}/profile`);
 }

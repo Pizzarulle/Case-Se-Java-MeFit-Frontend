@@ -4,10 +4,17 @@ import { KeyCloakContext } from "../../context/KeyCloakContext"
 
 import UserService from "../../api/profile"
 
+/**
+ * component to render user registration page, used to send data of the registration user to database,
+ * @returns 
+ */
 const Registration = () => {
 
     const [keyCloak,] = useContext(KeyCloakContext)
 
+    /**
+     * User effect that will run when component mounts and send the data to backend
+     */
     useEffect(() => {
         const registerUser = async () => {
             const user = {
