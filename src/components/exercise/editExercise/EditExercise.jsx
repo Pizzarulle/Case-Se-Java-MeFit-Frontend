@@ -25,9 +25,6 @@ const EditExercise = ({ titleText, exercise }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log("====================================");
-    console.log(data);
-    console.log("====================================");
     const [error] = !exercise
       ? await apiCreate(keyCloack, ModelTypes.EXERCISE, data)
       : await apiPatch(keyCloack, ModelTypes.EXERCISE, exercise.id, data);
@@ -68,7 +65,7 @@ const EditExercise = ({ titleText, exercise }) => {
             <span className={styles.validation}>Field is required</span>
           )}
           {errors.targetMuscleGroup?.type === "maxLength" && (
-            <span className={styles.validation}>Maximum length is 100</span>
+            <span className={styles.validation}>Maximum length is 255</span>
           )}
         </label>
 
@@ -77,7 +74,7 @@ const EditExercise = ({ titleText, exercise }) => {
           {...register("targetMuscleGroup", {
             required: true,
             minLength: 1,
-            maxLength: 100,
+            maxLength: 255,
           })}
         />
 
