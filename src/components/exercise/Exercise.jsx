@@ -18,9 +18,10 @@ const Exercise = ({ exerciseData }) => {
         <div>
           <h2>{name}</h2>
           <h4>{target_muscles}</h4>
-          <h4>
-            <a href={videoLink} target="_blank" rel="noreferrer">Video link</a>
-          </h4>
+             <h4>
+          {(videoLink ) && 
+             <a href={videoLink} target="_blank" rel="noreferrer">Video link</a>
+            }</h4>
         </div>
       </div>
       <div className={styles.dividerBorder}></div>
