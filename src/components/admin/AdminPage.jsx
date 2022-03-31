@@ -77,55 +77,67 @@ const AdminPage = () => {
     }, [])
 
     return (
-        <div>
+        <>
             {userList.map(user => {
                 return (
-                    <div key={user.id} className={styles.exerciseContainer}>
+                    
+                    <div key={user.id} className={styles.adminContainer}  id={user.roles.isAdmin ? styles.isAdmin :user.roles.isContributor ? styles.isContributor : ""}>
                         <div className={styles.row}>
-                            <div >
-                                <User userData={{
-                                    firstName: user.firstName,
-                                    lastName: user.familyName,
-                                    roles: user.roles
-
-                                }} />
-                            </div>
-                            <div className={styles.column}>
-                                {user.roles.isAdmin ?
-                                    <button onClick={
-                                        () => KeyCloakAdminService.removeUserFromRole(keyCloak, user.id, "MeFitt_Admin")
-                                            .then(() => getUpdatedUser(user.id))}>Remove admin</button>
-                                    :
-                                    <button onClick={
-                                        () => KeyCloakAdminService.addUserToRole(keyCloak, user.id, "MeFitt_Admin")
-                                            .then(() => getUpdatedUser(user.id))}>Make Admin</button>
-                                }
-
-                                {user.roles.isContributor ?
-                                    <button onClick={
-                                        () => KeyCloakAdminService.removeUserFromRole(keyCloak, user.id, "MeFitt_Contributer")
-                                            .then(() => getUpdatedUser(user.id))}>Remove Con</button>
-                                    :
-                                    <button onClick={
-                                        () => KeyCloakAdminService.addUserToRole(keyCloak, user.id, "MeFitt_Contributer")
-                                            .then(() => getUpdatedUser(user.id))}>Make Con</button>
-                                }
-                                <button className={styles.red} onClick={() => KeyCloakAdminService.deleteUser(keyCloak, user.id)
-                                    .then(() => getUsers())} >Delete</button>
-                            </div>
                             <div>
+                                <h2>{user.firstName} {user.lastName}</h2>
+                                <p>
+                                    <span>Status:</span> {user.roles.isAdmin ?  "Admin" : user.roles.isContributor ? "Contributor" : "Normal User"}
+                                </p>
+                            </div>
+                            <div> 
+                                <p><span>Username: </span>{user.username}</p> 
+                                <p>{user.email && <>
+                                        <span>Email:</span> {user.email}
+                                    </>}
+                                </p>  
+                            </div>
 
+                            <div className={styles.interactiveGroup}>
+                                <div className={styles.btnContainer}>
+                                    <div>
+                                        {user.roles.isAdmin ?
+                                        <button onClick={
+                                            () => KeyCloakAdminService.removeUserFromRole(keyCloak, user.id, "MeFitt_Admin")
+                                                .then(() => getUpdatedUser(user.id))}>Remove Admin</button>
+                                        :
+                                        <button onClick={
+                                            () => KeyCloakAdminService.addUserToRole(keyCloak, user.id, "MeFitt_Admin")
+                                                .then(() => getUpdatedUser(user.id))}>Make Admin</button>
+                                        }
+
+                                        {user.roles.isContributor ?
+                                            <button onClick={
+                                                () => KeyCloakAdminService.removeUserFromRole(keyCloak, user.id, "MeFitt_Contributer")
+                                                    .then(() => getUpdatedUser(user.id))}>Remove Contributor</button>
+                                            :
+                                            <button onClick={
+                                                () => KeyCloakAdminService.addUserToRole(keyCloak, user.id, "MeFitt_Contributer")
+                                                    .then(() => getUpdatedUser(user.id))}>Make Contributor</button>
+                                        }
+                                    </div>
+                                    <button 
+                                        className={styles.red} 
+                                        onClick={() => KeyCloakAdminService.deleteUser(keyCloak, user.id)
+                                            .then(() => getUsers())}>
+                                        Delete
+                                    </button>
+                                </div>
                                 <div className={styles.column}>
                                     <label>New password: </label>
                                     <input type="password" onChange={e => updatePasswordOfUser(e, user.id)} />
-                                    <button onClick={() => KeyCloakAdminService.updateUserPassword(keyCloak, user)} >Send password</button>
+                                    <button onClick={() => KeyCloakAdminService.updateUserPassword(keyCloak, user)} >Update password</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 )
             })}
-        </div>
+        </>
     )
 }
 

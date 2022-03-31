@@ -1,31 +1,82 @@
-.exerciseContainer {
+.adminContainer {
   background-color: #fff;
   box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
   margin: 1rem 0;
-  cursor: pointer;
+  width: 70vw;
+  margin:  1rem auto;
+  border-bottom: 0.5rem solid red;
+}
+.adminContainer span{
+  font-weight: bold;
 }
 .row {
   display: flex;
   padding: 0 1.5rem;
   align-items: center;
   gap: 1rem;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+.row > * {
+  flex: 1;
+  text-align: start;
 }
 
-
+.interactiveGroup > * {
+  flex: 1;
+  text-align: start;
+}
+.interactiveGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-evenly;
+}
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  text-align: end;
+}
+.interactiveGroup button{
+  border-radius: 1.5rem;
+  background-color: #f2f2f2;
+  border: 1px solid #f2f2f2;
+  width: max-content;
+  height: min-content;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  font-size: large;
+  font-weight: bold;
+  margin: 0.25rem 0.5rem;
+}
+.interactiveGroup button:hover{
+  color: #f2f2f2;
+  background-color: #3f345f;
+  border: 1px solid #3f345f;
+}
 .column{
   display: flex;
   flex-direction: column;
   max-width: fit-content;
-  flex: 1;
   justify-content: space-between;
   height: 200%;
 }
-
 .column > button{
-  margin: 10px;
+  margin: 10px 0;
+}
+.red {
+  background-color: #e81216 !important;
+  color: white !important;
+}
+.red:hover{
+  background-color: white !important;
+  color: #e81216 !important;
+  border: 1px solid #e81216 !important;
 }
 
-.red{
-  background-color: red;
+#isAdmin {
+  border-bottom-color: greenyellow !important;
+}
+
+#isContributor {
+  border-bottom-color: yellow !important;
 }

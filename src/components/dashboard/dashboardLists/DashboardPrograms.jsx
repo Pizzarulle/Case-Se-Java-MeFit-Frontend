@@ -14,7 +14,7 @@ const DashboardPrograms = (props) => {
         <Loader />
       ) : (
         <div>
-          {props.userProgram ? <h3>Your programs!</h3> : <h3>Available programs!</h3>}
+          {props.userProgram ? <h3>Programs you follow!</h3> : <h3>Available programs!</h3>}
           {props.programs.map((program) => (
             <div key={program.id}>
               {props.userProgram && (

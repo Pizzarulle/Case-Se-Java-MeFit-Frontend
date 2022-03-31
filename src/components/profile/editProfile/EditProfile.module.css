@@ -1,4 +1,5 @@
 .editProfileContainer {
+  position: relative;
   box-shadow: 2px 2px 8px rgb(0 0 0 / 30%);
   padding: 1.5rem;
   margin: auto;
@@ -31,35 +32,60 @@
   padding: 1rem;
   font-size: large;
 }
-.editProfileContainer form input[type="submit"] {
-  background-color: red;
-  border: 3px solid red;
-  font-size: large;
-  font-weight: bold;
-  color: white;
-  border-radius: 1rem;
-  align-self: flex-end;
-  cursor: pointer;
+.editProfileContainer input[type="submit"] {
+  background-color: green;
+  border: 3px solid green;
+
 }
-.editProfileContainer form input[type="submit"]:hover {
+.editProfileContainer input[type="submit"]:hover {
   background-color: white;
-  color: red;
+  color: green;
 }
 
-.edit {
+.editProfileContainer .editAccount {
+  position:absolute;
+  top:1rem;
+  right:1rem;
   padding: 1rem;
   font-size: large;
-  background-color: red;
-  border: 3px solid red;
+  background-color: #3f345f;
+  border: 3px solid #f2f2f2;
+  color: #f2f2f2;
   font-size: large;
   font-weight: bold;
-  color: white;
   border-radius: 1rem;
   align-self: flex-end;
   cursor: pointer;
 }
+.editProfileContainer .btnContainer {
+  display: flex;
+  min-width: 100%;
+  justify-content: end;
+}
+.editProfileContainer .btnContainer > *{
+  border-radius: 1rem;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  font-size: large;
+  font-weight: bold;
+  margin: 0.5rem 1rem;
+}
 
-.edit:hover {
+.editProfileContainer .editAccount:hover {
+  color: #3f345f;
+  background-color: #f2f2f2;
+  border: 3px solid #3f345f;
+}
+hr{
+  margin-top: 3rem;
+}
+
+.editProfileContainer form button {
+  background-color: red;
+  border: 3px solid red;
+}
+.editProfileContainer button:hover {
   background-color: white;
   color: red;
 }

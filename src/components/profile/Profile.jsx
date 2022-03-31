@@ -18,6 +18,10 @@ const Profile = () => {
   const [user, setUser] = useState();
   const [profile, setProfile] = useState(null);
 
+
+  const handleDiscard = () =>{
+    setEditPage(false)
+  }
   const handleEditSubmit = (e) => {
     setEditPage(false);
     setProfile(e);
@@ -50,7 +54,7 @@ const Profile = () => {
       {!user ? (
         <Loader />
       ) : editPage ? (
-        <EditProfile user={profile} editSubmitted={handleEditSubmit} />
+        <EditProfile user={profile} editSubmitted={handleEditSubmit} discardClick={handleDiscard} />
       ) : (
         <div
           className={styles.profileContainer}

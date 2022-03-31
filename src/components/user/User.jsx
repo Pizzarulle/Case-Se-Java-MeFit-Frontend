@@ -10,11 +10,11 @@ const User = ({ userData }) => {
 
     return (
         <div>
-            <h1>{ firstName } { lastName }</h1>
             <div className={ styles.userContainer } id={ isAdmin ? styles.isAdmin : isContributor ? styles.isContributor : "" }>
+            <h1>{ firstName } { lastName }</h1>
                 <div className={ styles.row }>
                     <div className={ styles.column }>
-                        <p>Status:</p>
+                        <p>Status: {isAdmin ?  "Admin" : isContributor ? "Contributor" : "Normal User"}</p>
                         <div className={ styles.floatRight }>
                             <p className={ styles.admin }>Admin: <b>{ isAdmin.toString() }</b></p>
                             <p className={ styles.contributor }>Contributor: <b>{ isContributor.toString() }</b></p>
