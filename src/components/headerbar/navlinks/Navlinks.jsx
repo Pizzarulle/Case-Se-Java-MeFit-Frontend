@@ -7,7 +7,6 @@ import styles from "./Navlinks.module.css"
  * @returns 
  */
 const Navlinks = (props) => {
-
     return (
         <div className={styles.navlinksContainer}>
             <Link to={"/"}>Dashboard</Link>
@@ -20,7 +19,6 @@ const Navlinks = (props) => {
                     {props.keyCloak.tokenParsed.roles.includes("MeFitt_Admin") &&
                         <Link to={"/admin"}>Admin</Link>
                     }
-
                     {props.keyCloak.tokenParsed.roles.some(role => ["MeFitt_Admin", "MeFitt_Contributer"].includes(role)) &&
                         <Link to={"/contributor/exercise"}>Contributor’s Area</Link>
                     }

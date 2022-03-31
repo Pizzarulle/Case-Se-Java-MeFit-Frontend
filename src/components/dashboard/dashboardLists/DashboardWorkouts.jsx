@@ -10,7 +10,7 @@ const DashboardWorkouts = (props) => {
     <>
       {props.workouts !== undefined && (
         <>
-          {props.userWorkout ? <h3>Your Workouts!</h3> : <h3>Available Workouts!</h3>}
+          {props.userWorkout ? <h3>Workouts you follow!</h3> : <h3>Available Workouts!</h3>}
           {props.workouts.map((workout) => (
             <div key={workout.id}>
               {props.userWorkout && (

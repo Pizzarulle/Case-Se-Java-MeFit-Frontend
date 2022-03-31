@@ -60,4 +60,5 @@
 }
 hr{
   margin-top: 3rem;
+  min-width: 100%;
 }

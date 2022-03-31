@@ -51,10 +51,10 @@ const Program = (props) => {
         )}
 
         {props.removeProgramFromProfile !== undefined &&
-          <button onClick={() => props.removeProgramFromProfile(props.programData)} >Remove</button>
+          <button onClick={() => props.removeProgramFromProfile(props.programData)} >Unfollow</button>
         }{
           props.addProgramToProfile !== undefined &&
-          <button onClick={() => props.addProgramToProfile(props.programData)} >Add</button>
+          <button onClick={() => props.addProgramToProfile(props.programData)} >Follow</button>
         }
 
       </div>

@@ -24,12 +24,12 @@ const Workout = (props) => {
                                         :
                                         <button>Complete</button>
                                     }
-                                    <button onClick={() => props.removeWorkoutFromProfile(props.workoutData)} >Remove</button>
+                                    <button onClick={() => props.removeWorkoutFromProfile(props.workoutData)} >Unfollow</button>
                                 </p>
                             }{
                                 props.addWorkoutToProfile !== undefined &&
                                 <p className={styles.complete} >
-                                     <button onClick={() => props.addWorkoutToProfile(props.workoutData)} >Add</button>
+                                     <button onClick={() => props.addWorkoutToProfile(props.workoutData)} >Follow</button>
                                      </p>
                             }
 
