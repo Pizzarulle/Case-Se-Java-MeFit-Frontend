@@ -6,8 +6,13 @@ import styles from "./EditProfile.module.css";
 
 /**
  * Component to render the page to edit a users profile details
+<<<<<<< HEAD
  * @param {*} props
  * @returns
+=======
+ * @param {*} props 
+ * @returns 
+>>>>>>> 66aa8393e1035311f4bf2e7de45bbf07e1f0d853
  */
 const EditProfile = (props) => {
   const [keycloak] = useContext(KeyCloakContext);
